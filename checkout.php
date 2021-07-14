@@ -1,4 +1,17 @@
-<?php require_once("cabecalho.php")?>
+<?php 
+require_once("cabecalho.php");
+$id2 = $_GET['id'];
+$query = $pdo->query("SELECT * FROM produtos where id = '" . $id2 . "' ");
+   $res = $query->fetchAll(PDO::FETCH_ASSOC);
+   $nome2 = $res[0]['nome'];
+   $imagem2 = $res[0]['imagem'];
+   $tamanho2 = $res[0]['tamanho'];
+   $desc2 = $res[0]['descricao'];
+   $valor2 = $res[0]['valor'];
+   $tamanhove2 = $res[0]['tamanho_veste'];
+   $peso2 = $res[0]['peso'];
+   $id = $res[0]['id'];
+?>
 
     <!-- Checkout Section Begin -->
     <section class="checkout spad">
@@ -86,7 +99,61 @@
                                 <input type="text"
                                     placeholder="Notas sobre seu pedido.">
                             </div>
-                            <button class="site-btn" type="submit">Adicionar endereço</button>
+                        </div>
+                        <div class="col-lg-4 col-md-6">
+                            <div class="checkout__order">
+                                <h4>Seu pedido</h4>
+                                <div class="checkout__order__products">Produtos</div>
+                                <ul>
+                                    <li><?= $nome2 ?><span></span></li>
+                                    
+                                </ul>
+                                <div class="checkout__order__subtotal">Valor <span>R$<?= $valor2 ?></span></div>
+                                <div class="checkout__order__frete">frete <span>R$<?= $valor2 ?></span></div>
+                                <div class="checkout__order__total">Total <span>$total</span></div>
+                                
+                                
+                                <div class="checkout__input__checkbox">
+                                    <label for="acc-or">
+                                        Entrega
+                                        <input type="radio" id="tipo_entrega">
+                                    </label>
+                                </div>
+                                <div class="checkout__input__checkbox">
+                                    <label for="payment">
+                                       Sacolina
+                                        <input type="radio" id="tipo_entrega">
+                                       
+                                    </label>
+                                </div>
+                                <div class="checkout__input__checkbox">
+                                    <label for="paypal">
+                                        Retirada
+                                        <input type="radio" id="tipo_entrega">
+                            
+                                    </label>
+                                </div>
+                                <form method="post" target="pagseguro"  
+                                action="https://pagseguro.uol.com.br/v2/checkout/payment.html">  
+                                
+                                <!-- Campos obrigatórios -->  
+                                <input name="receiverEmail" type="hidden" value="viniciusfe66@gmail.com">  
+                                <input name="currency" type="hidden" value="BRL">  
+                        
+                                <!-- Itens do pagamento (ao menos um item é obrigatório) -->  
+                                <input name="itemId1" type="hidden" value="<?= $id2 ?>">  
+                                <input name="itemDescription1" type="hidden" value="<?= $nome2 ?>">  
+                                <input name="itemAmount1" type="hidden" value="<?= $valor2 ?>">  
+                                <input name="itemQuantity1" type="hidden" value=1>  
+                                <input name="itemWeight1" type="hidden" value="<?= $peso2 ?>">     
+                        
+                                <!-- Código de referência do pagamento no seu sistema (opcional) -->  
+                                <input name="reference" type="hidden" value="encontrei">  
+                                <!-- submit do form (obrigatório) -->  
+                                <input alt="Pague com PagSeguro" name="submit"  type="image" class="primary-btn"/>  
+                                
+                        </form>
+                            </div>
                         </div>
                     </div>
                 </form>

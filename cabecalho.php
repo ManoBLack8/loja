@@ -43,7 +43,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__auth">
-                <a href="./login.php"><i class="fa fa-user"><?php echo $_SESSION['email']?></i></a>
+                <a href="sistema"><i class="fa fa-user"><?php echo $_SESSION['email']?></i></a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -147,28 +147,6 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
     <section class="hero hero-normal">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>Categorias</span>
-                        </div>
-                        <ul><?php
-                        $query = $pdo->query("SELECT * FROM categorias order by id asc ");
-                        $res = $query->fetchAll(PDO::FETCH_ASSOC);
-                   for ($i=0; $i < count($res); $i++) { 
-                      foreach ($res[$i] as $key => $value) {
-                      }
-                      
-                      $nome = $res[$i]['nome'];
-                      $id = $res[$i]['id'];
-                      
-                      ?>
-                            <li><a href="shop.php?cat=<?php echo $id ?>"><?php echo $nome?></a></li>
-                            <?php } ?>
-                        </ul>
-                    </div>
-                </div>
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">

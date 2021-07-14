@@ -1,4 +1,23 @@
-<?php require_once("cabecalho.php")?>
+<?php require_once("cabecalho.php");
+$query = $pdo->query("SELECT * FROM categorias order by id asc ");
+$res = $query->fetchAll(PDO::FETCH_ASSOC);
+
+$query2 = $pdo->query("SELECT * FROM promocao order by id asc ");
+$ress = $query2->fetchAll(PDO::FETCH_ASSOC);
+@$cate = $_GET['cat'];
+if ($cate == null) {
+    $query3 = $pdo->query("SELECT * FROM produtos order by id desc ");
+    $res3 = $query3->fetchAll(PDO::FETCH_ASSOC);
+    $query4 = $pdo->query("SELECT DISTINCT tamanho FROM produtos order by id desc ");
+    $res4 = $query4->fetchAll(PDO::FETCH_ASSOC);
+}else {
+    $query3 = $pdo->query("SELECT * FROM produtos where idcategoria = $cate order by id desc ");
+    $res3 = $query3->fetchAll(PDO::FETCH_ASSOC);
+    $query4 = $pdo->query("SELECT DISTINCT tamanho FROM produtos where idcategoria = $cate order by id desc ");
+    $res4 = $query4->fetchAll(PDO::FETCH_ASSOC);
+}
+
+?>
 
     <!-- Product Section Begin -->
     <section class="product spad">
@@ -6,88 +25,54 @@
             <div class="row">
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
-                        <div class="sidebar__item">
-                            <h4>Categorias</h4>
-                            <ul>
-                            <li><a href="shop.php">Todas</a></li>
-                            <?php
-                        $query = $pdo->query("SELECT * FROM categorias order by id asc ");
-                        $res = $query->fetchAll(PDO::FETCH_ASSOC);
-                   for ($i=0; $i < count($res); $i++) { 
-                      foreach ($res[$i] as $key => $value) {
-                      }
-                      
-                      $nome = $res[$i]['nome'];
-                      $id = $res[$i]['id'];
-                      
-                      ?>
-                            <li><a href="?cat=<?php echo $id ?>"><?php echo $nome?></a></li>
-                            <?php } ?>
+                        <div class="hero__categories">
+                            <div class="hero__categories__all">
+                                <i class="fa fa-bars"></i>
+                                <span>Categorias</span>
+                            </div>
+                            <ul><?php
+                            $query = $pdo->query("SELECT * FROM categorias order by id asc ");
+                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                    for ($i=0; $i < count($res); $i++) { 
+                        foreach ($res[$i] as $key => $value) {
+                        }
+                        
+                        $nome = $res[$i]['nome'];
+                        $id = $res[$i]['id'];
+                        
+                        ?>
+                                <li><a href="shop.php?cat=<?php echo $id ?>"><?php echo $nome?></a></li>
+                                <?php } ?>
                             </ul>
                         </div>
                         <div class="sidebar__item">
                             <h4>Tamanho</h4>
-                            <div class="sidebar__item__size">
-                                <label for="XG">
-                                    XG
-                                    <input type="radio" id="XG">
-                                </label>
-                            </div>
-                            <div class="sidebar__item__size">
-                                <label for="GG">
-                                    GG
-                                    <input type="radio" id="GG">
-                                </label>
-                            </div>
-                            <div class="sidebar__item__size">
-                                <label for="G">
-                                    G
-                                    <input type="radio" id="G">
-                                </label>
-                            </div>
-                            <div class="sidebar__item__size">
-                                <label for="M">
-                                    M
-                                    <input type="radio" id="M">
-                                </label>
-                            </div>
-                            <div class="sidebar__item__size">
-                                <label for="P">
-                                    P
-                                    <input type="radio" id="P">
-                                </label>
-                            </div>
-                        </div>
-                        <div class="sidebar__item">
-                            <h4>Genero</h4>
-                            <div class="sidebar__item__size">
-                                <label for="Feminino">
-                                    Feminino
-                                    <input type="radio" id="Feminino">
-                                </label>
-                            </div>
-                            <div class="sidebar__item__size">
-                                <label for="Masculino">
-                                    Masculino
-                                    <input type="radio" id="Masculino">
-                                </label>
-                            </div>
-                            <div class="sidebar__item__size">
-                                <label for="Unisex">
-                                    Unisex
-                                    <input type="radio" id="Unisex">
+                            <?php
+                            for ($i=0; $i < count($res4); $i++) {
+                                $tamanho = $res4[$i]['tamanho'];
+                                ?>
+                            <a href="?cat=<?= @$_GET['id'] ?>&tamanho=<?= $tamanho?>" class="sidebar__item__size"><?= $tamanho ?></a>
+                            <?php } ?>
+                            <div class="">
+                                <label for="tamanho">
+                                    tamanho
+                                    <input type="range"  min="34" max="70" step="1" oninput="this.nextElementSibling.value = this.value" id="tamanho">
+                                    <output></output>
                                 </label>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-9 col-md-7">
-                    <div class="product__discount">
+                    <?php if (count($ress) > 0) {
+                        echo '<div class="product__discount">
                         <div class="section-title product__discount__title">
                             <h2>Promoção</h2>
                         </div>
                         <div class="row"> 
                             <div class="product__discount__slider owl-carousel">
+                                <?php 
+                         ?>
                                 <div class="col-lg-4">
                                     <div class="product__discount__item">
                                         <div class="product__discount__item__pic set-bg"
@@ -162,21 +147,15 @@
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>';
+                    } ?>
                     <div class="filter__item">
                         <div class="row">
                             <div class="col-lg-4 col-md-5">
-                                <div class="filter__sort">
-                                    <span>Ordenar por</span>
-                                    <select>
-                                        <option value="0">Mais recentes</option>
-                                        <option value="0">Mais antigos</option>
-                                    </select>
-                                </div>
                             </div>
                             <div class="col-lg-4 col-md-4">
                                 <div class="filter__found">
-                                    <h6><span><?php $res ?></span>Produtos encontrados</h6>
+                                    <h6><span><?= count($res3) ?></span>Produtos encontrados</h6>
                                 </div>
                             </div>
                             
@@ -184,28 +163,17 @@
                     </div>
                     <div class="row">
                     <?php 
-                    require_once("conexao.php");
-                    @$cate = $_GET['cat'];
-                    if ($cate == null) {
-                        $query = $pdo->query("SELECT * FROM produtos order by id desc ");
-                   $res = $query->fetchAll(PDO::FETCH_ASSOC);
-                    }else {
-                        $query = $pdo->query("SELECT * FROM produtos where idcategoria = $cate order by id desc ");
-                        $res = $query->fetchAll(PDO::FETCH_ASSOC);
-    
-            
-                    }
 
-                   for ($i=0; $i < count($res); $i++) { 
-                      foreach ($res[$i] as $key => $value) {
+                   for ($i=0; $i < count($res3); $i++) { 
+                      foreach ($res3[$i] as $key => $value) {
                       }
                       
-                      $nome = $res[$i]['nome'];
-                      $valor = $res[$i]['valor'];
-                      $imagem = $res[$i]['imagem'];
-                      $desc = $res[$i]['descricao'];
-                      $id = $res[$i]['id'];
-                      $nomeurl = $res[$i]['nome_url'];
+                      $nome = $res3[$i]['nome'];
+                      $valor = $res3[$i]['valor'];
+                      $imagem = $res3[$i]['imagem'];
+                      $desc = $res3[$i]['descricao'];
+                      $id = $res3[$i]['id'];
+                      $nomeurl = $res3[$i]['nome_url'];
 
                       $valor = number_format($valor, 2, ',', '.');
                    
@@ -216,7 +184,7 @@
 
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg">
+                                <div class="product__item__pic">
                                 <img src="img/produtos/<?php echo $imagem ?>" alt="">
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
