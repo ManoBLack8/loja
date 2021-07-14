@@ -25,18 +25,24 @@ if ($cate == null) {
             <div class="row">
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
-                        <div class="sidebar__item">
-                            <h4>Categorias</h4>
-                            <ul>
-                            <li><a href="shop.php">Todas</a></li>
-                            <?php
-                   for ($i=0; $i < count($res); $i++) { 
-                      $nome = $res[$i]['nome'];
-                      $id = $res[$i]['id'];
-                      
-                      ?>
-                            <li><a href="?cat=<?php echo $id ?>"><?php echo $nome?></a></li>
-                            <?php } ?>
+                        <div class="hero__categories">
+                            <div class="hero__categories__all">
+                                <i class="fa fa-bars"></i>
+                                <span>Categorias</span>
+                            </div>
+                            <ul><?php
+                            $query = $pdo->query("SELECT * FROM categorias order by id asc ");
+                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                    for ($i=0; $i < count($res); $i++) { 
+                        foreach ($res[$i] as $key => $value) {
+                        }
+                        
+                        $nome = $res[$i]['nome'];
+                        $id = $res[$i]['id'];
+                        
+                        ?>
+                                <li><a href="shop.php?cat=<?php echo $id ?>"><?php echo $nome?></a></li>
+                                <?php } ?>
                             </ul>
                         </div>
                         <div class="sidebar__item">
@@ -45,12 +51,7 @@ if ($cate == null) {
                             for ($i=0; $i < count($res4); $i++) {
                                 $tamanho = $res4[$i]['tamanho'];
                                 ?>
-                            <div class="sidebar__item__size">
-                                <label for="tamanho">
-                                    <?= $tamanho ?>
-                                    <input type="radio" name="tamanho" id="tamanho" value="<?= $tamanho ?>">
-                                </label>
-                            </div>
+                            <a href="?cat=<?= @$_GET['id'] ?>&tamanho=<?= $tamanho?>" class="sidebar__item__size"><?= $tamanho ?></a>
                             <?php } ?>
                             <div class="">
                                 <label for="tamanho">
@@ -183,7 +184,7 @@ if ($cate == null) {
 
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
-                                <div class="product__item__pic set-bg">
+                                <div class="product__item__pic">
                                 <img src="img/produtos/<?php echo $imagem ?>" alt="">
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
