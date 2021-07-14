@@ -43,7 +43,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__auth">
-                <a href="./login.php"><i class="fa fa-user"><?php echo $_SESSION['email']?></i></a>
+                <a href="sistema"><i class="fa fa-user"><?php echo $_SESSION['email']?></i></a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">

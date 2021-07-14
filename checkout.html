@@ -362,7 +362,26 @@
                                         <span class="checkmark"></span>
                                     </label>
                                 </div>
-                                <button type="submit" class="site-btn">PLACE ORDER</button>
+                                <form method="post" target="pagseguro"  
+                        action="https://pagseguro.uol.com.br/v2/checkout/payment.html">  
+                                
+                                <!-- Campos obrigatórios -->  
+                                <input name="receiverEmail" type="hidden" value="viniciusfe66@gmail.com">  
+                                <input name="currency" type="hidden" value="BRL">  
+                        
+                                <!-- Itens do pagamento (ao menos um item é obrigatório) -->  
+                                <input name="itemId1" type="hidden" value="<?php echo $id2 ?>">  
+                                <input name="itemDescription1" type="hidden" value="<?php echo $nome2 ?>">  
+                                <input name="itemAmount1" type="hidden" value="<?php echo $valor2 ?>">  
+                                <input name="itemQuantity1" type="hidden" value=1>  
+                                <input name="itemWeight1" type="hidden" value="<?= $peso2 ?>">     
+                        
+                                <!-- Código de referência do pagamento no seu sistema (opcional) -->  
+                                <input name="reference" type="hidden" value="encontrei">  
+                                <!-- submit do form (obrigatório) -->  
+                                <input alt="Pague com PagSeguro" name="submit"  type="image" class="primary-btn"/>  
+                                
+                        </form>
                             </div>
                         </div>
                     </div>
