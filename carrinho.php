@@ -22,22 +22,29 @@
                             </thead>
                             <?php 
                                 $id2 = $_SESSION['id_usuario'];
-                            $query = $pdo->query("SELECT * FROM carrinho where id_usuario = '" . $id2 . "'  order by id desc ");
+                            $query = $pdo->query("SELECT * FROM carrinho where situ = 'disponivel' and id_usuario =  $id2 order by id desc ");
                             $res = $query->fetchAll(PDO::FETCH_ASSOC);
                             
                             for ($i=0; $i < count($res); $i++) { 
                                 foreach ($res[$i] as $key => $value) {
                                 }
+                                
                             $idc = $res[$i]['id_produto'];
                             $id = $res[$i]['id'];
                             $query2 = $pdo->query("SELECT * FROM produtos where id = '" . $idc . "'");
-                            $ress = $query2->fetchAll(PDO::FETCH_ASSOC);
-                            $nomecar = $ress[0]['nome'];
-                            $imagemc = $ress[0]['imagem'];
-                            $valorcar = $ress[0]['valor'];
-                            $idp = $ress[0]['id'];
+                            @$ress = $query2->fetchAll(PDO::FETCH_ASSOC);
+                            @$nomecar = $ress[0]['nome'];
+                            @$imagemc = $ress[0]['imagem'];
+                            @$valorcar = $ress[0]['valor'];
+                            @$idp = $ress[0]['id'];
                             @$total = $valorcar + $total;
-    
+
+                            if ($idp == null) {
+                                $queryy = $pdo->prepare("UPDATE carrinho SET situ = :situ where id_usuario = $id2 and id_produto =  $idc");
+                                $queryy->bindValue(":situ","excluido");
+                                $queryy->execute();
+                                echo "<script language='javascript'> window.location='carrinho.php' </script>";
+                            }
                       ?>
                             <tbody>
                                 <tr>
@@ -101,27 +108,7 @@
                             <li>Frete <span>R$<?php echo $frete ?></span></li>
                             <li>Total <span>R$<?php echo $totaltotal ?></span></li>
                         </ul>
-                        <form method="post" target="pagseguro"  
-action="https://pagseguro.uol.com.br/v2/checkout/payment.html">  
-          
-        <!-- Campos obrigatórios -->  
-        <input name="receiverEmail" type="hidden" value="viniciusfe66@gmail.com">
-        <input name="currency" type="hidden" value="BRL">  
-  
-        <!-- Itens do pagamento (ao menos um item é obrigatório) -->  
-        <input name="itemId1" type="hidden" value="<?php echo $idp ?>">  
-        <input name="itemDescription1" type="hidden" value="<?php echo $nomecar ?>">  
-        <input name="itemAmount1" type="hidden" value="<?php echo $totaltotal?>">  
-        <input name="itemQuantity1" type="hidden" value="1">  
-        <input name="itemWeight1" type="hidden" value="1000">
-  
-        <!-- Código de referência do pagamento no seu sistema (opcional) -->  
-        <input name="reference" type="hidden" value="REF1234">  
-  
-        <!-- submit do form (obrigatório) -->  
-        <button Type="submit" id="btncomprar" class="site-btn">comprar</button>  
-          
-</form>
+                        <a href="checkout.php" class="site-btn">Tela de vendas</a>
                     </div>
                 </div>
             </div>

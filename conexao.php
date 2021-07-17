@@ -9,5 +9,5 @@ try{
 } catch (Exception $e){
     echo "erro ao conectar com banco de dados" .  $e;
 }
-
+global $pdo;
 ?>
