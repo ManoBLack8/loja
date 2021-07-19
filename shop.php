@@ -1,22 +1,6 @@
-<?php require_once("cabecalho.php");
-$query = $pdo->query("SELECT * FROM categorias order by id asc ");
-$res = $query->fetchAll(PDO::FETCH_ASSOC);
-
-$query2 = $pdo->query("SELECT * FROM promocao order by id asc ");
-$ress = $query2->fetchAll(PDO::FETCH_ASSOC);
-@$cate = $_GET['cat'];
-if ($cate == null) {
-    $query3 = $pdo->query("SELECT * FROM produtos order by id desc ");
-    $res3 = $query3->fetchAll(PDO::FETCH_ASSOC);
-    $query4 = $pdo->query("SELECT DISTINCT tamanho FROM produtos order by id desc ");
-    $res4 = $query4->fetchAll(PDO::FETCH_ASSOC);
-}else {
-    $query3 = $pdo->query("SELECT * FROM produtos where idcategoria = $cate order by id desc ");
-    $res3 = $query3->fetchAll(PDO::FETCH_ASSOC);
-    $query4 = $pdo->query("SELECT DISTINCT tamanho FROM produtos where idcategoria = $cate order by id desc ");
-    $res4 = $query4->fetchAll(PDO::FETCH_ASSOC);
-}
-
+<?php 
+require_once("cabecalho.php");
+require_once("Controller/ShopController.php");
 ?>
 
     <!-- Product Section Begin -->
@@ -30,36 +14,29 @@ if ($cate == null) {
                                 <i class="fa fa-bars"></i>
                                 <span>Categorias</span>
                             </div>
-                            <ul><?php
+                            <ul>
+                                <li><a href="shop.php">Todas</a></li>
+                            <?php
                             $query = $pdo->query("SELECT * FROM categorias order by id asc ");
                             $res = $query->fetchAll(PDO::FETCH_ASSOC);
-                    for ($i=0; $i < count($res); $i++) { 
-                        foreach ($res[$i] as $key => $value) {
-                        }
-                        
-                        $nome = $res[$i]['nome'];
-                        $id = $res[$i]['id'];
-                        
-                        ?>
-                                <li><a href="shop.php?cat=<?php echo $id ?>"><?php echo $nome?></a></li>
+                        for ($i=0; $i < count($res); $i++) {                
+                            $nome = $res[$i]['nome'];
+                            $id = $res[$i]['id'];
+                            
+                            ?>
+                                <li><a href="shop.php?cat=<?= $id ?>&tamanho=<?= @$_GET['tamanho']?>"><?= $nome?></a></li>
                                 <?php } ?>
                             </ul>
                         </div>
                         <div class="sidebar__item">
                             <h4>Tamanho</h4>
                             <?php
+                            
                             for ($i=0; $i < count($res4); $i++) {
                                 $tamanho = $res4[$i]['tamanho'];
                                 ?>
-                            <a href="?cat=<?= @$_GET['id'] ?>&tamanho=<?= $tamanho?>" class="sidebar__item__size"><?= $tamanho ?></a>
+                            <a href="?cat=<?= @$_GET['cat'] ?>&tamanho=<?= $tamanho?>" class="sidebar__item__size"><?= $tamanho ?></a>
                             <?php } ?>
-                            <div class="">
-                                <label for="tamanho">
-                                    tamanho
-                                    <input type="range"  min="34" max="70" step="1" oninput="this.nextElementSibling.value = this.value" id="tamanho">
-                                    <output></output>
-                                </label>
-                            </div>
                         </div>
                     </div>
                 </div>
@@ -252,7 +229,7 @@ if ($cate == null) {
 
 <?php
 require_once("Roda_pe.php");  
-if ($_GET['funcao'] == 'carrinho' ){
+if (@$_GET['funcao'] == 'carrinho' ){
     echo "<script>$('#modalCarrinho').modal('show');</script>";
 }
 ?>
