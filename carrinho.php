@@ -77,18 +77,6 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="shoping__continue">
-                    <div class="shoping__discount">
-                        </div>
-                       <a class="site-btn" href="<?php $res = $pdo->query("SELECT * FROM andress where id_usuario = '".$id2."'");
-                       $dados = $res->fetchAll(PDO::FETCH_ASSOC);
-                       if (@count($dados) > 0) {
-                           echo "?q=entrega";
-                        }else {
-                            echo "checkout.php";
-                        } ?>">Entrega</a>
-                       <a class="site-btn" href="?q=sacolinha">Sacolinha</a>
-                       <a class="site-btn" href="?q=retirada">Retirada</a>
-
                        <?php require_once("checkoutback/frete_cal.php"); ?>
                         
                         <div class="shoping__discount">
@@ -105,7 +93,6 @@
                         <h5>Total Carrinho</h5>
                         <ul>
                             <li>Total de produtos <span>R$<?php echo $total ?></span></li>
-                            <li>Frete <span>R$<?php echo $frete ?></span></li>
                             <li>Total <span>R$<?php echo $totaltotal ?></span></li>
                         </ul>
                         <a href="checkout.php" class="site-btn">Tela de vendas</a>
@@ -164,10 +151,6 @@ require_once("Roda_pe.php");
 if (@$_GET['funcao'] == 'delcarrinho' ){
     echo "<script>$('#modal-deletar-carrinho').modal('show');</script>";
 }
-if (@$_GET['q'] == 'entrega' ){
-    echo "<script>$('#modal_entrega').modal('show');</script>";
-}
-?>
 ?>
  <script src="https://code.jquery.com/jquery-3.4.1.min.js"       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
  crossorigin="anonymous">
