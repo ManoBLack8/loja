@@ -1,7 +1,9 @@
 <?php 
 require_once("cabecalho.php");
-
-function Addsitu($idc,$id2)
+$_SESSION['id_usuario'];
+$nome_usuario = $_SESSION['nome_usuario'];
+$email_usuario = $_SESSION['email_usuario'];
+function addsitu($idc,$id2)
 {
     global $pdo ;
     $queryy = $pdo->prepare("UPDATE carrinho SET situ = :situ where id_usuario = $id2 and id_produto =  $idc");
@@ -19,18 +21,10 @@ function Addsitu($idc,$id2)
                 <form method="post" target="pagseguro"  action="https://pagseguro.uol.com.br/v2/checkout/payment.html">  
                         <div class="row">
                             <div class="col-lg-8 col-md-6">
-                                <div class="row">
-                                    <div class="col-lg-6">
-                                        <div class="checkout__input">
-                                            <p>Seu nome<span>*</span></p>
-                                            <input type="text">
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-6">
-                                        <div class="checkout__input">
-                                            <p>Seu sobrenome<span>*</span></p>
-                                            <input type="text">
-                                        </div>
+                                <div class="checkout_input">
+                                    <div class="checkout__input">
+                                        <p>Seu nome<span>*</span></p>
+                                        <input type="text" name="senderName" value="<?= @$nome_usuario ?>">
                                     </div>
                                 </div>
                                 <div class="checkout__input">
@@ -65,13 +59,15 @@ function Addsitu($idc,$id2)
                                     <div class="col-lg-6">
                                         <div class="checkout__input">
                                             <p>Telefone<span>*</span></p>
-                                            <input type="text">
+                                            <input type="text" id="ddd" name="senderAreaCode" placeholder="DDD" class="checkout__input__number">
+
+                                            <input type="text" name="senderPhone" id="telefone" class="checkout__input__add" placeholder="Numero de telefone">
                                         </div>
                                     </div>
                                     <div class="col-lg-6">
                                         <div class="checkout__input">
                                             <p>Email<span>*</span></p>
-                                            <input type="text">
+                                            <input name="senderEmail" type="email" value="<?= $email_usuario ?>"> 
                                         </div>
                                     </div>
                                 </div>
@@ -111,8 +107,6 @@ function Addsitu($idc,$id2)
                                 $res = $query->fetchAll(PDO::FETCH_ASSOC);
                                 
                                 for ($i=0; $i < count($res); $i++) { 
-                                    foreach ($res[$i] as $key => $value) {
-                                    }
                                     
                                 $idc = $res[$i]['id_produto'];
                                 $id = $res[$i]['id'];
@@ -131,8 +125,7 @@ function Addsitu($idc,$id2)
                                 }?>
                                     <ul>
                                         <li><?= $nomecar ?><span></span></li>
-                                        
-                                    </ul><?php } ?>
+                                    </ul><?php var_dump($i);  } ?>
                                     <div class="checkout__order__subtotal">Valor <span>R$<?= $total_produtos ?></span></div>
                                     <div class="checkout__order__frete">frete <span>R$<?= $frete?></span></div>
                                     <div class="checkout__order__total">Total <span>R$<?= $total?></span></div>
@@ -183,14 +176,12 @@ function Addsitu($idc,$id2)
                                             <input name="shippingType" type="hidden" value="3">
                                             <input name="shippingAddressCountry" type="hidden" value="BRA">  
                                     
-                                            <!-- Dados do comprador (opcionais) -->  
-                                            <input name="senderName" type="hidden" value="José Comprador">  
-                                            <input name="senderAreaCode" type="hidden" value="11">  
-                                            <input name="senderPhone" type="hidden" value="56273440">  
-                                            <input name="senderEmail" type="hidden" value="comprador@uol.com.br">  
+                                            <!-- Dados do comprador (opcionais) --> 
+                                            
+                                             
                                     
                                             <!-- submit do form (obrigatório) -->  
-                                            <input alt="Pague com PagSeguro" name="submit"  type="image"/>  
+                                            <button class="site-btn" type="submit">Comprar com a Pagseguro</button>
                                             
                                      
                                 </div>
@@ -203,9 +194,8 @@ function Addsitu($idc,$id2)
     <!-- Checkout Section End -->
 
     <!-- Footer Section Begin -->
-<?php require_once("Roda_pe.php")?>
+<?php require_once("Roda_pe.php");?>
 <script>
-
 $(document).ready(function() {
 
     function limpa_formulário_cep() {
