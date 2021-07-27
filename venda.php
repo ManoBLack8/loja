@@ -1,4 +1,6 @@
 <?php
+$fretes = @$_POST['fretes'];
+var_dump($fretes);
   $token_type = "Bearer";
   $expires_in = 2592000;
   $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjBkNDI2YmU5NWZkZTczN2UxNjMwODcwMjJhMzY1ZGRkOWViMjE1ZTkxODc2OWUxZjlmZGY2MDViZjM0Yzk2OWE5NjJkZTQ1YTMxMjMzY2FlIn0.eyJhdWQiOiIxNDM3IiwianRpIjoiMGQ0MjZiZTk1ZmRlNzM3ZTE2MzA4NzAyMmEzNjVkZGQ5ZWIyMTVlOTE4NzY5ZTFmOWZkZjYwNWJmMzRjOTY5YTk2MmRlNDVhMzEyMzNjYWUiLCJpYXQiOjE2MjY4MzE2MDEsIm5iZiI6MTYyNjgzMTYwMSwiZXhwIjoxNjI5NDIzNjAxLCJzdWIiOiI5ODkwYmEwZC1lMGNlLTRjZDUtYjJjYy01MjIzNmJjZTdlNjYiLCJzY29wZXMiOlsic2hpcHBpbmctY2FsY3VsYXRlIl19.prt5ShcJr6T9p_p-yZFbrMfyY_uIbBe20HG7B4bTmddMnR0a-o-HrKBdD14ZFC8ofgc_ezVz9N7w4hkO4t4I2hduP93ncI9BfuDZbfN_U26LXP9_oJP4yJZgKYjBuEwfyXqg6sozZ2uipx-k5Y5Mq-ldiD7vM8i8pmNsvKQWNIi7NgnCTZS6iBS1lFGZuvuVcZvS_SPf63KCZYBhiZAdvgzqnOEf5nOmJXOE4ygxueso6yhwqgJOCXO2dIEwxSS8IyYIDfFHj0SyD6M1DtuYPsic2DZwPFOw09YkiwTgPryBd2o2NR7FCkyky28D-82V84R5XH_Fj5yidvHLQNHe7ujoss6pecgmKIM_pKmdxSFB2TjY36XAGnzX6BfC4t5pOQrKc4vapeA5_bUgJNz9W5NvpADNigkIrBF2UutkcePi-VTZYZEtdBw_eP6VJbz4usfXtOtBjiFFuCObN40XoPV5OzT4LPFKEPM2N0wLQs7hZAV2dpDN1bLhPIfVgcUGuCjV9IljcOQz_bIkBOKQoCvl3NPUaLpmeM3Src0Pjho11oHTPTWDObPUVKeTXPOge6MCrWtyXhWqnz_856zaTpp8LUn5dFS1PUHOaauMd3zMXwv3_BRlt6udgSLEaj10xQg03A2w7EgAm4st4GvaN3OTFj46GFf1r4RS8yXmJG8";
@@ -64,24 +66,73 @@ curl_close($curl);
 require_once("cabecalho.php");
 ?>
 <body>
-    <section>
-        <div class="container">
-            <div class="entregas" width="200">
-                <form action="venda.php" method="POST">
-                    <?php foreach ($response as $frete){
-                        if (@$frete->error < 1) { ?>
-                        <label class="label_entrega">
-                            <img src="<?= $frete->company->picture ?>" width="120" alt="<?= $frete->name ?>">
-                            <h3><?= $frete->name ?></h3>
-                            <h5><?= $frete->price ?></h5>
-                            <h6><?= $frete->company->name ?></h6>
-                            <p><?= $frete->delivery_time ?> dias</p>
-                            <input type="radio" name="frete" id="frete" value="<?= $frete->price?>">
-                        </label><?php } ?>
-                    <?php } ?>
-                    <button type="submit" class="site-btn">ir para tela de compra</button>
-                </form>
+<section>
+    <div class="container">
+        <div class="venda_tela">
+            <div class="col-lg-12 col-md-12">
+                <div class="checkout__order">
+                    <h4>Seu pedido</h4>
+                    <div class="checkout__order__products">Produtos</div>
+                    <?php
+                $id2 = $_SESSION['id_usuario'];
+                $query = $pdo->query("SELECT * FROM carrinho where situ = 'disponivel' and id_usuario =  $id2 order by id desc ");
+                $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                
+                for ($i=0; $i < count($res); $i++) { 
+                    
+                $idc = $res[$i]['id_produto'];
+                $id = $res[$i]['id'];
+                $query2 = $pdo->query("SELECT * FROM produtos where id = '" . $idc . "'");
+                @$ress = $query2->fetchAll(PDO::FETCH_ASSOC);
+                @$nomecar = $ress[0]['nome'];
+                @$imagemc = $ress[0]['imagem'];
+                @$valorcar = $ress[0]['valor'];
+                @$idp = $ress[0]['id'];
+                @$peso = $ress[0]['peso'];
+                @$total_produtos = $valorcar + $total_produtos;
+                $frete = 7.0;
+                $total = $fretes_price + $total_produtos;
+                
+                $a = $i + 1;
+                if ($idp == null) {
+                    Addsitu($idp,$id2);
+                }?>
+                    <input name="itemId<?=$a?>" type="hidden" value="<?= $idp ?>">
+                    <input name="itemDescription<?=$a?>" type="hidden" value="<?= $nomecar?>">  
+                    <input name="itemAmount<?=$a?>" type="hidden" value="<?= $valorcar?>">  
+                    <input name="itemQuantity<?=$a?>" type="hidden" value="1">  
+                    <input name="itemWeight<?=$a?>" type="hidden" value="<?= $peso ?>">
+
+                    <ul>
+                        <li><?= $nomecar ?><span></span></li>
+                    </ul><?php } ?>
+                    <div class="checkout__order__subtotal">Valor<span>R$<?= $total_produtos ?></span></div>
+                    <div class="checkout__order__frete">frete: <span>R$<?= $fretes ?></span></div>
+                    <div class="checkout__order__total">Total <span>R$<?= $total?></span></div>
+                    
+                    
+                    <!-- Campos obrigatórios -->  
+                    <input name="receiverEmail" type="hidden" value="viniciusfe66@gmail.com">  
+                    <input name="currency" type="hidden" value="BRL">  
+                    <!-- Código de referência do pagamento no seu sistema (opcional) -->  
+                    <input name="reference" type="hidden" value="REF1234">  
+                    
+                    <!-- Informações de frete (opcionais) -->  
+                    <input name="shippingType" type="hidden" value="3">
+                    <input name="shippingAddressCountry" type="hidden" value="BRA">  
+            
+                    <!-- Dados do comprador (opcionais) --> 
+                    
+                        
+            
+                    <!-- submit do form (obrigatório) -->  
+                    <button class="site-btn" type="submit">Comprar com a Pagseguro</button>
+                            
+                        
+                </div>
             </div>
+
         </div>
-    </section>
+    </div>
+</section>
 </body>
