@@ -153,7 +153,9 @@ ol {
 	color: #e88988;
 	background: #fff;
 }
-
+.checkout__form button{
+	float: right;
+}
 
 
 /*---------------------
@@ -2784,6 +2786,30 @@ ol {
 	letter-spacing: 2px;
 }
 
+.label_entrega{
+	text-align: center;
+	width: 200px;
+	margin: 20px;
+	border-radius: 4px;
+	background: #f0efef;
+}
+.label_entrega:hover{
+	background:  #e88988;
+}
+
+.label_entrega:checked{
+	background: #e88988;
+}
+
+.formulario_entrega{
+	width: 100%;
+}
+.img_entrega{
+	max-height: 20px;
+}
+.entrega-btn{
+	float: right;
+}
 /*--------------------------------- Responsive Media Quaries -----------------------------*/
 
 @media only screen and (min-width: 1200px) {
