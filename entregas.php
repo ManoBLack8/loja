@@ -76,14 +76,13 @@ curl_close($curl);
                     <div class="formulario_entrega">
                         <?php foreach ($response as $frete){
                             if (@$frete->error < 1) { ?>
-                            <label class="label_entrega" onclick="marcardesmarcar()">
+                            <label class="label_entrega" id="label">
                                 <img src="<?= $frete->company->picture ?>" class="img_entrega" alt="<?= $frete->name ?>">
                                 <h3 class="mt-3"><?= $frete->name ?></h3>
                                 <h5><?= $frete->price ?></h5>
                                 <h6><?= $frete->company->name ?></h6>
                                 <p><?= $frete->delivery_time ?> dias</p>
-                                <input type="radio" class="marcar" name="fretes[]" id="frete" value="<?= $frete->price ?>">
-                                <input type="radio"  class="marcar" name="fretes[1]" value="<?= $frete->name ?>" id="frete">
+                                <input type="radio" class="marcar" name="fretes" id="frete" value="<?= $frete->price ?>, <?= $frete->name ?>,<?= $frete->company->name?>">
                                 
                             </label><?php } ?>
                         <?php } ?>
@@ -95,10 +94,3 @@ curl_close($curl);
         </div>
     </section>
 </body>
-<script>
- function marcardesmarcar(){
-    radio
-
-   
-}
-</script>

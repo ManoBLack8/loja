@@ -6,7 +6,7 @@ $telefone = '65 992620294';
 
 
 //VARIAVEIS BANCO DE DADOS
-$servidor = 'localhost';
+$servidor = '127.0.0.1';
 $usuario = 'root';
 $senha = '';
 $banco = 'loja';

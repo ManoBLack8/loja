@@ -2106,7 +2106,7 @@ ol {
 .checkout__order .checkout__order__subtotal {
 	font-size: 18px;
 	color: #1c1c1c;
-	font-weight: 700;
+	font-weight: 600;
 	border-bottom: 1px solid #e1e1e1;
 	border-top: 1px solid #e1e1e1;
 	padding-bottom: 15px;
@@ -2125,7 +2125,7 @@ ol {
 .checkout__order .checkout__order__total {
 	font-size: 18px;
 	color: #1c1c1c;
-	font-weight: 700;
+	font-weight: 600;
 	border-bottom: 1px solid #e1e1e1;
 	padding-bottom: 15px;
 	margin-bottom: 25px;
@@ -2138,7 +2138,7 @@ ol {
 .checkout__order .checkout__order__frete{
 	font-size: 18px;
 	color: #1c1c1c;
-	font-weight: 700;
+	font-weight: 600;
 	border-bottom: 1px solid #e1e1e1;
 	padding-bottom: 15px;
 	margin-bottom: 25px;
@@ -2790,6 +2790,7 @@ ol {
 	text-align: center;
 	width: 200px;
 	margin: 20px;
+	color: green;
 	border-radius: 4px;
 	background: #f0efef;
 }
@@ -2797,8 +2798,8 @@ ol {
 	background:  #e88988;
 }
 
-.label_entrega:checked{
-	background: #e88988;
+.marcar {
+	display: none;
 }
 
 .formulario_entrega{
