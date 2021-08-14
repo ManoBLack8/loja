@@ -1,6 +1,6 @@
 <?php
 
-require_once("../../../conexão.php"); 
+require_once("../../../conexao.php"); 
 
 $id = $_POST['id_foto'];
 

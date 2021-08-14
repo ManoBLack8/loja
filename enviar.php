@@ -1,5 +1,5 @@
 <?php
-require_once("conexão.php");
+require_once("conexao.php");
 if ($_POST['nomecontato'] === "") {
     echo 'Preencha o campo Nome';
     exit();
