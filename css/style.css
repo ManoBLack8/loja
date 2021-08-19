@@ -74,7 +74,9 @@ ol {
 	padding: 0;
 	margin: 0;
 }
-
+select {
+	width: 200px;
+}
 /*---------------------
   Helper CSS
 -----------------------*/
