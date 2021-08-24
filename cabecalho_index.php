@@ -35,7 +35,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="./index.php"><img src="img/logo.png"  alt=""></a>
+            <a href="./index.php"><img src="img/logo-nova.png"  alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -109,7 +109,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.php"><img src="img/logo.png" width="120" alt=""></a>
+                        <a href="./index.php"><img src="img/logo-nova.png" width="120" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
@@ -150,31 +150,6 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
     <section class="hero">
         <div class="container">
             <div class="row">
-                <div class="col-lg-3">
-                    <div class="hero__categories">
-                        <div class="hero__categories__all">
-                            <i class="fa fa-bars"></i>
-                            <span>Categorias</span>
-                        </div>
-                        <ul>
-                            <li><a href="#">Blusas</a></li>
-                            <li><a href="#">Camisas</a></li>
-                            <li><a href="#">Camisetas</a></li>
-                            <li><a href="#">Calças</a></li>
-                            <li><a href="#">Saias</a></li>
-                            <li><a href="#">Shorts</a></li>
-                            <li><a href="#">Calçados</a></li>
-                            <li><a href="#">Bolsas e acessorios</a></li>
-                            <li><a href="#">Conjuntos</a></li>
-                            <li><a href="#">Kimonos e coletes</a></li>
-                            <li><a href="#">Macacoes</a></li>
-                            <li><a href="#">Golinhas</a></li>
-                            <li><a href="#">Langeries</a></li>
-                            <li><a href="#">Croppeds</a></li>
-                            <li><a href="#">Body e maiô</a></li>
-                        </ul>
-                    </div>
-                </div>
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
@@ -183,15 +158,10 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                                 <button type="submit" class="site-btn">Buscar</button>
                             </form>
                         </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-whatsapp"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5><?php echo $telefone ?></h5>
-                                <span>Suporte das 8:00 ás 17:00</span>
-                            </div>
-                        </div>
                     </div>
-                   
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Hero Section End -->

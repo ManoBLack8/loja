@@ -2,12 +2,20 @@
 
 ?>
 
-                <div class="hero__item set-bg" data-setbg="img/banner/Capturar.png">
-                    <div class="hero__text">
-                        <span>novidade</span>
-                        <h2>Sejam bem vindos<br />Ao nosso maravilhoso site</h2>
-                        <p>Nos concheça clicando no botão</p>
-                        <a href="logout.php" class="primary-btn">Conheça-nos</a>
+<div class="latest-product__slider owl-carousel">
+                    <div class="latest-prdouct__slider__item">
+                        <a href="#" class="latest-product__item">
+                            <div class="latest-product__item__pic">
+                                <img src="img/banner/banner-2.jpg" alt="">
+                            </div>
+                        </a>
+                    </div>
+                    <div class="latest-prdouct__slider__item">
+                        <a href="#" class="latest-product__item">
+                            <div class="latest-product__item__pic">
+                                <img src="img/banner/banner-1.jpg" alt="">
+                            </div>
+                        </a>
                     </div>
                 </div>
             </div>

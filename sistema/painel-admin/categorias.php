@@ -27,10 +27,9 @@ require_once("../../conexao.php");
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>Nome</th>
-                        <th>Imagem</th>
-                        <th>Status</th>
-                        <th>Ações</th>
+                        <th>ID</th>
+                        <th>NOME</th>
+                        <th>AÇOES</th>
                     </tr>
                 </thead>
 
@@ -38,7 +37,7 @@ require_once("../../conexao.php");
 
                    <?php 
 
-                   $query = $pdo->query("SELECT * FROM produtos order by id desc ");
+                   $query = $pdo->query("SELECT * FROM categorias order by id desc ");
                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
                    for ($i=0; $i < count($res); $i++) { 
@@ -46,20 +45,14 @@ require_once("../../conexao.php");
                       }
 
                       $nomep = $res[$i]['nome'];
-                      $imagem = $res[$i]['imagem'];
-                      $situ = $res[$i]['situação'];
                       $id = $res[$i]['id'];
 
                       ?>
 
 
                     <tr>
-                        <td><?php echo $nome ?></td>
-                        <td><?php echo $imagem ?></td>
-                        <td><img src="../../img/<?php echo $imagem ?>" width="50"></td>
-                       
-                        
-
+                        <td><?php echo $id ?></td>
+                        <td><?php echo $nomep ?></td>
                         <td>
                              <a href="index.php?pag=<?php echo $pag ?>&funcao=editar&id=<?php echo $id ?>" class='text-primary mr-1' title='Editar Dados'><i class='far fa-edit'></i></a>
                             <a href="index.php?pag=<?php echo $pag ?>&funcao=excluir&id=<?php echo $id ?>" class='text-danger mr-1' title='Excluir Registro'><i class='far fa-trash-alt'></i></a>
@@ -118,21 +111,6 @@ require_once("../../conexao.php");
                         <label >Nome</label>
                         <input value="<?php echo @$nome2 ?>" type="text" class="form-control" id="nome-cat" name="nome-cat" placeholder="Nome">
                     </div>
-
-                    <div class="form-group">
-                        <label >Imagem</label>
-                        <input type="file" value="<?php echo @$imagem2 ?>"  class="form-control-file" id="imagem" name="imagem" onChange="carregarImg();">
-                    </div>
-
-                    <?php if(@$imagem2 != ""){ ?>
-                    	 <img src="../../img/produtos/<?php echo $imagem2 ?>" width="200" height="200" id="target">
-                 	<?php  }else{ ?>
-                    <img src="../../img/produtos/sem-foto.jpg" width="200" height="200" id="target">
-                	<?php } ?>
-
-
-                   
-
                     <small>
                         <div id="mensagem">
 

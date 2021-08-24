@@ -19,7 +19,6 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
     <!-- Css Styles -->
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="css/elegant-icons.css" type="text/css">
     <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="css/slicknav.min.css" type="text/css">
@@ -32,7 +31,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
     <div class="humberger__menu__overlay"></div>
     <div class="humberger__menu__wrapper">
         <div class="humberger__menu__logo">
-            <a href="./index.php"><img src="img/logo.png"  alt=""></a>
+            <a href="./index.php"><img src="img/logo-nova.png"  alt=""></a>
         </div>
         <div class="humberger__menu__cart">
             <ul>
@@ -106,7 +105,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
             <div class="row">
                 <div class="col-lg-3">
                     <div class="header__logo">
-                        <a href="./index.php"><img src="img/logo.png" width="120" alt=""></a>
+                        <a href="./index.php"><img src="img/logo-nova.png" width="120" alt=""></a>
                     </div>
                 </div>
                 <div class="col-lg-6">
