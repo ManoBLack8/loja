@@ -1,5 +1,6 @@
 <?php require_once("conexao.php");
 session_start();
+$itens_do_carrinho = itensDoCarrinho($_SESSION["id_usuario"]);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -130,7 +131,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="./carrinho.php"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                            <li><a href="./carrinho.php"><i class="fa fa-shopping-cart"></i> <span><?= count($itens_do_carrinho) ?></span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -149,8 +150,8 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                 <div class="col-lg-9">
                     <div class="hero__search">
                         <div class="hero__search__form">
-                            <form action="#">
-                                <input type="text" placeholder="Do que vc precisa ?">
+                            <form action="shop.php" method="POST">
+                                <input type="text" name="pesquisar" placeholder="Do que vc precisa ?">
                                 <button type="submit" class="site-btn">Buscar</button>
                             </form>
                         </div>

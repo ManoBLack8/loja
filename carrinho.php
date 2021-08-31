@@ -57,7 +57,7 @@
                                         R$<?php echo $valorcar ?>
                                     </td>
                                     <td>
-                                    <a width="120" href="carrinho.php?funcao=delcarrinho&id=<?php echo $id ?>" class='text-danger mr-1' title='Excluir Registro'><i class='icon_close'></i></a>
+                                    <a width="120" href="carrinho.php?funcao=delcarrinho&id=<?php echo $id ?>" class='text-danger mr-1' title="Excluir registro"><i class="fa fa-2x fa-times"></i></a>
                                     </td>
                                 </tr>
                                 
