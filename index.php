@@ -1,4 +1,4 @@
-<?php require_once("cabecalho_index.php");
+<?php require_once("cabecalho.php");
 
 ?>
 <section>
