@@ -10,4 +10,5 @@ try{
     echo "erro ao conectar com banco de dados" .  $e;
 }
 global $pdo;
+require_once("Controller/funcoes_globais.php");
 ?>
