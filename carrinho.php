@@ -38,6 +38,7 @@
                             @$valorcar = $ress[0]['valor'];
                             @$idp = $ress[0]['id'];
                             @$total = $valorcar + $total;
+                            $totaltotal = $total + @$desconto;
 
                             if ($idp == null) {
                                 $queryy = $pdo->prepare("UPDATE carrinho SET situ = :situ where id_usuario = $id2 and id_produto =  $idc");
@@ -77,8 +78,6 @@
                 </div>
                 <div class="col-lg-6">
                     <div class="shoping__continue">
-                       <?php require_once("checkoutback/frete_cal.php"); ?>
-                        
                         <div class="shoping__discount">
                             <h5>Codigos de desconto</h5>
                             <form action="#">
@@ -93,7 +92,7 @@
                         <h5>Total Carrinho</h5>
                         <ul>
                             <li>Total de produtos <span>R$<?php echo $total ?></span></li>
-                            <li>Total <span>R$<?php echo $totaltotal ?></span></li>
+                            <li>Total <span>R$<?= $totaltotal ?></span></li>
                         </ul>
                         <a href="checkout.php" class="site-btn">Tela de vendas</a>
                     </div>
