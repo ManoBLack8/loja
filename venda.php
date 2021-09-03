@@ -69,7 +69,7 @@ $query2 = $pdo->query("SELECT * FROM andress where id_usuario = '" . $id_usuario
 
                         <input name="itemId<?=$b?>" type="hidden" value="1">
                         <input name="itemDescription<?=$b?>" type="hidden" value="frete: <?= $fretes_name?> - <?= $fretes_name_company ?>">  
-                        <input name="itemAmount<?=$b?>" type="hidden" value="1.00">  
+                        <input name="itemAmount<?=$b?>" type="hidden" value="<?= $fretes_price ?>">  
                         <input name="itemQuantity<?=$b?>" type="hidden" value="1">  
 
                         
