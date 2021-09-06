@@ -2791,15 +2791,25 @@ select {
 
 .label_entrega{
 	text-align: center;
-	width: 200px;
 	margin: 20px;
 	border-radius: 4px;
 	background: #f0efef;
+	padding: 5px;
+}
+.label_entrega h5,h4,p{
+ margin-top: 10px;
+ margin-left: auto;
+}
+.label_entrega h5{
+	margin-right: 0px;
+	margin-left: auto;
 }
 .label_entrega:hover{
 	background:  #e88988;
 }
-
+.label_entrega input{
+	width: 20px !important;
+}
 .label_entrega:checked{
 	background: #e88988;
 }
@@ -2809,6 +2819,7 @@ select {
 }
 .img_entrega{
 	max-height: 20px;
+	margin-top: 12px;
 }
 .entrega-btn{
 	float: right;

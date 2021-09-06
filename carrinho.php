@@ -76,22 +76,36 @@
                             Atualizar carrinho</a>
                     </div>
                 </div>
+                
                 <div class="col-lg-6">
                     <div class="shoping__continue">
                         <div class="shoping__discount">
                             <h5>Codigos de desconto</h5>
                             <form action="#">
-                                <input type="text" placeholder="Adicione seu cupom">
-                                <button type="submit" class="site-btn">Aplicar desconto</button>
+                                <input type="text" name="cupom" placeholder="Adicione seu cupom">
+                                <button type="submit" id="btn-cupom" class="site-btn">Aplicar desconto</button>
                             </form>
                         </div>
                     </div>
                 </div>
                 <div class="col-lg-6">
+                    <div class="shoping__continue">
+                        <div class="shoping__discount">
+                            <h5>Calcular frete</h5>
+                            <form action="#">
+                                <input type="postalcode" width="20" name="entrega" placeholder="Adicione seu cupom" id="cep">
+                                <input type="hidden" width="20" name="city" placeholder="Adicione seu cupom" id="cidade">
+                                <button type="submit" id="btn-calcular"
+                                class="site-btn">Calcular</button>
+                            </form>
+                            <div id="entregas"></div> 
+                        </div>
+                    </div>
                     <div class="shoping__checkout">
                         <h5>Total Carrinho</h5>
                         <ul>
                             <li>Total de produtos <span>R$<?php echo $total ?></span></li>
+                            <div id="cupom"></div>
                             <li>Total <span>R$<?= $totaltotal ?></span></li>
                         </ul>
                         <a href="checkout.php" class="site-btn">Tela de vendas</a>
@@ -100,19 +114,6 @@
             </div>
         </div>
     </section>
-    <div class="modal" id="modal_entrega" tabindex="-1" role="dialog">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-body">
-        <p></p>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-primary">Save changes</button>
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-      </div>
-    </div>
-  </div>
-</div>
     <!-- Shoping Cart Section End -->
  <div class="modal" id="modal-deletar-carrinho" tabindex="-1" role="dialog">
     <div class="modal-dialog" role="document">
@@ -127,7 +128,7 @@
 
                 <p>Deseja realmente Excluir este Registro?</p>
 
-                <div align="center" id="mensagem_excluir" class="">
+                <div align="center" class="">
 
                 </div>
 
@@ -144,7 +145,36 @@
         </div>
     </div>
 </div>
+<div class="modal" id="modal-entregas" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Tipos de entregas</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+            <div class="container">
+           <div class="entregas" width="200">
+           <div></div>
+                
+            </div>
+        </div>
 
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-cancelar-excluir">Cancelar</button>
+                <form method="post">
+
+                    <input type="hidden" id="id"  name="id" value="<?php echo @$_GET['id'] ?>" required>
+
+                    <button type="button" id="btn-deletar" name="btn-deletar" class="btn btn-danger">Excluir</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
 <?php
 require_once("Roda_pe.php");  
 if (@$_GET['funcao'] == 'delcarrinho' ){
@@ -154,7 +184,9 @@ if (@$_GET['funcao'] == 'delcarrinho' ){
  <script src="https://code.jquery.com/jquery-3.4.1.min.js"       integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
  crossorigin="anonymous">
 </script>
-<script src="js/pagseguro.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+
+  <script src="../js/mascara.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         $('#btn-deletar').click(function (event) {
@@ -184,5 +216,98 @@ if (@$_GET['funcao'] == 'delcarrinho' ){
         })
     })
 </script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btn-calcular').click(function (event) {
+            event.preventDefault();
+            
+            
 
+            $.ajax({
+                url: "entregas.php",
+                method: "post",
+                data: $('form').serialize(),
+                dataType: "text",
+                success: function (data) {
+                    $('#entregas').append(data)
+                },
 
+            })
+        })
+    })
+
+</script>
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#btn-cupom').click(function (event) {
+            event.preventDefault();
+            
+            
+
+            $.ajax({
+                url: "Controller/CupomController.php",
+                method: "post",
+                data: $('form').serialize(),
+                dataType: "text",
+                success: function (data) {
+                    $('#cupom').append(data)
+                },
+
+            })
+        })
+    })
+
+</script>
+<script>
+$(document).ready(function() {
+
+    function limpa_formulário_cep() {
+        // Limpa valores do formulário de cep.
+        $("#cidade").val("");
+    }
+    
+    //Quando o campo cep perde o foco.
+    $("#cep").blur(function() {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = $(this).val().replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                $("#cidade").val("...");
+                //Consulta o webservice viacep.com.br/
+                $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                    if (!("erro" in dados)) {
+                        //Atualiza os campos com os valores da consulta.
+                        $("#cidade").val(dados.localidade);
+                    } //end if.
+                    else {
+                        //CEP pesquisado não foi encontrado.
+                        limpa_formulário_cep();
+                        alert("CEP não encontrado.");
+                    }
+                });
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_formulário_cep();
+        }
+    });
+});
+
+</script>

@@ -1,9 +1,12 @@
 <?php
-require_once("cabecalho.php");
+require_once("conexao.php");
+session_start();
 $id_usuario = $_SESSION['id_usuario'];
 $query2 = $pdo->query("SELECT * FROM andress where id_usuario = '" . $id_usuario . "'");
 @$ress = $query2->fetchAll(PDO::FETCH_ASSOC);
 @$cep = $ress[0]['cep'];
+$cep = $_POST["entrega"];
+$city = $_POST["city"];
   $token_type = "Bearer";
   $expires_in = 2592000;
   $access_token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjBkNDI2YmU5NWZkZTczN2UxNjMwODcwMjJhMzY1ZGRkOWViMjE1ZTkxODc2OWUxZjlmZGY2MDViZjM0Yzk2OWE5NjJkZTQ1YTMxMjMzY2FlIn0.eyJhdWQiOiIxNDM3IiwianRpIjoiMGQ0MjZiZTk1ZmRlNzM3ZTE2MzA4NzAyMmEzNjVkZGQ5ZWIyMTVlOTE4NzY5ZTFmOWZkZjYwNWJmMzRjOTY5YTk2MmRlNDVhMzEyMzNjYWUiLCJpYXQiOjE2MjY4MzE2MDEsIm5iZiI6MTYyNjgzMTYwMSwiZXhwIjoxNjI5NDIzNjAxLCJzdWIiOiI5ODkwYmEwZC1lMGNlLTRjZDUtYjJjYy01MjIzNmJjZTdlNjYiLCJzY29wZXMiOlsic2hpcHBpbmctY2FsY3VsYXRlIl19.prt5ShcJr6T9p_p-yZFbrMfyY_uIbBe20HG7B4bTmddMnR0a-o-HrKBdD14ZFC8ofgc_ezVz9N7w4hkO4t4I2hduP93ncI9BfuDZbfN_U26LXP9_oJP4yJZgKYjBuEwfyXqg6sozZ2uipx-k5Y5Mq-ldiD7vM8i8pmNsvKQWNIi7NgnCTZS6iBS1lFGZuvuVcZvS_SPf63KCZYBhiZAdvgzqnOEf5nOmJXOE4ygxueso6yhwqgJOCXO2dIEwxSS8IyYIDfFHj0SyD6M1DtuYPsic2DZwPFOw09YkiwTgPryBd2o2NR7FCkyky28D-82V84R5XH_Fj5yidvHLQNHe7ujoss6pecgmKIM_pKmdxSFB2TjY36XAGnzX6BfC4t5pOQrKc4vapeA5_bUgJNz9W5NvpADNigkIrBF2UutkcePi-VTZYZEtdBw_eP6VJbz4usfXtOtBjiFFuCObN40XoPV5OzT4LPFKEPM2N0wLQs7hZAV2dpDN1bLhPIfVgcUGuCjV9IljcOQz_bIkBOKQoCvl3NPUaLpmeM3Src0Pjho11oHTPTWDObPUVKeTXPOge6MCrWtyXhWqnz_856zaTpp8LUn5dFS1PUHOaauMd3zMXwv3_BRlt6udgSLEaj10xQg03A2w7EgAm4st4GvaN3OTFj46GFf1r4RS8yXmJG8";
@@ -68,36 +71,45 @@ $response = json_decode(curl_exec($curl));
 curl_close($curl);
 
 ?>
-<body>
-    <section>
-        <div class="container">
-            <div class="entregas" width="200">
-                <form action="venda.php" method="POST">
-                    <div class="formulario_entrega">
-                        <?php foreach ($response as $frete){
-                            if (@$frete->error < 1) { ?>
-                            <label class="label_entrega" onclick="marcardesmarcar()">
-                                <img src="<?= $frete->company->picture ?>" class="img_entrega" alt="<?= $frete->name ?>">
-                                <h3 class="mt-3"><?= $frete->name ?></h3>
-                                <h5><?= $frete->price ?></h5>
-                                <h6><?= $frete->company->name ?></h6>
-                                <p><?= $frete->delivery_time ?> dias</p>
-                                <input type="radio" class="marcar" name="fretes" id="frete" value="<?= $frete->price ?>,<?= $frete->name ?>,<?= $frete->company->name ?>">
-                                
-                            </label><?php } ?>
-                        <?php } ?>
-                    </div>
-                    <button type="submit" class="site-btn entrega-btn">ir para tela de compra</button>
-                </form>
-                
-            </div>
+
+<div class="entregas" width="200">
+    <form action="venda.php" method="POST">
+        <div class="formulario_entrega">
+        <?php if ($city == "Cuiabá") {
+                        $frete_price = "10";
+                        if ($city == "Várzea Grande") {
+                            $frete_price = "13";
+                        }
+                        $frete_name = "Motoboy";
+                        $frete_company_name = "Encontrei";
+                        $frete_picture_company = "";
+                        $frete_delivery_time = "";
+
+                        ?>
+                        <label class="label_entrega row" onclick="marcardesmarcar()">
+                            <input type="radio" class="marcar" name="fretes" id="frete" value="<?= $frete_price ?>,<?= $frete_name ?>,<?= $frete_company_name ?>">
+                            <span class="fa fa-delivery"></span>
+                            <h4><?= $frete_name ?></h4>
+                            <p><?= $frete_delivery_time ?> dias</p>
+                            <h5>R$ <?= $frete_price ?></h5>
+                        </label>
+                     <?php } ?>
+            <?php foreach ($response as $frete){
+                if (@$frete->error < 1) { ?>
+                    <label class="label_entrega row" onclick="marcardesmarcar()">
+                    <input type="radio" class="marcar" name="fretes" id="frete" value="<?= $frete->price ?>,<?= $frete->name ?>,<?= $frete->company->name ?>">
+                    <img src="<?= $frete->company->picture ?>" class="img_entrega" alt="<?= $frete->name ?>">
+                    <h4><?= $frete->name ?></h4>
+                    <p><?= $frete->delivery_time ?> dias</p>
+                    <h5>R$ <?= $frete->price ?></h5>
+                    
+                    
+                    
+                </label><?php } ?>
+            <?php } ?>
         </div>
-    </section>
+    </form>
+    
+</div>
 </body>
 <script>
- function marcardesmarcar(){
-    radio
-
-   
-}
-</script>

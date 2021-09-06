@@ -1,3 +1,4 @@
+
 <?php
 function itensDoCarrinho($id_usuario){
     global $pdo;
