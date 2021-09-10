@@ -68,7 +68,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
         <div id="mobile-menu-wrap"></div>
         <div class="header__top__right__social">
             <a href="#"><i class="fa fa-facebook"></i></a>
-            <a href="https://www.instagram.com/encontrei_labrecho/"><i class="fa fa-instagram"></i></a>
+            <a href="https://www.instagram.com/encontrei__/"><i class="fa fa-instagram"></i></a>
         </div>
         <div class="humberger__menu__contact">
             <ul>
@@ -94,7 +94,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                         <div class="header__top__right">
                             <div class="header__top__right__social">
                                 <a href="#"><i class="fa fa-facebook"></i></a>
-                                <a href="https://www.instagram.com/encontrei_labrecho/"><i class="fa fa-instagram"></i></a>
+                                <a href="https://www.instagram.com/encontrei__/"><i class="fa fa-instagram"></i></a>
                             </div>
                             <div class="header__top__right__auth">
                                 <a href="sistema"><i class="fa fa-user"></i>Login</a>

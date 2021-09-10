@@ -18,11 +18,11 @@ $res4 = $query4->fetchAll(PDO::FETCH_ASSOC);
 if ($cate != null) {
     $query3 = $pdo->query("SELECT * FROM produtos where idcategoria = $cate order by id desc ");
     $res3 = $query3->fetchAll(PDO::FETCH_ASSOC);
-    $query4 = $pdo->query("SELECT DISTINCT tamanho FROM produtos where idcategoria = $cate order by id desc ");
+    $query4 = $pdo->query("SELECT DISTINCT tamanho FROM produtos order by id desc ");
     $res4 = $query4->fetchAll(PDO::FETCH_ASSOC);
 }
 if ($tam != null) {
-    $query3 = $pdo->query("SELECT * FROM produtos where idcategoria = $cate order by id desc ");
+    $query3 = $pdo->query("SELECT * FROM produtos where tamanho = '$tam' order by id desc ");
     $res3 = $query3->fetchAll(PDO::FETCH_ASSOC);
     if ($cate = null) {
         $query3 = $pdo->query("SELECT * FROM produtos order by id desc ");

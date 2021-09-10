@@ -21,7 +21,7 @@
                                 </tr>
                             </thead>
                             <?php 
-                                $id2 = $_SESSION['id_usuario'];
+                            $id2 = $_SESSION['id_usuario'];
                             $query = $pdo->query("SELECT * FROM carrinho where situ = 'disponivel' and id_usuario =  $id2 order by id desc ");
                             $res = $query->fetchAll(PDO::FETCH_ASSOC);
                             
@@ -92,24 +92,24 @@
                     <div class="shoping__continue">
                         <div class="shoping__discount">
                             <h5>Calcular frete</h5>
-                            <form action="#">
-                                <input type="postalcode" width="20" name="entrega" placeholder="Adicione seu cupom" id="cep">
+                            <form action="checkout.php" method="POST">
+                                <input type="postalcode" width="20" name="cep" placeholder="Adicione seu cupom" id="cep">
                                 <input type="hidden" width="20" name="city" placeholder="Adicione seu cupom" id="cidade">
                                 <button type="submit" id="btn-calcular"
                                 class="site-btn">Calcular</button>
-                            </form>
+                            
                             <div id="entregas"></div> 
                         </div>
                     </div>
                     <div class="shoping__checkout">
                         <h5>Total Carrinho</h5>
                         <ul>
-                            <li>Total de produtos <span>R$<?php echo $total ?></span></li>
+                            <li>Total de produtos <span>R$<?= $total ?></span></li>
                             <div id="cupom"></div>
                             <li>Total <span>R$<?= $totaltotal ?></span></li>
                         </ul>
-                        <a href="checkout.php" class="site-btn">Tela de vendas</a>
-                    </div>
+                        <button type="submit" class="site-btn">Tela de vendas</button>
+                    </div></form>
                 </div>
             </div>
         </div>
@@ -191,7 +191,6 @@ if (@$_GET['funcao'] == 'delcarrinho' ){
     $(document).ready(function () {
         $('#btn-deletar').click(function (event) {
             event.preventDefault();
-
             $.ajax({
                 url: "carrinho/excluir_carrinho.php",
                 method: "post",
@@ -220,16 +219,17 @@ if (@$_GET['funcao'] == 'delcarrinho' ){
     $(document).ready(function () {
         $('#btn-calcular').click(function (event) {
             event.preventDefault();
-            
-            
-
+            sleep(10)
             $.ajax({
                 url: "entregas.php",
                 method: "post",
                 data: $('form').serialize(),
                 dataType: "text",
                 success: function (data) {
-                    $('#entregas').append(data)
+                    $('#entregas').html(data)
+                    
+                    
+                    
                 },
 
             })
@@ -280,9 +280,6 @@ $(document).ready(function() {
 
             //Valida o formato do CEP.
             if(validacep.test(cep)) {
-
-                //Preenche os campos com "..." enquanto consulta webservice.
-                $("#cidade").val("...");
                 //Consulta o webservice viacep.com.br/
                 $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
 
@@ -309,5 +306,10 @@ $(document).ready(function() {
         }
     });
 });
+
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
 
 </script>

@@ -5,7 +5,7 @@ $id_usuario = $_SESSION['id_usuario'];
 $query2 = $pdo->query("SELECT * FROM andress where id_usuario = '" . $id_usuario . "'");
 @$ress = $query2->fetchAll(PDO::FETCH_ASSOC);
 @$cep = $ress[0]['cep'];
-$cep = $_POST["entrega"];
+$cep = $_POST["cep"];
 $city = $_POST["city"];
   $token_type = "Bearer";
   $expires_in = 2592000;
@@ -69,47 +69,56 @@ curl_setopt_array($curl, array(
 $response = json_decode(curl_exec($curl));
 
 curl_close($curl);
+if (@$response->errors) {
+    echo "<span class='text-danger'>Verifique o seu cep</span>";
+}else{
+
 
 ?>
 
 <div class="entregas" width="200">
-    <form action="venda.php" method="POST">
         <div class="formulario_entrega">
-        <?php if ($city == "Cuiabá") {
-                        $frete_price = "10";
+        <label class="label_entrega row" onclick="marcardesmarcar()">
+        <input type="radio" class="marcar" name="fretes" id="frete" value=" 00.00, Sacolinha, Encontrei">
+        <img src="icones e logos/Prancheta 2 cópia 2.png" class="img_entrega" alt="Sacolinha">
+        <h4>Sacolinha</h4>
+        <p>Reserva o produto por 2 meses</p>
+        <h5>R$ 00.00</h5>
+    </label>
+        <?php if ($city == "Cuiabá" or $city == "Várzea Grande") {
+                        $frete_price = "10.00";
                         if ($city == "Várzea Grande") {
-                            $frete_price = "13";
+                            $frete_price = "13.00";
                         }
                         $frete_name = "Motoboy";
                         $frete_company_name = "Encontrei";
-                        $frete_picture_company = "";
-                        $frete_delivery_time = "";
+                        $frete_picture_company = "icones e logos/Camada 1.png";
+                        $frete_delivery_time = "aos sabados";
+                        $day = "";
 
                         ?>
                         <label class="label_entrega row" onclick="marcardesmarcar()">
                             <input type="radio" class="marcar" name="fretes" id="frete" value="<?= $frete_price ?>,<?= $frete_name ?>,<?= $frete_company_name ?>">
-                            <span class="fa fa-delivery"></span>
+                            <img src="<?= $frete_picture_company ?>" class="img_entrega" alt="<?= $frete_name ?>">
                             <h4><?= $frete_name ?></h4>
-                            <p><?= $frete_delivery_time ?> dias</p>
+                            <p><?= $frete_delivery_time ?> <?= $day ?></p>
                             <h5>R$ <?= $frete_price ?></h5>
                         </label>
                      <?php } ?>
             <?php foreach ($response as $frete){
+                $day = "dias";
                 if (@$frete->error < 1) { ?>
                     <label class="label_entrega row" onclick="marcardesmarcar()">
                     <input type="radio" class="marcar" name="fretes" id="frete" value="<?= $frete->price ?>,<?= $frete->name ?>,<?= $frete->company->name ?>">
                     <img src="<?= $frete->company->picture ?>" class="img_entrega" alt="<?= $frete->name ?>">
                     <h4><?= $frete->name ?></h4>
-                    <p><?= $frete->delivery_time ?> dias</p>
+                    <p><?= $frete->delivery_time ?> <?= $day ?></p>
                     <h5>R$ <?= $frete->price ?></h5>
-                    
-                    
-                    
                 </label><?php } ?>
             <?php } ?>
         </div>
-    </form>
     
 </div>
 </body>
+<?php } ?>
 <script>

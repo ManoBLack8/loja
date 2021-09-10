@@ -3,6 +3,14 @@ require_once("cabecalho.php");
 $_SESSION['id_usuario'];
 $nome_usuario = $_SESSION['nome_usuario'];
 $email_usuario = $_SESSION['email_usuario'];
+$cep = $_POST["cep"];
+$fretes = explode(",",@$_POST['fretes']);
+@$fretes_price = $fretes[0];
+@$fretes_name = $fretes[1];
+@$fretes_name_company = $fretes[2];
+if (@$_POST['fretes'] == "" or null) {
+    echo "<script language='javascript'> window.location='carrinho.php' </script>";
+}
 function addsitu($idc,$id2)
 {
     global $pdo ;
@@ -18,33 +26,33 @@ function addsitu($idc,$id2)
         <div class="container">
             <div class="checkout__form">
                 <h4>Detalhes da cobrança</h4>
-                    <form method="post" action="carrinho/endereco.php">  
+                    <form method="post" action="https://pagseguro.uol.com.br/v2/checkout/payment.html">  
                         <div class="row">
                             <div class="col-lg-8 col-md-6">
                                 <div class="checkout__input">
                                     <p>CEP<span>*</span></p>
-                                    <input id="cep" name="cep" type="postalcode">
+                                    <input name="shippingAddressPostalCode" type="postalcode" value="<?= @$cep ?>">
                                 </div>
                                 <div class="checkout__input">
                                     <p>UF<span>*</span></p>
-                                    <input id="uf" name="uf" type="text">
+                                    <input name="shippingAddressState" id="uf" type="text" value="<?= @$estado ?>">
                                 </div>
                                 <div class="checkout__input">
                                     <p>Cidade<span>*</span></p>
-                                    <input id="cidade" name="cidade" type="text">
+                                    <input name="shippingAddressCity" id="cidade" type="text" value="<?= @$cidade ?>">  
                                 </div>
                                 <div class="checkout__input">
                                     <p>Bairro<span>*</span></p>
-                                    <input id="bairro" name="bairro" type="text">
+                                    <input name="shippingAddressDistrict" type="text" id="bairro" value="<?= @$bairro ?>"> 
                                 </div>
                                 <div class="checkout__input">
                                     <p>Endereço<span>*</span></p>
-                                        <input type="text" id="rua" name="rua" placeholder="Nome da Rua" class="checkout__input__add">
-                                    <input type="text" id="numero" name="numero" placeholder="" class="checkout__input__number">
+                                    <input name="shippingAddressStreet" placeholder="Nome da Rua" class="checkout__input__add" type="text" value="<?= @$rua ?>"> 
+                                    <input name="shippingAddressNumber" type="text" value="<?= @$lote ?>">
                                 </div>
                                 <div class="checkout__input">
                                     <p>Complemento<span>*</span></p>
-                                    <input id="complemento" name="complemento" type="text">
+                                    <input name="shippingAddressComplement" type="text" value="<?= @$complemento ?>">  
                                 </div>
                                 
                                 
@@ -53,16 +61,92 @@ function addsitu($idc,$id2)
                                     <div class="col-lg-6">
                                         <div class="checkout__input">
                                             <p>Telefone<span>*</span></p>
-                                            <input type="text" id="ddd" name="ddd" placeholder="DDD" class="checkout__input__number">
+                                            <input name="senderPhone"
+                                            id="ddd" class="checkout__input__number" type="text" value="<?= @$_SESSION["telefone_usuario"] ?>">
 
-                                            <input type="text" name="senderPhone" id="telefone" class="checkout__input__add" placeholder="Numero de telefone">
+                                            <input name="senderAreaCode" type="text" id="telefone" class="checkout__input__add" placeholder="Numero de telefone" value="<?= @$_SESSION["ddd_usuario"] ?>">
                                         </div>
                                     </div>
                                 </div>                                
-                                <button type="submit" class="btn-checkout site-btn">Proximo <span class="fa fa-arrow-right"></span></button>
                             </div>
-                        </div>
-                    </form> 
+                        
+                         
+                        <div class="col-lg-4 col-md-6">
+                        <div class="checkout__order">
+                            <h4>Seu pedido</h4>
+                            <div class="checkout__order__products">Produtos</div>
+                            <?php
+                            $id2 = $_SESSION['id_usuario'];
+                            $query = $pdo->query("SELECT * FROM carrinho where situ = 'disponivel' and id_usuario =  $id2 order by id desc ");
+                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                            
+                            for ($i=0; $i < count($res); $i++) { 
+                                
+                            $idc = $res[$i]['id_produto'];
+                            $id = $res[$i]['id'];
+                            $query2 = $pdo->query("SELECT * FROM produtos where id = '" . $idc . "'");
+                            @$ress = $query2->fetchAll(PDO::FETCH_ASSOC);
+                            @$nomecar = $ress[0]['nome'];
+                            @$imagemc = $ress[0]['imagem'];
+                            @$valorcar = $ress[0]['valor'];
+                            @$idp = $ress[0]['id'];
+                            @$peso = $ress[0]['peso'];
+                            @$total_produtos = $valorcar + $total_produtos;
+                            $frete = 7.0;
+                            $total = $fretes_price + $total_produtos;
+                            
+                            $a = $i + 1;
+                            
+                            if ($idp == null) {
+                                Addsitu($idp,$id2);
+                            }?>
+
+                            <input name="itemId<?=$a?>" type="hidden" value="<?= $idp ?>">
+                            <input name="itemDescription<?=$a?>" type="hidden" value="<?= $nomecar?>">  
+                            <input name="itemAmount<?=$a?>" type="hidden" value="<?= $valorcar?>">  
+                            <input name="itemQuantity<?=$a?>" type="hidden" value="1"> 
+                            <input name="itemWeight<?=$a?>" type="hidden" value="<?= $peso ?>">
+
+                            <ul>
+                                <li><?= $nomecar ?><span>R$ <?= $valorcar?></span></li>
+                            </ul><?php } 
+                            
+                            $b = count($res) + 1;?>
+
+                            <input name="itemId<?=$b?>" type="hidden" value="1">
+                            <input name="itemDescription<?=$b?>" type="hidden" value="frete: <?= $fretes_name?> - <?= $fretes_name_company ?>">  
+                            <input name="itemAmount<?=$b?>" type="hidden" value="<?= $fretes_price ?>">  
+                            <input name="itemQuantity<?=$b?>" type="hidden" value="1">  
+
+                            
+
+
+                            <div class="checkout__order__subtotal">Valor<span>R$<?= $total_produtos ?></span></div>
+                            <div class="checkout__order__frete">frete: <?= $fretes_name?> - <?=$fretes_name_company ?> <span>R$<?= $fretes_price ?></span></div>
+                            <div class="checkout__order__total">Total <span>R$<?= $total?></span></div>
+                            
+                            
+                            <!-- Campos obrigatórios -->  
+                            <input name="receiverEmail" type="hidden" value="viniciusfe66@gmail.com">  
+                            <input name="currency" type="hidden" value="BRL">  
+                            <!-- Código de referência do pagamento no seu sistema (opcional) -->  
+                            <input name="reference" type="hidden" value="brecho">  
+                            
+                            <!-- Informações de frete (opcionais) -->  
+                            <input name="shippingType" type="hidden" value="3">
+
+                            <input name="shippingAddressCountry" type="hidden" value="BRA">  
+                    
+                            
+                            <!-- Dados do comprador (opcionais) -->   
+                            <input name="senderEmail" type="hidden" value="<?= @$_SESSION["email_usuario"] ?>">  
+                            <input name="senderName" type="hidden" value="<?= @$_SESSION["nome_usuario"] ?>"> 
+                            <!-- submit do form (obrigatório) -->  
+                            <button class="site-btn" type="submit">Comprar com a Pagseguro</button>
+                        </div> 
+                        </form>
+                    </div>
+                </div>
             </div>
         </div>
     </section>

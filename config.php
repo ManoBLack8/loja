@@ -1,7 +1,7 @@
 <?php 
 
-$nome = 'Encontrei lá brecho';
-$email = 'encontrei.labrecho@gmail.com';
+$nome = 'Encontrei!';
+$email = 'contato@encontrei.store';
 $telefone = '65 992620294';
 
 

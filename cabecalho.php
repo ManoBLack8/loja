@@ -1,6 +1,6 @@
 <?php require_once("conexao.php");
 session_start();
-$itens_do_carrinho = itensDoCarrinho($_SESSION["id_usuario"]);
+$itens_do_carrinho = itensDoCarrinho(@$_SESSION["id_usuario"]);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -9,15 +9,13 @@ $itens_do_carrinho = itensDoCarrinho($_SESSION["id_usuario"]);
     <meta charset="UTF-8">
     <meta name="description" content="Brechó online | Moda Vintage & Atemporal🍂
 Para você que preza por inclusão, diversidade e autenticidade brecho online">
-    <meta name="keywords" content="Brechó, encontrei lá brecho, encontrei la, moda atemporal, cuiabá MT">
+    <meta name="keywords" content="Brechó, encontrei lá brecho, encontrei la, moda atemporal, cuiabá MT, encontrei!, juliana, de, souza, silva">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title><?php echo $nome ?></title>
 
-    <!-- Google Font -->
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;600;900&display=swap" rel="stylesheet">
-
     <!-- Css Styles -->
+    <link rel="shortcut icon" href="icones e logos/favicon.ico">
     <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="css/font-awesome.min.css" type="text/css">
     <link rel="stylesheet" href="css/jquery-ui.min.css" type="text/css">
@@ -131,7 +129,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                     <div class="header__cart">
                         <ul>
                             <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="./carrinho.php"><i class="fa fa-shopping-cart"></i> <span><?= count($itens_do_carrinho) ?></span></a></li>
+                            <li><a href="./carrinho.php"><i class="fa fa-shopping-cart"></i> <span><?= count($itens_do_carrinho)+ 1 ?></span></a></li>
                         </ul>
                     </div>
                 </div>
@@ -151,7 +149,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                     <div class="hero__search">
                         <div class="hero__search__form">
                             <form action="shop.php" method="POST">
-                                <input type="text" name="pesquisar" placeholder="Do que vc precisa ?">
+                                <input type="text" name="pesquisar" placeholder="Do que vc precisa ?" value="<?= @$_POST["pesquisar"] ?>">
                                 <button type="submit" class="site-btn">Buscar</button>
                             </form>
                         </div>
