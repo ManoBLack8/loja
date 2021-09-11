@@ -61,7 +61,6 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                         <li><a href="./blog-details.html">Blog detalhes</a></li>
                     </ul>
                 </li>
-                <li><a href="./blog.html">Blog</a></li>
                 <li><a href="contato.php">Contato</a></li>
             </ul>
         </nav>
@@ -107,7 +106,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                                 <ul class="header__menu__dropdown text-center login">
                                                 <li><a href="./carrinho.php">Meus Pedidos</a></li>
                                                 <li><a href="carrinho.php">Carrinho</a></li>
-                                                <li class="fa fa-exit"><a href="sistema">Sair</a></li>
+                                                <li><a href="sistema">Sair</a></li>
                                             </ul>
                                         </li>
                                     </ul>
@@ -139,7 +138,6 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                                     <li><a href="./blog-details.html">Blog Detalhes</a></li>
                                 </ul>
                             </li>
-                            <li><a href="./blog.html">Blog</a></li>
                             <li><a href="contato.php">Contato</a></li>
                         </ul>
                     </nav>
@@ -171,15 +169,6 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                                 <input type="text" name="pesquisar" placeholder="Do que vc precisa ?" value="<?= @$_POST["pesquisar"] ?>">
                                 <button type="submit" class="site-btn">Buscar</button>
                             </form>
-                        </div>
-                        <div class="hero__search__phone">
-                            <div class="hero__search__phone__icon">
-                                <i class="fa fa-whatsapp"></i>
-                            </div>
-                            <div class="hero__search__phone__text">
-                                <h5><?php echo $telefone ?></h5>
-                                <span>Suporte das 8:00 ás 17:00</span>
-                            </div>
                         </div>
                     </div>
                 </div>

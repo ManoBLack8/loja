@@ -23,7 +23,7 @@ require_once("Controller/ShopController.php");
                             $id = $res[$i]['id'];
                             
                             ?>
-                                <li><a href="shop.php?cat=<?= $id ?>&tamanho=<?= @$_GET['tamanho']?>"><?= $nome?></a></li>
+                                <li><a href="shop.php?pag=<?= @$_GET['pag'] ?>&cat=<?= $id ?>&tamanho=<?= @$_GET['tamanho']?>&funcao=<?= @$_GET['funcao'] ?>&id=<?= @$_GET['id'] ?>"><?= $nome?></a></li>
                                 <?php } ?>
                             </ul>
                         </div>
@@ -33,9 +33,14 @@ require_once("Controller/ShopController.php");
                             
                             for ($i=0; $i < count($res4); $i++) {
                                 $tamanho = $res4[$i]['tamanho'];
+                                if($tamanho != ""){
+                                 
+                                
                                 ?>
-                            <a href="?cat=<?= @$_GET['cat'] ?>&tamanho=<?= $tamanho?>" class="sidebar__item__size"><?= $tamanho ?></a>
-                            <?php } ?>
+                            <a href="?pag=<?= @$_GET['pag'] ?>&cat=<?= @$_GET['cat'] ?>&tamanho=<?= $tamanho?>&funcao=<?= @$_GET['funcao'] ?>&id=<?= @$_GET['id'] ?>" class="sidebar__item__size"><?= $tamanho ?></a>
+                            <?php 
+                                }
+                        } ?>
                         </div>
                     </div>
                 </div>
@@ -80,7 +85,7 @@ require_once("Controller/ShopController.php");
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
                                         <li><a href="shop-detalhes.php?id=<?php echo $id ?>"><i class="fa fa-eye"></i></a></li>
-                                        <li><a href="?cat=<?= @$_GET['cat']?>&tamanho=<?= @$_GET['tamanho']?>&funcao=carrinho&id=<?=$id ?>" ><i class="fa fa-shopping-cart"></i></a></li>
+                                        <li><a href="?pag=<?= @$_GET['pag'] ?>&cat=<?= @$_GET['cat']?>&tamanho=<?= @$_GET['tamanho']?>&funcao=carrinho&id=<?=$id ?>" ><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
@@ -93,10 +98,18 @@ require_once("Controller/ShopController.php");
                        
                     </div>
                     <div class="product__pagination">
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">3</a>
-                        <a href="#"><i class="fa fa-long-arrow-right"></i></a>
+                        <?php
+                        if ($pc>1) {
+                            echo " <a href='?pag=$anterior'><-</a> ";
+                        }
+                        for($p=0; $p< $tp; $p++){?>
+                            <a href="?pag=<?= $p+1 ?>&cat=<?= @$_GET['cat']?>&tamanho=<?= @$_GET['tamanho']?>&funcao=<?= @$_GET['funcao'] ?>&id=<?= @$_GET['id'] ?>"><?= $p+1 ?></a>
+                        
+                   <?php }
+                   if ($pc<$tp) {
+                    echo " <a href='?pag=$proximo'>-></a>";
+                    }
+                   ?>
                     </div>
                 </div>
             </div>
