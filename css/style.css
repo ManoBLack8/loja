@@ -173,6 +173,7 @@ select {
 }
 .login {
 	text-align: center;
+	padding: 0px 0 !important;
 }
 
 .header__top__left {
@@ -341,6 +342,8 @@ select {
 .header__menu {
 	padding: 24px 0;
 }
+.header__menu2 {
+}
 
 .header__menu ul li {
 	list-style: none;
@@ -348,7 +351,12 @@ select {
 	margin-right: 50px;
 	position: relative;
 }
-
+.header__menu2 ul li {
+	list-style: none;
+	display: inline-block;
+	margin-right: 50px;
+	position: relative;
+}
 .header__menu ul li .header__menu__dropdown {
 	position: absolute;
 	left: 0;
@@ -365,13 +373,36 @@ select {
 	opacity: 0;
 	visibility: hidden;
 }
-
+.header__menu2 ul li .header__menu__dropdown {
+	position: absolute;
+	left: 0;
+	top: 50px;
+	background: #222222;
+	width: 180px;
+	z-index: 9;
+	padding: 5px 0;
+	-webkit-transition: all, 0.3s;
+	-moz-transition: all, 0.3s;
+	-ms-transition: all, 0.3s;
+	-o-transition: all, 0.3s;
+	transition: all, 0.3s;
+	opacity: 0;
+	visibility: hidden;
+}
 .header__menu ul li .header__menu__dropdown li {
 	margin-right: 0;
 	display: block;
 }
 
+.header__menu2 ul li .header__menu__dropdown li {
+	margin-right: 0;
+	display: block;
+}
+
 .header__menu ul li .header__menu__dropdown li:hover>a {
+	color:  #e88988;
+}
+.header__menu2 ul li .header__menu__dropdown li:hover>a {
 	color:  #e88988;
 }
 
@@ -381,12 +412,26 @@ select {
 	font-weight: 400;
 	padding: 5px 15px;
 }
+.header__menu2 ul li .header__menu__dropdown li a {
+	text-transform: capitalize;
+	color: #ffffff;
+	font-weight: 400;
+	padding: 5px 15px;
+}
 
 .header__menu ul li.active a {
 	color:  #e88988;
 }
-
+.header__menu2 ul li.active a {
+	color:  #e88988;
+}
 .header__menu ul li:hover .header__menu__dropdown {
+	top: 30px;
+	opacity: 1;
+	visibility: visible;
+}
+
+.header__menu2 ul li:hover .header__menu__dropdown {
 	top: 30px;
 	opacity: 1;
 	visibility: visible;
@@ -396,10 +441,15 @@ select {
 	color:  #e88988;
 }
 
+.header__menu2 ul li:hover>a {
+	color:  #e88988;
+}
 .header__menu ul li:last-child {
 	margin-right: 0;
 }
-
+.header__menu2 ul li:last-child {
+	margin-right: 0;
+}
 .header__menu ul li a {
 	font-size: 14px;
 	color: #3d2645;
@@ -415,6 +465,20 @@ select {
 	display: block;
 }
 
+.header__menu2 ul li a {
+	font-size: 11px;
+	color: #3d2645;
+	text-transform: uppercase;
+	font-weight: 700;
+	letter-spacing: 2px;
+	-webkit-transition: all, 0.3s;
+	-moz-transition: all, 0.3s;
+	-ms-transition: all, 0.3s;
+	-o-transition: all, 0.3s;
+	transition: all, 0.3s;
+	padding: 5px 0;
+	display: block;
+}
 .header__cart {
 	text-align: right;
 	padding: 24px 0;

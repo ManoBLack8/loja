@@ -41,7 +41,12 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
         </div>
         <div class="humberger__menu__widget">
             <div class="header__top__right__auth">
-                <a href="sistema"><i class="fa fa-user"><?php echo $_SESSION['email']?></i></a>
+                <a href="sistema"><i class="fa fa-user"><?php
+                if (@$_SESSION["id_usuario"] == null) {
+                 echo "Login";
+                }else {
+                    echo $_SESSION["nome_usuario"];
+                }?></i></a>
             </div>
         </div>
         <nav class="humberger__menu__nav mobile-menu">
@@ -92,7 +97,21 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                                 <a href="https://www.instagram.com/encontrei_labrecho/"><i class="fa fa-instagram"></i></a>
                             </div>
                             <div class="header__top__right__auth">
-                                <a href="sistema"><i class="fa fa-user"></i><?php echo $_SESSION['email_usuario']; ?></a>
+                                <nav class="header__menu2">
+                                    <ul>
+                                        <li><a href="#"></a><a href="sistema"><i class="fa fa-user"></i><?php if (@$_SESSION["id_usuario"] == null) {
+                                        echo "Login";
+                                        }else {
+                                            echo $_SESSION["nome_usuario"];
+                                        } ?></a>
+                                <ul class="header__menu__dropdown text-center login">
+                                                <li><a href="./carrinho.php">Meus Pedidos</a></li>
+                                                <li><a href="carrinho.php">Carrinho</a></li>
+                                                <li class="fa fa-exit"><a href="sistema">Sair</a></li>
+                                            </ul>
+                                        </li>
+                                    </ul>
+                                </nav>
                                     
                             </div>
                         </div>
