@@ -26,7 +26,7 @@ move_uploaded_file($imagem_temp, $caminho);
 
 
 
-	$pdo->query("INSERT INTO imagens (id_produto,  imagem) VALUES ( '$id_produto', '$imagem')");
+	$pdo->query("INSERT INTO imagens (id_produto,  imagens) VALUES ( '$id_produto', '$imagem')");
 	
 	echo 'Salvo com Sucesso!!';
 

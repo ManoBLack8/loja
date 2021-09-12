@@ -8,6 +8,7 @@ $fretes = explode(",",@$_POST['fretes']);
 @$fretes_price = $fretes[0];
 @$fretes_name = $fretes[1];
 @$fretes_name_company = $fretes[2];
+  //os 
 if (@$_POST['fretes'] == "" or null) {
     echo "<script language='javascript'> window.location='carrinho.php' </script>";
 }
@@ -28,7 +29,7 @@ function addsitu($idc,$id2)
                 <h4>Detalhes da cobrança</h4>
                     <form method="post" action="https://pagseguro.uol.com.br/v2/checkout/payment.html">  
                         <div class="row">
-                            <div class="col-lg-8 col-md-6">
+                            <div class="col-lg-7 col-md-6">
                                 <div class="checkout__input">
                                     <p>CEP<span>*</span></p>
                                     <input name="shippingAddressPostalCode" type="postalcode" value="<?= @$cep ?>">
@@ -48,7 +49,7 @@ function addsitu($idc,$id2)
                                 <div class="checkout__input">
                                     <p>Endereço<span>*</span></p>
                                     <input name="shippingAddressStreet" placeholder="Nome da Rua" class="checkout__input__add" type="text" value="<?= @$rua ?>"> 
-                                    <input name="shippingAddressNumber" type="text" value="<?= @$lote ?>">
+                                    <input class="col-md-2" name="shippingAddressNumber" placeholder="numero" type="text" value="<?= @$lote ?>">
                                 </div>
                                 <div class="checkout__input">
                                     <p>Complemento<span>*</span></p>
@@ -71,7 +72,7 @@ function addsitu($idc,$id2)
                             </div>
                         
                          
-                        <div class="col-lg-4 col-md-6">
+                        <div class="col-lg-5 col-md-6">
                         <div class="checkout__order">
                             <h4>Seu pedido</h4>
                             <div class="checkout__order__products">Produtos</div>
@@ -94,6 +95,9 @@ function addsitu($idc,$id2)
                             @$total_produtos = $valorcar + $total_produtos;
                             $frete = 7.0;
                             $total = $fretes_price + $total_produtos;
+                            // calculo porcentagem
+                            $pctm = $_POST["desconto"];
+                            $valor_descontado = $total - ($total / 100 * $pctm);
                             
                             $a = $i + 1;
                             
@@ -116,13 +120,18 @@ function addsitu($idc,$id2)
                             <input name="itemId<?=$b?>" type="hidden" value="1">
                             <input name="itemDescription<?=$b?>" type="hidden" value="frete: <?= $fretes_name?> - <?= $fretes_name_company ?>">  
                             <input name="itemAmount<?=$b?>" type="hidden" value="<?= $fretes_price ?>">  
-                            <input name="itemQuantity<?=$b?>" type="hidden" value="1">  
-
+                            <input name="itemQuantity<?=$b?>" type="hidden" value="1">
+                            
                             
 
 
                             <div class="checkout__order__subtotal">Valor<span>R$<?= $total_produtos ?></span></div>
                             <div class="checkout__order__frete">frete: <?= $fretes_name?> - <?=$fretes_name_company ?> <span>R$<?= $fretes_price ?></span></div>
+
+                            <?php if ($_POST["desconto"]) {
+                                $total = $valor_descontado; ?>
+                                <div class="checkout__order__frete">Desconto <span>-<?= $_POST["desconto"] ?>%</span></div>
+                           <?php } ?>
                             <div class="checkout__order__total">Total <span>R$<?= $total?></span></div>
                             
                             
@@ -135,7 +144,8 @@ function addsitu($idc,$id2)
                             <!-- Informações de frete (opcionais) -->  
                             <input name="shippingType" type="hidden" value="3">
 
-                            <input name="shippingAddressCountry" type="hidden" value="BRA">  
+                            <input name="shippingAddressCountry" type="hidden" value="BRA">    
+
                     
                             
                             <!-- Dados do comprador (opcionais) -->   

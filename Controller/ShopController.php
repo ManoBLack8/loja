@@ -41,7 +41,7 @@ $res3 = $query5->fetchAll(PDO::FETCH_ASSOC);
 
 $busca = "SELECT * FROM produtos where statu = 1 $where";
 
-$total_reg = "4"; // número de registros por página
+$total_reg = "12"; // número de registros por página
 
 $pagina=@$_GET['pag'];
 if (!$pagina) {

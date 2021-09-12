@@ -1409,6 +1409,15 @@ select {
 	margin-right: 0;
 }
 
+.filto-limpar{
+	text-align: center;
+	height: 50px;
+	font-size: 30px;
+	color: #3d2645 !important;
+}
+.filto-limpar a{
+	color: #3d2645 !important;
+}
 .filter__item {
 	padding-top: 45px;
 	border-top: 1px solid #ebebeb;
@@ -1563,7 +1572,13 @@ select {
 .blog__pagination {
 	padding-top: 10px;
 }
-
+.banner{
+	height: 100%;
+	width: 100%;
+	background: no-repeat center;
+    background-size: cover;
+	max-height: 700px;
+}
 .product__pagination a,
 .blog__pagination a {
 	display: inline-block;

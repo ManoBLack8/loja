@@ -34,8 +34,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                <li><a href="./carrinho.php"><i class="fa fa-shopping-bag"></i> <span>3</span></a></li>
+                <li><a href="./carrinho.php"><i class="fa fa-shopping-cart"></i><span><?= count($itens_do_carrinho) ?></span></a></li>
             </ul>
             <div class="header__cart__price">item: <span>R$00,00</span></div>
         </div>
@@ -53,15 +52,10 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
             <ul>
                 <li class="active"><a href="./index.php">Ínicio </a></li>
                 <li><a href="./shop.php">Shop</a></li>
-                <li><a href="#">Paginas</a>
-                    <ul class="header__menu__dropdown">
-                        <li><a href="./shop-detalhes.php">Detalhes de peças</a></li>
-                        <li><a href="./carrinho.php">Carrinho</a></li>
-                        <li><a href="./checkout.php">Check Out</a></li>
-                        <li><a href="./blog-details.html">Blog detalhes</a></li>
-                    </ul>
-                </li>
+                <li><a href="carrinho.php">Carrinho</a></li>
                 <li><a href="contato.php">Contato</a></li>
+                <?php if (@$_SESSION["id_usuario"] == null) {?>
+                    <li><a href="logout.php">Sair</a></li> <?php } ?>
             </ul>
         </nav>
         <div id="mobile-menu-wrap"></div>
@@ -71,7 +65,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
         </div>
         <div class="humberger__menu__contact">
             <ul>
-                <li><i class="fa fa-envelope"></i> <?php echo $email ?></li>
+                <li><i class="fa fa-envelope"></i> <?= $email ?></li>
             </ul>
         </div>
     </div>
@@ -85,7 +79,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                     <div class="col-lg-6 col-md-6">
                         <div class="header__top__left">
                             <ul>
-                                <li><i class="fa fa-envelope"></i><?php echo $email ?></li>
+                                <li><i class="fa fa-envelope"></i><?= $email ?></li>
                             </ul>
                         </div>
                     </div>
@@ -101,13 +95,12 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                                         <li><a href="#"></a><a href="sistema"><i class="fa fa-user"></i><?php if (@$_SESSION["id_usuario"] == null) {
                                         echo "Login";
                                         }else {
-                                            echo $_SESSION["nome_usuario"];
-                                        } ?></a>
-                                <ul class="header__menu__dropdown text-center login">
-                                                <li><a href="./carrinho.php">Meus Pedidos</a></li>
+                                            echo $_SESSION["nome_usuario"]; ?></a>
+                                            <ul class="header__menu__dropdown text-center login">
                                                 <li><a href="carrinho.php">Carrinho</a></li>
-                                                <li><a href="sistema">Sair</a></li>
+                                                <li><a href="logout.php">Sair</a></li>
                                             </ul>
+                                        <?php } ?>    
                                         </li>
                                     </ul>
                                 </nav>
@@ -130,14 +123,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                         <ul>
                             <li class="active"><a href="./index.php">Ínicio</a></li>
                             <li><a href="./shop.php">Shop</a></li>
-                            <li><a href="#">Paginas</a>
-                                <ul class="header__menu__dropdown">
-                                    <li><a href="./shop-detalhes.php">Detalhes da peça</a></li>
-                                    <li><a href="./carrinho.php">Carrinho</a></li>
-                                    <li><a href="./checkout.php">Check Out</a></li>
-                                    <li><a href="./blog-details.html">Blog Detalhes</a></li>
-                                </ul>
-                            </li>
+                            <li><a href="carrinho.php">Carrinho</a></li>
                             <li><a href="contato.php">Contato</a></li>
                         </ul>
                     </nav>
@@ -145,8 +131,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="#"><i class="fa fa-heart"></i> <span>1</span></a></li>
-                            <li><a href="./carrinho.php"><i class="fa fa-shopping-cart"></i> <span><?= count($itens_do_carrinho)+ 1 ?></span></a></li>
+                            <li><a href="./carrinho.php"><i class="fa fa-shopping-cart"></i> <span><?= count($itens_do_carrinho) ?></span></a></li>
                         </ul>
                     </div>
                 </div>

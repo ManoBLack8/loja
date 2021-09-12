@@ -14,7 +14,7 @@
     	$_SESSION['email_usuario'] = $dados[0]['email'];
     	$_SESSION['nivel_usuario'] = $dados[0]['nivel'];
 
-    	if($_SESSION['nivel_usuario'] == 'adimin'){
+    	if($_SESSION['nivel_usuario'] == 'admin'){
     		echo "<script language='javascript'> window.location='painel-admin' </script>";
     	}
 

@@ -9,12 +9,13 @@ require_once("Controller/ShopController.php");
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="hero__categories">
+                            <div class="filto-limpar" title="limpar filtro"><a class="fa fa-refresh" href="shop.php?pag=<?= @$_GET['pag'] ?>"></a></div>
                             <div class="hero__categories__all">
                                 <i class="fa fa-bars"></i>
                                 <span>Categorias</span>
                             </div>
                             <ul>
-                                <li><a href="shop.php">Todas</a></li>
+                                <li><a href="?pag=<?= @$_GET['pag'] ?>&cat=&tamanho=<?= @$_GET['tamanho']?>&funcao=<?= @$_GET['funcao'] ?>&id=<?= @$_GET['id'] ?>">Todas</a></li>
                             <?php
                             $query = $pdo->query("SELECT * FROM categorias order by id asc ");
                             $res = $query->fetchAll(PDO::FETCH_ASSOC);
@@ -23,14 +24,14 @@ require_once("Controller/ShopController.php");
                             $id = $res[$i]['id'];
                             
                             ?>
-                                <li><a href="shop.php?pag=<?= @$_GET['pag'] ?>&cat=<?= $id ?>&tamanho=<?= @$_GET['tamanho']?>&funcao=<?= @$_GET['funcao'] ?>&id=<?= @$_GET['id'] ?>"><?= $nome?></a></li>
+                                <li><a href="?pag=<?= @$_GET['pag'] ?>&cat=<?= $id ?>&tamanho=<?= @$_GET['tamanho']?>&funcao=<?= @$_GET['funcao'] ?>&id=<?= @$_GET['id'] ?>"><?= $nome?></a></li>
                                 <?php } ?>
                             </ul>
                         </div>
                         <div class="sidebar__item">
                             <h4>Tamanho</h4>
+                            <a href="?pag=<?= @$_GET['pag'] ?>&cat=<?= @$_GET['cat'] ?>&tamanho=&funcao=<?= @$_GET['funcao'] ?>&id=<?= @$_GET['id'] ?>" class="sidebar__item__size">Todos</a>
                             <?php
-                            
                             for ($i=0; $i < count($res4); $i++) {
                                 $tamanho = $res4[$i]['tamanho'];
                                 if($tamanho != ""){

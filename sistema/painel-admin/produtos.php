@@ -3,7 +3,9 @@ $pag = "produtos";
 require_once("../../conexao.php"); 
 @session_start();
     //verificar se o usuário está autenticado
-
+    if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'admin'){
+     echo "<script language='javascript'> window.location='../index.php' </script>";
+    }
 
 ?>
 
@@ -191,12 +193,10 @@ require_once("../../conexao.php");
                        </div>
                    </div>
                     <div class="form-group">
+                        <label for="">Situação</label>
                         <select class="form-control form-control-sm" name="statu" id="statu">
-                            <option value="0">Etnia</option>
-                            <option value="Preta(o)">Preta(o)</option>
-                            <option value="Branca(o)">Branca(o)</option>
-                            <option value="Indígena">Indígena</option>
-                            <option value="Amarela">Amarela(o)</option>
+                            <option value="1">Disponivel</option>
+                            <option value="0">Indisponivel</option>
                         </select>    
                     </div>  
                     </div>                  
@@ -327,7 +327,7 @@ require_once("../../conexao.php");
                         <div class="col-md-5">
                             <div class="col-md-12 form-group">
                                 <label>Imagem do Produto</label>
-                                <input type="file" class="form-control-file" id="imgproduto" name="imgproduto" onchange="carregarImgProduto();">
+                                <input type="file" class="form-control-file" id="imgproduto" name="imgproduto" onchange="listarImagensProd();">
 
                             </div>
 
@@ -337,7 +337,7 @@ require_once("../../conexao.php");
 
                         </div>
 
-                        <div class="col-md-7" id="listar-img">
+                        <div class="col-md-7" id="listar-img" on">
 
                         </div>
 
@@ -431,6 +431,10 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "editar") {
 
 if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
     echo "<script>$('#modal-deletar').modal('show');</script>";
+}
+
+if (@$_GET["funcao"] != null && @$_GET["funcao"] == "imagens") {
+    echo "<script>$('#modal-imagens').modal('show');</script>";
 }
 
 ?>
@@ -569,6 +573,17 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
 
 
 <script type="text/javascript">
+    var pag = "<?=$pag?>";
+    $.ajax({
+        url: pag + "/listar-imagens.php",
+        method: "post",
+        data: $('form').serialize(),
+        dataType: "html",
+        success: function (result) {
+
+            $('#listar-img').html(result);
+        }
+    })
     function listarImagensProd() {
         var pag = "<?=$pag?>";
         $.ajax({
@@ -584,6 +599,36 @@ if (@$_GET["funcao"] != null && @$_GET["funcao"] == "excluir") {
     }
 </script>
 
+<script type="text/javascript">
+    $(document).ready(function () {
+        var pag = "<?=$pag?>";
+        $('#btn-deletar-img').click(function (event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: pag + "/excluir-imagem.php",
+                method: "post",
+                data: $('form').serialize(),
+                dataType: "text",
+                success: function (mensagem) {
+
+                    if (mensagem.trim() === 'Excluído com Sucesso!!') {
+
+
+                        $('#btn-cancelar-excluir').click();
+                        window.location = "index.php?pag=" + pag;
+                    }
+
+                    $('#mensagem_excluir').text(mensagem)
+
+
+
+                },
+
+            })
+        })
+    })
+</script>
 
 <!--SCRIPT PARA CARREGAR IMAGEM -->
 <script type="text/javascript">

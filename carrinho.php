@@ -1,4 +1,5 @@
 <?php require_once("cabecalho.php");
+$id2 = @$_SESSION['id_usuario'];
 ?>
 
 <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
@@ -9,6 +10,8 @@
 
     <section class="shoping-cart spad">
         <div class="container">
+        <?php if($id2 != null){
+        ?>
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__table">
@@ -21,7 +24,7 @@
                                 </tr>
                             </thead>
                             <?php 
-                            $id2 = $_SESSION['id_usuario'];
+
                             $query = $pdo->query("SELECT * FROM carrinho where situ = 'disponivel' and id_usuario =  $id2 order by id desc ");
                             $res = $query->fetchAll(PDO::FETCH_ASSOC);
                             
@@ -38,8 +41,6 @@
                             @$valorcar = $ress[0]['valor'];
                             @$idp = $ress[0]['id'];
                             @$total = $valorcar + $total;
-                            $totaltotal = $total + @$desconto;
-
                             if ($idp == null) {
                                 $queryy = $pdo->prepare("UPDATE carrinho SET situ = :situ where id_usuario = $id2 and id_produto =  $idc");
                                 $queryy->bindValue(":situ","excluido");
@@ -97,7 +98,7 @@
                                 <input type="hidden" width="20" name="city" placeholder="Adicione seu cupom" id="cidade">
                                 <button type="submit" id="btn-calcular"
                                 class="site-btn">Calcular</button>
-                            
+                                <div id="cupom"></div>
                             <div id="entregas"></div> 
                         </div>
                     </div>
@@ -105,13 +106,19 @@
                         <h5>Total Carrinho</h5>
                         <ul>
                             <li>Total de produtos <span>R$<?= $total ?></span></li>
-                            <div id="cupom"></div>
-                            <li>Total <span>R$<?= $totaltotal ?></span></li>
                         </ul>
                         <button type="submit" class="site-btn">Tela de vendas</button>
                     </div></form>
                 </div>
             </div>
+            <?php }else { ?>
+            <div class="text-center">
+                <h2>Você não está logado</h2>
+                <p>Para acessar o carrinho é necessario estar logado</p>
+                <a href="sistema" class="site-btn">Ir para tela de Login</a>
+                <a href="./" class="site-btn">Ir para pagina prncipal</a>
+          </div>
+        <?php } ?>
         </div>
     </section>
     <!-- Shoping Cart Section End -->
@@ -250,7 +257,7 @@ if (@$_GET['funcao'] == 'delcarrinho' ){
                 data: $('form').serialize(),
                 dataType: "text",
                 success: function (data) {
-                    $('#cupom').append(data)
+                    $('#cupom').html(data)
                 },
 
             })

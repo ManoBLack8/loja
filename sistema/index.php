@@ -1,5 +1,10 @@
 <?php
-    require_once("../conexao.php");
+   require_once("../conexao.php");
+   session_start();
+
+   if(@$_SESSION['nivel_usuario'] == 'admin'){
+    		echo "<script language='javascript'> window.location='painel-admin' </script>";
+    	}
 
 
 ?>
@@ -35,7 +40,7 @@
 <body>
     <div class="container">
         <div class="row">
-			<div class="col-md-5 mx-auto">
+			<div class="col-md-5 col-lg-6 col-md-12 mx-auto login_form">
 			<div id="first">
 				<div class="myform form ">
 					 <div class="logo mb-3">

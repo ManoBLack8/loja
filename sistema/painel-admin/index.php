@@ -3,6 +3,10 @@ require_once("../../conexao.php");
 @session_start();
     //verificar se o usuário está autenticado
 
+    if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'admin'){
+       echo "<script language='javascript'> window.location='../index.php' </script>";
+        
+    }
 
     //variaveis para o menu
 $pag = @$_GET["pag"];
@@ -61,7 +65,7 @@ $menu10 = "carac";
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../../index.php">
 
                 <div class="sidebar-brand-text mx-3">Administrador</div>
             </a>
