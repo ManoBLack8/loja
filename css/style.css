@@ -1,11 +1,14 @@
 @font-face {
 	font-family: "Margin";
-	src: url("icones e logos/Margin DEMO.otf");
+	src: url("../fonts/Margin DEMO.otf");
+}
+@font-face {
+	font-family: "graphik";
+	src: url("../fonts/GraphikBlack");
 }
 html,
 body {
 	height: 100%;
-	font-family: "Margin";
 	-webkit-font-smoothing: antialiased;
 	font-smoothing: antialiased;
 	background: #F2B3BD;
@@ -49,7 +52,7 @@ h6 {
 
 p {
 	font-size: 16px;
-	font-family: "Margin";
+	font-family: "graphik";
 	color: #6f6f6f;
 	font-weight: 400;
 	line-height: 26px;

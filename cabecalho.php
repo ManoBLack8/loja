@@ -54,7 +54,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                 <li><a href="./shop.php">Shop</a></li>
                 <li><a href="carrinho.php">Carrinho</a></li>
                 <li><a href="contato.php">Contato</a></li>
-                <?php if (@$_SESSION["id_usuario"] == null) {?>
+                <?php if (@$_SESSION["id_usuario"] != null) {?>
                     <li><a href="logout.php">Sair</a></li> <?php } ?>
             </ul>
         </nav>

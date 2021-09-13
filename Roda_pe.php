@@ -17,7 +17,7 @@
                 <div class="col-lg-4 col-md-6 col-sm-6 offset-lg-1">
                     <div class="footer__widget">
                         <ul>
-                            <li><a href="#">Sobre nós</a></li>
+                            <li><a href="quem_somos.php">Quem somos</a></li>
                             <li><a href="#">Sobre o Brecho</a></li>
                             <li><a href="#">Transporte seguro</a></li>
                             <li><a href="#">Informção Sobre entrega</a></li>
