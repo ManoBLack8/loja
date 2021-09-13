@@ -1,5 +1,5 @@
 <?php require_once("conexao.php");
-session_start();
+@session_start();
 $itens_do_carrinho = itensDoCarrinho(@$_SESSION["id_usuario"]);
 ?>
 <!DOCTYPE html>
