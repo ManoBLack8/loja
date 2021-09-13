@@ -9,7 +9,6 @@ require_once("Controller/ShopController.php");
                 <div class="col-lg-3 col-md-5">
                     <div class="sidebar">
                         <div class="hero__categories">
-                            <div class="filto-limpar" title="limpar filtro"><a class="fa fa-refresh" href="shop.php?pag=<?= @$_GET['pag'] ?>"></a></div>
                             <div class="hero__categories__all">
                                 <i class="fa fa-bars"></i>
                                 <span>Categorias</span>
