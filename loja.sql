@@ -205,9 +205,7 @@ CREATE TABLE `produtos` (
 --
 
 INSERT INTO `produtos` (`id`, `nome`, `nome_url`, `imagem`, `tamanho`, `tamanho_veste`, `valor`, `descricao`, `idcategoria`, `statu`, `tags`, `peso`, `largura`, `altura`, `comprimento`) VALUES
-(42, 'juliet', 'juliet', 'juliet.PNG', 'normal', '', '1.00', '', 8, 'indisponivel', '', 0, 0.00, 0.00, 0.00),
-(44, 'O segundo ser mais bonito do unverso', 'to-valendo-nada', 'IMG-20210119-WA0073.jpg', '1,80m', 'GG', '1.00', 'Lindo,\r\nInteligente,\r\nLegal,\r\nGente boa,\r\nCalmo,\r\nMe ama,\r\nTrabalha (kkk),\r\nGostoso,\r\nTransa bem,\r\nCozinha bem,\r\nCriativo,\r\nVê o lado bom das coisas,\r\nFofo e \r\nSorriso bonito', 1, 'indisponivel', 'palavsvdz', 500, 0.00, 0.00, 0.00);
-
+(42, 'juliet', 'juliet', 'juliet.PNG', 'normal', '', '1.00', '', 8, 'indisponivel', '', 0, 0.00, 0.00, 0.00)
 -- --------------------------------------------------------
 
 --
