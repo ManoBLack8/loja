@@ -35,7 +35,8 @@ $ress = $query2->fetchAll(PDO::FETCH_ASSOC);
                         $imagem = $ress[$i]['imagens'];
                        ?>
                             <img data-imgbigurl="img/produtos/<?= $imagem ?>"
-                                src="img/produtos/<?= $imagem ?>" alt=""> <?php } ?>
+                                src="img/produtos/<?= $imagem ?>" alt=""> 
+                    <?php } ?>
                         </div>
                     </div>
                 </div>
