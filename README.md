@@ -43,6 +43,7 @@
             <li><a href="https://github.com/ManoBLack8">Vinicius José Ferreira da Silva</a></li>
         </ul>
     </section>
+    
     <footer>
         <p>Agradecemos por seu interesse em nosso projeto e esperamos que ele seja uma fonte de aprendizado e inspiração para a criação de sistemas web. Se tiver alguma dúvida ou sugestão, sinta-se à vontade para entrar em contato conosco.</p>
     </footer>
