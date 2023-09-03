@@ -1,6 +1,5 @@
 <?php require_once("conexao.php");
 @session_start();
-$itens_do_carrinho = itensDoCarrinho(@$_SESSION["id_usuario"]);
 ?>
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -34,7 +33,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="./carrinho.php"><i class="fa fa-shopping-cart"></i><span><?= count($itens_do_carrinho) ?></span></a></li>
+                <li><a href="./carrinho.php"><i class="fa fa-shopping-cart"></i><span>3</span></a></li>
             </ul>
             <div class="header__cart__price">item: <span>R$00,00</span></div>
         </div>
@@ -131,7 +130,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="./carrinho.php"><i class="fa fa-shopping-cart"></i> <span><?= count($itens_do_carrinho) ?></span></a></li>
+                            <li><a href="./carrinho.php"><i class="fa fa-shopping-cart"></i> <span>3</span></a></li>
                         </ul>
                     </div>
                 </div>

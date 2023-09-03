@@ -3,8 +3,6 @@ global $pdo;
 $query = $pdo->query("SELECT * FROM categorias order by id asc ");
 $res = $query->fetchAll(PDO::FETCH_ASSOC);
 
-$query2 = $pdo->query("SELECT * FROM promocao order by id asc ");
-$ress = $query2->fetchAll(PDO::FETCH_ASSOC);
 @$cate = $_GET['cat'];
 @$tam = $_GET['tamanho'];
 @$pesquisar = trim($_POST['pesquisar']);
