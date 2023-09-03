@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>README - Projeto de Loja Virtual IFMT Cuiabá</title>
-    <link rel="stylesheet" href="styles.css"> <!-- Lembre-se de incluir o arquivo CSS correspondente -->
-</head>
+
 <body>
     <header>
         <img src="link_para_o_logo.png" alt="Logo do Projeto">
