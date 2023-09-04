@@ -38,9 +38,9 @@
         <h2>Equipe de Desenvolvimento</h2>
         <p>Este projeto é mantido por uma equipe de estudantes bolsistas do IFMT - Cuiabá dedicados ao aprendizado e ao desenvolvimento de habilidades em criação de sistemas web. A equipe é composta por:</p>
         <ul>
-            <li><a href="https://github.com/Satellite63">Arthur Vicente Farias</a></li>
-            <li><a href="https://github.com/PhrStyle">João Victor</a></li>
-            <li><a href="https://github.com/ManoBLack8">Vinicius José Ferreira da Silva</a></li>
+            <li><a href="https://github.com/Satellite63">Arthur Vicente Farias</a> <img width="50" src="https://avatars.githubusercontent.com/u/107644318?v=4"></li>
+            <li><a href="https://github.com/PhrStyle">João Victor</a> <img width="50" src="https://avatars.githubusercontent.com/u/67803277?v=4"></li>
+            <li><a href="https://github.com/ManoBLack8">Vinicius José Ferreira da Silva</a> <img width="50" src="https://avatars.githubusercontent.com/u/69330979?v=4"></li>
         </ul>
     </section>
     
