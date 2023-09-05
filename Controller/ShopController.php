@@ -13,7 +13,7 @@ $res3 = $query3->fetchAll(PDO::FETCH_ASSOC);
 $query4 = $pdo->query("SELECT DISTINCT tamanho FROM produtos order by id desc ");
 $res4 = $query4->fetchAll(PDO::FETCH_ASSOC);
 
-$where = "";
+$where = "";    
 if ($cate != null and $tam != null) {
     @$where = "AND idcategoria = $cate AND tamanho = '$tam'";
     $query4 = $pdo->query("SELECT DISTINCT tamanho FROM produtos where idcategoria = $cate order by id desc ");
