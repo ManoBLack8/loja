@@ -2,15 +2,6 @@
 use Conexao;
 class produtos
 {
-    private static $nome = $_REQUEST['nome'];
-    private static $imagem = $_REQUEST['imagem'];
-    private static $tamanho = $_REQUEST['tamanho'];
-    private static $descricao = $_REQUEST['descricao'];
-    private static $valor = $_REQUEST['valor'];
-    private static $tamanho_veste = $_REQUEST['tamanho_veste'];
-    private static $peso = $_REQUEST['peso'];
-    private static $id = $_REQUEST['id'];
-
     public static function chamarProdutos()
     {
         return json_encode(Conexao::select('produtos')); 
@@ -25,5 +16,19 @@ class produtos
         return json_encode(Conexao::select('imagens', "id_produto = $id"));
     }
     
+    public static function autenticarLogin($user, $senha)
+    {
+        $usuarios = Conexao::select('usuarios', "email = $user AND senha = $senha");
+        if(count($usuarios) > 1){
+            session_start();
+            $_SESSION["cliente"]["id"] = $usuarios[0]["id"];
+            $_SESSION["cliente"]["nome"] = $usuarios[0]["nome"];
+            $_SESSION["cliente"]["email"] = $usuarios[0]["email"];
+            $_SESSION["cliente"]["nivel"] = $usuarios[0]["nivel"];
+
+        }else{
+            return "USUARIO NÃO EXISTE";
+        }
+    }
 }
 ?>
