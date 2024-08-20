@@ -9,8 +9,8 @@
                     <div class="footer__about">
                     <img src="img/mb.png" width="175" alt="">
                         <ul>
-                            <li>Telefone: <?php echo $telefone ?></li>
-                            <li><?php echo $email ?></li>
+                            <li>Telefone: <?= $loja->telefone ?></li>
+                            <li><?= $loja->email ?></li>
                         </ul>
                     </div>
                 </div>
@@ -48,7 +48,7 @@
                 <div class="col-lg-12">
                     <div class="footer__copyright">
                         <div class="footer__copyright__text"><p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-  Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos os diritos reservados | Encontrei lá brecho! <i class="fa fa-heart" aria-hidden="true"></i> feito por <a href="https://www.instagram.com/__manoblack__/" target="_blank">Manoblack</a>
+  Copyright &copy;<script>document.write(new Date().getFullYear());</script> Todos os diritos reservados | <?= $loja->nome ?> <i class="fa fa-rocket" aria-hidden="true"></i> feito por <a href="https://www.instagram.com/manoblack.dev/" target="_blank">Manoblack</a>
   <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p></div>
                     </div>
                 </div>
