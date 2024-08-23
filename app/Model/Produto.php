@@ -1,6 +1,8 @@
 <?php 
 namespace App\Model;
 
+use Dotenv\Util\Str;
+
 class Produto {
 
     private $conn;
@@ -108,9 +110,52 @@ class Produto {
     }
 
     public function produtosVitrine() {
-        $query = 'SELECT * FROM ' . $this->nomeTabela . ' WHERE situ >= 0';
+        $produtosPorPagina = 12;  // Quantos produtos por página
+        $paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;  // Página atual
+        $inicio = ($paginaAtual - 1) * $produtosPorPagina;  // Cálculo do offset
+        $query = 'SELECT * FROM ' . $this->nomeTabela . ' WHERE status >= 0 LIMIT :inicio, :produtoPorPagina';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':inicio', $inicio);
+        $stmt->bindParam(':produtoPorPagina', $produtosPorPagina);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getTamanhosvitrine() {
+        $query = 'SELECT tamanho FROM ' . $this->nomeTabela . ' WHERE status > 0';
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        return $stmt;
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getProdutosPaginados($inicio, $produtosPorPagina) {
+        $query = "SELECT * FROM " . $this->nomeTabela . " LIMIT :inicio, :produtosPorPagina";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':inicio', $inicio, \PDO::PARAM_INT);
+        $stmt->bindParam(':produtosPorPagina', $produtosPorPagina, \PDO::PARAM_INT);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
+
+    public function getTotalProdutos() {
+        $query = "SELECT COUNT(*) as total FROM " . $this->nomeTabela;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC)['total'];
+    }
+
+    public function getProdutoPorNome(){
+        $nome = $_GET['nome'];
+        $query = "SELECT * FROM " . $this->nomeTabela . " WHERE nome = :nome LIMIT 1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':nome', $nome);
+        $stmt->execute();
+        return $stmt->fetch(\PDO::FETCH_ASSOC);
+    }
+
+    public function getImagensProdutos($produtoId){
+        $produtoId = intval($produtoId);
+        $imagens = new Imagen($this->conn);
+         return $imagens->getImagemByProdutoId($produtoId);
     }
 }

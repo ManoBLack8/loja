@@ -2,6 +2,9 @@
 namespace App\Model;
 
 class Loja{
+    private $conn;
+    private $nomeTabela = 'config';
+    private $id;
     public $nome = "Encontrei Brechó";
     Public $email = "viniciusfe66@gmail.com";
     public $telefone = "+55 (65) 9 9965-3181";
@@ -15,7 +18,5 @@ class Loja{
     public $linkInstagram = "https://www.instagram.com/encontrei__/";
     public $whatsapp = "";
     public $youtube = "";
-
-
 
 }
