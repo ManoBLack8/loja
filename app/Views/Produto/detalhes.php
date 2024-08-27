@@ -1,5 +1,4 @@
 <?php require_once '../app/Views/layout/cabecalho.php';
-var_dump($_SERVER);
 ?>   
    <!-- Product Details Section Begin -->
     <section class="product-details spad">

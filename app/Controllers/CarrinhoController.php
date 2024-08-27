@@ -14,6 +14,13 @@ class CarrinhoController extends Controller {
         $this->db = $database->Conexao();
         $this->carrinho = new Carrinho($this->db);
     }
+    public function index(){
+        $carrinho =$this->carrinho->listaCarrinhoUsuario();
+        $this->render('Carrinho/index', $data = [
+            "carrinho" => $carrinho,
+            "totalCarrinho" => $this->carrinho->totalCarrinho()[0]
+        ]);
+    }
     public function adicionar() {
         // Recebe o ID do produto da requisição POST
         $produtoId = $_POST['id'];

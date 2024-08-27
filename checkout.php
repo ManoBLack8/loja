@@ -10,7 +10,7 @@ $fretes = explode(",",@$_POST['fretes']);
 @$fretes_name_company = $fretes[2];
   //os 
 if (@$_POST['fretes'] == "" or null) {
-    echo "<script language='javascript'> window.location='carrinho.php' </script>";
+    echo "<script language='javascript'> window.location='Carrinho' </script>";
 }
 function addsitu($idc,$id2)
 {
@@ -18,7 +18,7 @@ function addsitu($idc,$id2)
     $queryy = $pdo->prepare("UPDATE carrinho SET situ = :situ where id_usuario = $id2 and id_produto =  $idc");
     $queryy->bindValue(":situ","excluido");
     $queryy->execute();
-    echo "<script language='javascript'> window.location='carrinho.php' </script>";
+    echo "<script language='javascript'> window.location='Carrinho' </script>";
 }
 ?>
 

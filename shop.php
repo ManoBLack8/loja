@@ -165,7 +165,7 @@ if (@$_GET['funcao'] == 'carrinho' ){
             event.preventDefault();
 
             $.ajax({
-                url: "carrinho/inserir_carrinho.php",
+                url: "carrinho/inserir_Carrinho",
                 method: "post",
                 data: $('form').serialize(),
                 dataType: "text",

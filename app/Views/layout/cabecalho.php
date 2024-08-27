@@ -140,7 +140,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="./carrinho.php"><i class="fa fa-shopping-cart"></i> <span>3</span></a></li>
+                            <li><a href="./Carrinho"><i class="fa fa-shopping-cart"></i> <span>3</span></a></li>
                         </ul>
                     </div>
                 </div>

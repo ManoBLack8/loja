@@ -45,7 +45,7 @@ $id2 = @$_SESSION['id_usuario'];
                                 $queryy = $pdo->prepare("UPDATE carrinho SET situ = :situ where id_usuario = $id2 and id_produto =  $idc");
                                 $queryy->bindValue(":situ","excluido");
                                 $queryy->execute();
-                                echo "<script language='javascript'> window.location='carrinho.php' </script>";
+                                echo "<script language='javascript'> window.location='Carrinho' </script>";
                             }
                       ?>
                             <tbody>
@@ -59,7 +59,7 @@ $id2 = @$_SESSION['id_usuario'];
                                         R$<?php echo $valorcar ?>
                                     </td>
                                     <td>
-                                    <a width="120" href="carrinho.php?funcao=delcarrinho&id=<?php echo $id ?>" class='text-danger mr-1' title="Excluir registro"><i class="fa fa-2x fa-times"></i></a>
+                                    <a width="120" href="Carrinho?funcao=delcarrinho&id=<?php echo $id ?>" class='text-danger mr-1' title="Excluir registro"><i class="fa fa-2x fa-times"></i></a>
                                     </td>
                                 </tr>
                                 
@@ -73,7 +73,7 @@ $id2 = @$_SESSION['id_usuario'];
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
                         <a href="shop.php" class="primary-btn cart-btn">CONTINUE COMPRANDO</a>
-                        <a href="carrinho.php" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
+                        <a href="Carrinho" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
                             Atualizar carrinho</a>
                     </div>
                 </div>
@@ -199,7 +199,7 @@ if (@$_GET['funcao'] == 'delcarrinho' ){
         $('#btn-deletar').click(function (event) {
             event.preventDefault();
             $.ajax({
-                url: "carrinho/excluir_carrinho.php",
+                url: "carrinho/excluir_Carrinho",
                 method: "post",
                 data: $('form').serialize(),
                 dataType: "text",
@@ -209,7 +209,7 @@ if (@$_GET['funcao'] == 'delcarrinho' ){
 
 
                         $('#btn-cancelar-excluir').click();
-                        window.location = "carrinho.php";
+                        window.location = "Carrinho";
                     }
 
                     $('#mensagem_excluir').text(mensagem)

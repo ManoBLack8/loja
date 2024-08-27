@@ -23,23 +23,23 @@ class Usuario
 
     public function __construct($db, $id = null) {
         $this->conn = $db;
-        if (@$_SESSION["usuario"] != null){
-            $usuario = Self::findBYid($_SESSION["usuario"]["id"]);
-            $this->id = $usuario[0]['id'];
-            $this->nome = $usuario[0]['nome'];
-            $this->email = $usuario[0]['email'];
-            $this->senha = $usuario[0]['senha'];
-            $this->documento = $usuario[0]['documento'];
-            $this->sexo = $usuario[0]['sexo'];
-            $this->dtNascimento = $usuario[0]['dtNascimento'];
-            $this->nivelAcesso = $usuario[0]['nivelAcesso'];
-            $this->ipUsuario = $usuario[0]['ipUsuario'];
-            $this->navegadorUsuario = $usuario[0]['navegadorUsuario'];
-            $this->ultimoAcesso = $usuario[0]['ultimoAcesso'];
-            $this->dtCriacao = $usuario[0]['dtCriacao'];
-            $this->endereco_id = $usuario[0]['endereco_id'];
+        // if (@$_SESSION["usuario"] != null){
+        //     $usuario = Self::findBYid($_SESSION["usuario"]["id"]);
+        //     $this->id = $usuario[0]['id'];
+        //     $this->nome = $usuario[0]['nome'];
+        //     $this->email = $usuario[0]['email'];
+        //     $this->senha = $usuario[0]['senha'];
+        //     $this->documento = $usuario[0]['documento'];
+        //     $this->sexo = $usuario[0]['sexo'];
+        //     $this->dtNascimento = $usuario[0]['dtNascimento'];
+        //     $this->nivelAcesso = $usuario[0]['nivelAcesso'];
+        //     $this->ipUsuario = $usuario[0]['ipUsuario'];
+        //     $this->navegadorUsuario = $usuario[0]['navegadorUsuario'];
+        //     $this->ultimoAcesso = $usuario[0]['ultimoAcesso'];
+        //     $this->dtCriacao = $usuario[0]['dtCriacao'];
+        //     $this->endereco_id = $usuario[0]['endereco_id'];
     
-        }
+        // }
     }
 
     public function read() {

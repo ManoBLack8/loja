@@ -1,5 +1,4 @@
 <?php 
-var_dump($_SESSION);
 require_once '../app/Views/layout/cabecalho.php';
 
 // global $pdo;
@@ -82,7 +81,6 @@ require_once '../app/Views/layout/cabecalho.php';
                             <ul>
                                 <li><a href="">Todas</a></li>
                             <?php
-                            //var_dump($data['categoria']->read());
                             foreach ($data['categoria']->read() as $categoria) { ?>
                                 <li><a href="?cat=<?= $categoria['id'] ?>"><?= $categoria['nome'] ?></a></li>
                            <?php } ?>
@@ -116,6 +114,7 @@ require_once '../app/Views/layout/cabecalho.php';
                     </div>
                     <div class="row">
                     <?php
+
                     foreach ($data['produtos'] as $produto){
                       ?>
 
