@@ -72,7 +72,7 @@ $id2 = @$_SESSION['id_usuario'];
             <div class="row">
                 <div class="col-lg-12">
                     <div class="shoping__cart__btns">
-                        <a href="shop.php" class="primary-btn cart-btn">CONTINUE COMPRANDO</a>
+                        <a href="Shop" class="primary-btn cart-btn">CONTINUE COMPRANDO</a>
                         <a href="Carrinho" class="primary-btn cart-btn cart-btn-right"><span class="icon_loading"></span>
                             Atualizar carrinho</a>
                     </div>

@@ -175,7 +175,7 @@ if (@$_GET['funcao'] == 'carrinho' ){
 
 
                         $('#btn-cancelar-excluir').click();
-                        window.location = "shop.php";
+                        window.location = "Shop";
                     }
 
                     $('#mensagem_excluir').text(mensagem)

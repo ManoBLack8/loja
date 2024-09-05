@@ -50,7 +50,17 @@ class Carrinho {
 
     public function getQuantidadeItens() {
         // Conta a quantidade de itens no carrinho
-        return isset($_SESSION['carrinho']) ? count($_SESSION['carrinho']) : 0;
+        @$_SESSION['usuario']['id'] = 1;
+        $usuario_id = @$_SESSION['usuario']['id'];
+        $query = 
+        'SELECT COUNT(*) FROM ' . $this->nomeTabela . ' AS c
+        INNER JOIN produtos AS p ON p.id = c.produto_id 
+                        WHERE usuario_id = :usuario_id';
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':usuario_id', $usuario_id);
+        $stmt->execute();
+        
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function totalCarrinho() {

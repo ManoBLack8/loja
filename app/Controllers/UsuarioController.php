@@ -11,13 +11,17 @@ class UsuarioController extends Controller
     private $salas;
     public function __construct() {
         @session_start();
-        $database = new BancoDeDados();
-        $this->db = $database->Conexao();
-        $this->usuario = new Usuario($this->db);
+        $this->usuario = new Usuario();
     }
 
     public function index() {
-       
+        if ($this->usuario->findByid($_SESSION["usuario"]["id"])){
+            $user = $this->usuario->findByid($_SESSION["usuario"]["id"]);
+            $this->usuario->sessaoUsuarioInicio();
+            $this->render("Usuario/index");
+        }else{
+            $this->rendirecionar("../Login");
+        }
         
     }
 }

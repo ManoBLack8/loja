@@ -1,6 +1,6 @@
 <?php 
 namespace App\Model;
-
+use Config\BancoDeDados;
 use Dotenv\Util\Str;
 
 class Produto {
@@ -17,15 +17,15 @@ class Produto {
     private $descricao;
     private $categoria_id;
 
-    function __construct($conn) {
-        $this->conn = $conn;
+    function __construct() {
+        $this->conn = (new BancoDeDados())->Conexao();
     }
 
     public function read() {
         $query = 'SELECT * FROM ' . $this->nomeTabela;
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
-        return $stmt;
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
     public function create() {

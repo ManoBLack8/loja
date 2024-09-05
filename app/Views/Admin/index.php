@@ -1,51 +1,6 @@
 <?php 
-    //variaveis para o menu
-$pag = @$_GET["pag"];
-$menu1 = "produtos";
-$menu2 = "categorias";
-$menu3 = "sub-categorias";
-$menu4 = "combos";
-$menu5 = "promocoes";
-$menu6 = "clientes";
-$menu7 = "vendas";
-$menu8 = "backup";
-$menu9 = "tipo-envios";
-$menu10 = "carac";
-
-
+require_once '../app/Views/layout/header.php';
 ?>
-
-
-
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="Hugo Vasconcelos">
-
-    <title>Painel Administrativo</title>
-
-    <!-- Custom fonts for this template-->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet">
-
-    <!-- Custom styles for this template-->
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
-    <link href="../css/style.css" rel="stylesheet">
-
-    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
-
-
-    <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-
-</head>
 
 <body id="page-top">
 
@@ -77,18 +32,18 @@ $menu10 = "carac";
 
 
             <li class="nav-item">
-                <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
+                <a class="nav-link collapsed" data-toggle="collapse" data-target="#collapseTwo" aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-box-open"></i>
                     <span>Produtos</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu1 ?>">Produtos</a>
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu2 ?>">Categorias</a>
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu3 ?>">Sub Categorias</a>
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu9 ?>">Tipo Envios</a>
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu10 ?>">Características</a>
+                        <a class="collapse-item" href="Admin/produtos">Produtos</a>
+                        <a class="collapse-item" href="">Categorias</a>
+                        <a class="collapse-item" href="">Sub Categorias</a>
+                        <a class="collapse-item" href="">Tipo Envios</a>
+                        <a class="collapse-item" href="">Características</a>
                     </div>
                 </div>
             </li>
@@ -102,8 +57,8 @@ $menu10 = "carac";
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu4 ?>">Combos</a>
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu5 ?>">Promoções</a>
+                        <a class="collapse-item" href="./combos">Combos</a>
+                        <a class="collapse-item" href="./promocoes">Promoções</a>
 
                     </div>
                 </div>
@@ -121,20 +76,20 @@ $menu10 = "carac";
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="index.php?pag=<?php echo $menu6 ?>">
+                <a class="nav-link" href="./clientes">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Clientes</span></a>
                 </li>
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php?pag=<?php echo $menu7 ?>">
+                    <a class="nav-link" href="./vendas">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Vendas</span></a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?pag=<?php echo $menu8 ?>">
+                        <a class="nav-link" href="./backup">
                             <i class="fas fa-fw fa-table"></i>
                             <span>Backup</span></a>
                         </li>
@@ -174,7 +129,7 @@ $menu10 = "carac";
                                     <!-- Nav Item - User Information -->
                                     <li class="nav-item dropdown no-arrow">
                                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo @$nome_usu ?></span>
+                                            <span class="mr-2 d-none d-lg-inline text-gray-600 small">José</span>
                                             <img class="img-profile rounded-circle" src="../../img/sem-foto.jpg">
 
                                         </a>
@@ -201,41 +156,9 @@ $menu10 = "carac";
                             <!-- Begin Page Content -->
                             <div class="container-fluid">
 
-                                <?php if ($pag == null) { 
-                                    include_once("home.php"); 
-
-                                } else if ($pag==$menu1) {
-                                    include_once($menu1.".php");
-
-                                } else if ($pag==$menu2) {
-                                    include_once($menu2.".php");
-
-                                } else if ($pag==$menu3) {
-                                    include_once($menu3.".php");
-
-                                } else if ($pag==$menu4) {
-                                    include_once($menu4.".php");
-
-                                } else if ($pag==$menu5) {
-                                    include_once($menu5.".php");
-
-                                } else if ($pag==$menu6) {
-                                    include_once($menu6.".php");
-
-                                } else if ($pag==$menu7) {
-   
-                                    include_once($menu7.".php");
-
-                                } else if ($pag==$menu8) {
-                                    include_once($menu8.".php");
-
-                                } else if ($pag==$menu9) {
-                                    include_once($menu9.".php");
-
-                                } else if ($pag==$menu10) {
-                                    include_once($menu10.".php");
-
-                                } else {
+                                <?php if ($data["pag"]) { 
+                                    include_once($data["pag"].".php");
+                                } else if ($data["pag"] == null || @$data["pag"] == '' ) {
                                     include_once("home.php");
                                 }
                                 ?>
@@ -330,8 +253,8 @@ $menu10 = "carac";
 
 
 
-                                    <input value="<?php echo $_SESSION['id_usuario'] ?>" type="hidden" name="txtid" id="txtid">
-                                    <input value="<?php echo $_SESSION['cpf_usuario'] ?>" type="hidden" name="antigo" id="antigo">
+                                    <input value="<?php echo $_SESSION["usuario"]["id"] ?>" type="hidden" name="txtid" id="txtid">
+                                    <input value="<?php echo $_SESSION["usuario"]["documento"] ?>" type="hidden" name="antigo" id="antigo">
 
                                     <button type="button" id="btn-fechar-perfil" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                     <button type="submit" name="btn-salvar-perfil" id="btn-salvar-perfil" class="btn btn-primary">Salvar</button>
@@ -366,12 +289,8 @@ $menu10 = "carac";
 
             </body>
 
-            </html>
-
-
-
-
-
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+<?php require_once '../app/Views/layout/footer.php'; ?>
 
 <script type="text/javascript">
     $('#btn-salvar-perfil').click(function(event){
@@ -399,8 +318,3 @@ $menu10 = "carac";
         })
     })
 </script>
-
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
-
-<script src="../../js/mascara.js"></script>

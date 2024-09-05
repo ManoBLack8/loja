@@ -6,6 +6,10 @@ class Controller {
         include '../app/Views/'.$view.'.php';
     }
 
+    protected function rendirecionar($view){
+        header("location: ./$view");
+    }
+
     protected function Modal($texto, $alerta){
         include '../app/Views/Layout/header.php';
         include '../app/Views/Modals/modal.php';
