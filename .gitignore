@@ -4,6 +4,12 @@
 ## Get latest from https://github.com/github/gitignore/blob/master/VisualStudio.gitignore
 
 # User-specific files
+# Ignore .env file
+.ENV
+
+# Ignore environment files with specific extensions, if any
+*.ENV.*
+
 *.rsuser
 *.suo
 *.user
@@ -349,4 +355,3 @@ MigrationBackup/
 .ionide/
 
 /vendor/
-*.ENV
