@@ -1,14 +1,14 @@
 <?php 
 namespace App\Model;
-
+Use Config\BancoDeDados;
 class Categoria{
 
     private $conn;
     private $nomeTabela = 'categorias';
     private $id;
 
-    public function __construct($db){
-        $this->conn = $db;
+    public function __construct(){
+        $this->conn = (new BancoDeDados())->Conexao();
     }
 
     public function read() {

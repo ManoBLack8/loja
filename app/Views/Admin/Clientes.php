@@ -1,12 +1,3 @@
-<?php 
-$pag = "Clientes";
-require_once("../../conexao.php"); 
-@session_start();
-    //verificar se o usuário está autenticado
-
-
-?>
-
 <div class="row mt-4 mb-4">
     <a type="button" class="btn-primary btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Novo Produto</a>
     <a type="button" class="btn-primary btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>
@@ -25,55 +16,30 @@ require_once("../../conexao.php");
                 <thead>
                     <tr>
                         <th>Nome</th>
-                        <th>Nome de usuario</th>
+                        <th>CPF</th>
                         <th>Email</th>
-                        <th>Nivel</th>
-                        <th>Endereço</th>
+                        <th>Data de Nascimento</th>
+                        <th>Ultimo acesso</th>
 
                     </tr>
                 </thead>
 
                 <tbody>
-
                    <?php 
-
-                   $query = $pdo->query("SELECT * FROM usuarios order by id desc ");
-                   $res = $query->fetchAll(PDO::FETCH_ASSOC);
-
-                   for ($i=0; $i < count($res); $i++) { 
-                      foreach ($res[$i] as $key => $value) {
-                      }
-
-                      $nomep = $res[$i]['nome'];
-                      $username = $res[$i]['username'];
-                      $email_user = $res[$i]['email'];
-                      $nivel = $res[$i]['nivel'];
-                      $senha = $res[$i]['senha'];
-                      $id = $res[$i]['id'];
-                     
-                 $query2 = $pdo->query("SELECT * FROM andress where id_usuario =  '" . $id . "' ");
-                   $ress = $query2->fetchAll(PDO::FETCH_ASSOC);
-                   @$cep = $ress[0]['cep'];
-                      $endereço = $cep; 
-                      
-
-
+                    foreach($data["clientes"] as $clientes){
+            
+                    if($clientes["nivelAcesso"] == "usuario"){
                       ?>
 
 
                     <tr>
-                        <td><?php echo $nomep ?></td>
-                        <td><?php echo $username  ?></td>
-                        <td><?php echo $email_user ?></td>
-                        <td><?php echo $nivel ?></td>
-                        <td><?php echo $endereço ?></td>
+                        <td><?= $clientes["nome"] ?></td>
+                        <td><?= $clientes["documento"]  ?></td>
+                        <td><?= $clientes["email"] ?></td>
+                        <td><?= $clientes["dtNascimento"] ?></td>
+                        <td><?= $clientes["ultimoAcesso"]?></td>
                     </tr>
-<?php } ?>
-
-
-
-
-
+                    <?php } } ?>
                 </tbody>
             </table>
         </div>
@@ -145,7 +111,7 @@ require_once("../../conexao.php");
                             </div>
 
                             <div class="col-md-12 mb-2">
-                                <img src="../../img/sem-foto.jpg" alt="Carregue sua Imagem" id="targetImgProduto" width="100%">
+                                <img src="../../src/img/produtos/sem-foto.png" alt="Carregue sua Imagem" id="targetImgProduto" width="100%">
                             </div>
 
                         </div>

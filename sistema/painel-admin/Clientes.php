@@ -145,7 +145,7 @@ require_once("../../conexao.php");
                             </div>
 
                             <div class="col-md-12 mb-2">
-                                <img src="../../img/sem-foto.jpg" alt="Carregue sua Imagem" id="targetImgProduto" width="100%">
+                                <img src="../../src/img/produtos/sem-foto.png" alt="Carregue sua Imagem" id="targetImgProduto" width="100%">
                             </div>
 
                         </div>

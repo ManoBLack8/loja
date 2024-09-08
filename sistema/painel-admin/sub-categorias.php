@@ -173,7 +173,7 @@ if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
                     <?php if(@$imagem2 != ""){ ?>
                     	 <img src="../../img/sub-categorias/<?php echo $imagem2 ?>" width="200" height="200" id="target">
                  	<?php  }else{ ?>
-                    <img src="../../img/sub-categorias/sem-foto.jpg" width="200" height="200" id="target">
+                    <img src="../../img/sub-categoriasprodutos/sem-foto.png" width="200" height="200" id="target">
                 	<?php } ?>
 
 

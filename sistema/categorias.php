@@ -131,7 +131,7 @@ require_once("cabeçalho.php");
                     <?php if(@$imagem2 != ""){ ?>
                     	 <img src="../../img/produtos/<?php echo $imagem2 ?>" width="200" height="200" id="target">
                  	<?php  }else{ ?>
-                    <img src="../../img/produtos/sem-foto.jpg" width="200" height="200" id="target">
+                    <img src="../../img/produtosprodutos/sem-foto.png" width="200" height="200" id="target">
                 	<?php } ?>
 
 

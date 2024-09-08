@@ -127,7 +127,7 @@ class Usuario
         $stmt->execute();
         $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
         
-        if ($user) {
+        if ($user = (object) $user[0]) {
             $this->sessaoUsuarioInicio($user);
             return true;
         }
@@ -135,21 +135,8 @@ class Usuario
         return false;
     }
 
-    public function sessaoUsuarioInicio() {
-        $this->id = $_SESSION['usuario']['id'];
-        $this->nome = $_SESSION['usuario']['nome'];
-        $this->email = $_SESSION['usuario']['email'];
-        $this->senha = $_SESSION['usuario']['senha'];
-        $this->documento = $_SESSION['usuario']['documento'];
-        $this->sexo = $_SESSION['usuario']['sexo'];
-        $this->telefone = $_SESSION['usuario']['telefone'];
-        $this->dtNascimento = $_SESSION['usuario']['dtNascimento'];
-        $this->nivelAcesso = $_SESSION['usuario']['nivelAcesso'];
-        $this->ipUsuario = $_SESSION['usuario']['ipUsuario'];
-        $this->ultimoAcesso = $_SESSION['usuario']['ultimoAcesso'];
-        $this->navegadorUsuario = $_SESSION['usuario']['navegarUsuario'];
-        $this->dtCriacao = $_SESSION['usuario']['dtCriacao'];
-        $this->endereco_id = $_SESSION['usuario']['endereco_id'];
+    public function sessaoUsuarioInicio($user) {
+        $_SESSION["usuario"] = (array) $user;
     }
 }
 ?>

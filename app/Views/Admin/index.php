@@ -39,11 +39,11 @@ require_once '../app/Views/layout/header.php';
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        <a class="collapse-item" href="Admin/produtos">Produtos</a>
-                        <a class="collapse-item" href="">Categorias</a>
-                        <a class="collapse-item" href="">Sub Categorias</a>
-                        <a class="collapse-item" href="">Tipo Envios</a>
-                        <a class="collapse-item" href="">Características</a>
+                        <a class="collapse-item" href="../Admin/produtos">Produtos</a>
+                        <a class="collapse-item" href="../Admin/categorias">Categorias</a>
+                        <a class="collapse-item" href="../Admin/subCategorias">Sub Categorias</a>
+                        <a class="collapse-item" href="../Admin/tipoEnvios">Tipo Envios</a>
+                        <a class="collapse-item" href="../Admin/caracteristicas">Características</a>
                     </div>
                 </div>
             </li>
@@ -57,8 +57,8 @@ require_once '../app/Views/layout/header.php';
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        <a class="collapse-item" href="./combos">Combos</a>
-                        <a class="collapse-item" href="./promocoes">Promoções</a>
+                        <a class="collapse-item" href="../Admin/combos">Combos</a>
+                        <a class="collapse-item" href="../Admin/promocoes">Promoções</a>
 
                     </div>
                 </div>
@@ -76,20 +76,20 @@ require_once '../app/Views/layout/header.php';
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="./clientes">
+                <a class="nav-link" href="../Admin/clientes">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Clientes</span></a>
                 </li>
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="./vendas">
+                    <a class="nav-link" href="../Admin/vendas">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Vendas</span></a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="./backup">
+                        <a class="nav-link" href="../Admin/backup">
                             <i class="fas fa-fw fa-table"></i>
                             <span>Backup</span></a>
                         </li>
@@ -97,10 +97,10 @@ require_once '../app/Views/layout/header.php';
                         <!-- Divider -->
                         <hr class="sidebar-divider d-none d-md-block">
 
-                        <!-- Sidebar Toggler (Sidebar) -->
-                        <div class="text-center d-none d-md-inline">
-                            <button class="rounded-circle border-0" id="sidebarToggle"></button>
-                        </div>
+                    <!-- Sidebar Toggler (Sidebar) -->
+                    <div class="text-center d-none d-md-inline">
+                        <button class="rounded-circle border-0" id="sidebarToggle"></button>
+                    </div>
 
                     </ul>
                     <!-- End of Sidebar -->
@@ -130,7 +130,7 @@ require_once '../app/Views/layout/header.php';
                                     <li class="nav-item dropdown no-arrow">
                                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <span class="mr-2 d-none d-lg-inline text-gray-600 small">José</span>
-                                            <img class="img-profile rounded-circle" src="../../img/sem-foto.jpg">
+                                            <img class="img-profile rounded-circle" src="../../src/img/produtos/sem-foto.png">
 
                                         </a>
                                         <!-- Dropdown - User Information -->
@@ -264,29 +264,7 @@ require_once '../app/Views/layout/header.php';
 
                         </div>
                     </div>
-                </div>
-
-
-                <!-- Core plugin JavaScript-->
-                <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
-
-                <!-- Custom scripts for all pages-->
-                <script src="../js/sb-admin-2.min.js"></script>
-
-                <!-- Page level plugins -->
-                <script src="../vendor/chart.js/Chart.min.js"></script>
-
-                <!-- Page level custom scripts -->
-                <script src="../js/demo/chart-area-demo.js"></script>
-                <script src="../js/demo/chart-pie-demo.js"></script>
-
-                <!-- Page level plugins -->
-                <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
-                <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
-                <!-- Page level custom scripts -->
-                <script src="../js/demo/datatables-demo.js"></script>
-
+                </div> 
             </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>

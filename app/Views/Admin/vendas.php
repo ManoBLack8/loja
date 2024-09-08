@@ -1,14 +1,3 @@
-<?php 
-$pag = "vendas";
-require_once("../../conexao.php"); 
-@session_start();
-    //verificar se o usuário está autenticado
-
-
-?>
-
-
-
 <div class="row mt-4 mb-4">
     <a type="button" class="btn-primary btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Novo Produto</a>
     <a type="button" class="btn-primary btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>
@@ -22,48 +11,21 @@ require_once("../../conexao.php");
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
-                        <th>id</th>
-                        <th>nome</th>
-                        <th>codigo</th>
-                        <th>situação</th>
+                        <th>Nome</th>
+                        <th>Codigo</th>
+                        <th>Tipo Entrega</th>
+                        <th>Valor Total</th>
                     </tr>
                 </thead>
 
                 <tbody>
 
-                   <?php 
-
-                    $query = $pdo->query("SELECT * FROM pedidos order by id desc ");
-                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-
-                    for ($i=0; $i < count($res); $i++) { 
-                    foreach ($res[$i] as $key => $value) {
-                    }
-
-                    $nomep = $res[$i]['nome'];
-                    $cpf = $res[$i]['cpf'];
-                    $codigo = $res[$i]['transacao'];
-                    $situ = $res[$i]['situ'];
-                    
-                    $tipo = $res[$i]['tipoentre'];
-                    $idus = $res[$i]['id_usuario'];
-                    $id = $res[$i]['id'];
-                    
-                    $query2 = $pdo->query("SELECT * FROM usuario where id =  '" . $idus . "' ");
-                    $ress = $query2->fetchAll(PDO::FETCH_ASSOC);
-                    $nome = $res[0]['nome'];
-
-
-
-                      $preco = number_format($preco, 2, ',', '.');
-                      ?>
-
-
+                   <?php  foreach($data["pedidos"] as $pedidos){   ?>
                     <tr>
-                        <td><?php echo $id ?></td>
-                        <td><?php echo $nome ?></td>
-                        <td><?php echo $codigo ?></td>
-                        <td><?php echo $situ ?></td>
+                        <td><?= $pedidos["nome"] ?></td>
+                        <td><?= $pedidos["transacao"] ?></td>
+                        <td><?= $pedidos["tipoEntrega"] ?></td>
+                        <td><?= $pedidos["valorTotal"] ?></td>
                     </tr>
 <?php } ?>
 
@@ -85,7 +47,7 @@ require_once("../../conexao.php");
 
 
 <!-- Modal --> 
-<div class="modal fade bd-example-modal-lg" id="modalDados" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+<!-- <div class="modal fade bd-example-modal-lg" id="modalDados" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -140,7 +102,7 @@ require_once("../../conexao.php");
                     <?php if(@$imagem2 != ""){ ?>
                     	 <img src="../../img/<?php echo $imagem2 ?>" width="200" id="target">
                  	<?php  }else{ ?>
-                    <img src="../../img/sem-foto.jpg" width="200" id="target">
+                    <img src="../../src/img/produtos/sem-foto.png" width="200" id="target">
                 	<?php } ?>
                     <div class = "row">
                     <div class="form-group">
@@ -165,25 +127,25 @@ require_once("../../conexao.php");
                             <label >Categoria</label>
                             <select class="form-control form-control-sm" name="categoria" id="categoria">
                                 <?php 
-                                if (@$_GET['funcao'] == 'editar') {
-                                    $query = $pdo->query("SELECT * from categorias where id = '$nome_cat2' ");
-                                    $res = $query->fetchAll(PDO::FETCH_ASSOC);
-                                    $nomeCat = $res[0]['nome'];
-                                    echo "<option value='".$nome_cat2."' >" . $nomeCat . "</option>";
-                                }
+                            //     if (@$_GET['funcao'] == 'editar') {
+                            //         $query = $pdo->query("SELECT * from categorias where id = '$nome_cat2' ");
+                            //         $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                            //         $nomeCat = $res[0]['nome'];
+                            //         echo "<option value='".$nome_cat2."' >" . $nomeCat . "</option>";
+                            //     }
 
-                                $query2 = $pdo->query("SELECT * from categorias order by nome asc ");
-                                $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
-                                for ($i=0; $i < count($res2); $i++) { 
-                                    foreach ($res2[$i] as $key => $value) {
-                                    }
+                            //     $query2 = $pdo->query("SELECT * from categorias order by nome asc ");
+                            //     $res2 = $query2->fetchAll(PDO::FETCH_ASSOC);
+                            //     for ($i=0; $i < count($res2); $i++) { 
+                            //         foreach ($res2[$i] as $key => $value) {
+                            //         }
 
-                                    if(@$nomeCat != $res2[$i]['nome']){
-                                       echo "<option value='".$res2[$i]['id']."' >" . $res2[$i]['nome'] . "</option>"; 
-                                   }
+                            //         if(@$nomeCat != $res2[$i]['nome']){
+                            //            echo "<option value='".$res2[$i]['id']."' >" . $res2[$i]['nome'] . "</option>"; 
+                            //        }
 
 
-                               }
+                            //    }
 
 
                                ?>
@@ -334,7 +296,7 @@ require_once("../../conexao.php");
                             </div>
 
                             <div class="col-md-12 mb-2">
-                                <img src="../../img/sem-foto.jpg" alt="Carregue sua Imagem" id="targetImgProduto" width="100%">
+                                <img src="../../src/img/produtos/sem-foto.png" alt="Carregue sua Imagem" id="targetImgProduto" width="100%">
                             </div>
 
                         </div>
@@ -403,7 +365,7 @@ require_once("../../conexao.php");
             </div>
         </div>
     </div>
-</div>
+</div> -->
 
 
 

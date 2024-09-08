@@ -7,6 +7,7 @@ class LoginController extends Controller {
 
     public function index() {
         session_start();
+        var_dump($_SESSION);
         if($_SESSION["usuario"]["nivelAcesso"] == 'usuario'){
             $this->rendirecionar("../Usuario/index");
         }
@@ -34,12 +35,12 @@ class LoginController extends Controller {
             } else {
                 // Falha no login
                 echo "Usuário ou senha inválidos";
-                //$this->render("Login/index");
+                $this->render("Login/index");
             }
         } else {
             // Campos não preenchidos
             echo "Preencha todos os campos.";
-            //$this->render("Login/index");
+            $this->render("Login/index");
         }
     }
 }

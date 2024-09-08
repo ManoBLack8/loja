@@ -1,16 +1,3 @@
-<?php 
-$pag = "categorias";
-require_once("../../conexao.php");
-@session_start();
-    //verificar se o usuário está autenticado
-//if(@$_SESSION['id_usuario'] == null || @$_SESSION['nivel_usuario'] != 'Admin'){
-  //  echo "<script language='javascript'> window.location='../index.php' </script>";
-
-//}
-
-
-?>
-
 <div class="row mt-4 mb-4">
     <a type="button" class="btn-primary btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Nova Categoria</a>
     <a type="button" class="btn-primary btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>
@@ -35,24 +22,12 @@ require_once("../../conexao.php");
 
                 <tbody>
 
-                   <?php 
-
-                   $query = $pdo->query("SELECT * FROM categorias order by id desc ");
-                   $res = $query->fetchAll(PDO::FETCH_ASSOC);
-
-                   for ($i=0; $i < count($res); $i++) { 
-                      foreach ($res[$i] as $key => $value) {
-                      }
-
-                      $nomep = $res[$i]['nome'];
-                      $id = $res[$i]['id'];
-
-                      ?>
+                   <?php foreach($data["categorias"] as $categorias){?>
 
 
                     <tr>
-                        <td><?php echo $id ?></td>
-                        <td><?php echo $nomep ?></td>
+                        <td><?= $categorias["id"] ?></td>
+                        <td><?= $categorias["nome"] ?></td>
                         <td>
                              <a href="index.php?pag=<?php echo $pag ?>&funcao=editar&id=<?php echo $id ?>" class='text-primary mr-1' title='Editar Dados'><i class='far fa-edit'></i></a>
                             <a href="index.php?pag=<?php echo $pag ?>&funcao=excluir&id=<?php echo $id ?>" class='text-danger mr-1' title='Excluir Registro'><i class='far fa-trash-alt'></i></a>

@@ -31,7 +31,7 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
     <link rel="shortcut icon" href="../src/iconesELogos/favicon.ico">
     <link rel="stylesheet" href="../src/css/bootstrap.min.css" type="text/css">
     <link rel="stylesheet" href="../src/css/font-awesome.min.css" type="text/css">
-    <link rel="stylesheet" href="../src/jquery-ui.min.css" type="text/css">
+    <link rel="stylesheet" href="../src/css/jquery-ui.min.css" type="text/css">
     <link rel="stylesheet" href="../src/css/owl.carousel.min.css" type="text/css">
     <link rel="stylesheet" href="../src/css/slicknav.min.css" type="text/css">
     <link rel="stylesheet" href="../src/css/style.css" type="text/css">
@@ -40,5 +40,5 @@ Para você que preza por inclusão, diversidade e autenticidade brecho online">
     <link href="../src/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
     <!-- Bootstrap core JavaScript-->
     <script src="../src/vendor/jquery/jquery.min.js"></script>
-    <script src="../src /vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="../src/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </head>

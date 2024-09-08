@@ -9,7 +9,6 @@
 *.user
 *.userosscache
 *.sln.docstates
-
 # User-specific files (MonoDevelop/Xamarin Studio)
 *.userprefs
 
@@ -350,3 +349,4 @@ MigrationBackup/
 .ionide/
 
 /vendor/
+*.ENV
