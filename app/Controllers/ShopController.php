@@ -17,9 +17,9 @@ class ShopController extends Controller
         @session_start();
         $database = new BancoDeDados();
         $this->db = $database->Conexao();
-        $this->usuario = new Usuario($this->db);
-        $this->produto = new Produto($this->db);
-        $this->categoria = new Categoria($this->db);
+        $this->usuario = new Usuario();
+        $this->produto = new Produto();
+        $this->categoria = new Categoria();
     }
 
     public function index($pag = 1){

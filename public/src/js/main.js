@@ -167,11 +167,6 @@
     minamount.val('R$' + rangeSlider.slider("values", 0));
     maxamount.val('R$' + rangeSlider.slider("values", 1));
 
-    /*--------------------------
-        Select
-    ----------------------------*/
-    $("select").niceSelect();
-
     /*------------------
 		Single Product
 	--------------------*/

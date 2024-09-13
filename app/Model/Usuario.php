@@ -30,18 +30,26 @@ class Usuario
 
     // Getters e Setters gerados de forma automática para maior simplicidade
 
-    public function __get($property) {
-        if (property_exists($this, $property)) {
-            return $this->$property;
-        }
+    
+    public function getEmail(){
+        return $this->email;
     }
 
-    public function __set($property, $value) {
-        if (property_exists($this, $property)) {
-            $this->$property = htmlspecialchars(strip_tags($value));
-        }
+    public function setDocumento($documento){
+        $this->documento = $documento;
     }
 
+    public function setEmail($email){
+        $this->email = $email;
+    }
+
+    public function setSenha($senha){
+        $this->senha = $senha;
+    }
+
+    public function getNivelAcesso(){
+        return $this->nivelAcesso;
+    }
     public function read() {
         $query = 'SELECT * FROM ' . $this->nomeTabela;
         $stmt = $this->conn->prepare($query);

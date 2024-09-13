@@ -16,5 +16,11 @@ class Controller {
         include '../app/Views/Layout/footer.php';
         include '../app/Views/Modals/executarModal.php';
     }
+    protected function ModalForm($arquivo, $modal = []){
+        include '../app/Views/Layout/header.php';
+        include '../app/Views/Modals/'.$arquivo.'.php';
+        include '../app/Views/Layout/footer.php';
+        include '../app/Views/Modals/executarModal.php';
+    }
     
 }

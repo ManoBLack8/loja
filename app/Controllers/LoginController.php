@@ -7,29 +7,28 @@ class LoginController extends Controller {
 
     public function index() {
         session_start();
-        var_dump($_SESSION);
         if($_SESSION["usuario"]["nivelAcesso"] == 'usuario'){
-            $this->rendirecionar("../Usuario/index");
+            $this->rendirecionar("../Usuario");
         }
         
         if($_SESSION["usuario"]["nivelAcesso"] == 'admin'){
-            $this->rendirecionar("../Admin/index");
+            $this->rendirecionar("../Admin");
         }
         $usuario = new Usuario();
         $emailDocumento = $_POST["email_login"] ?? null;
         $senha = $_POST["senha_login"] ?? null;
         if ($emailDocumento && $senha) {
-            $usuario->email = $emailDocumento;
-            $usuario->documento = $emailDocumento;
-            $usuario->senha = $senha;
+            $usuario->setEmail($emailDocumento);
+            $usuario->setDocumento($emailDocumento);
+            $usuario->setSenha($senha);
             if ($usuario->loginUsuario()) {
-                if($usuario->nivelAcesso == 'admin'){
+                if($usuario->getNivelAcesso() == 'admin'){
                     //$this->Modal('Usuário autenticado com sucesso', 'success');
                     $this->rendirecionar("../Admin/index");
 
                 }else{
                     $this->Modal('Usuário autenticado com sucesso', 'success');
-                    $this->rendirecionar("../Usuario/index");                    
+                    $this->rendirecionar("../Usuario");                    
                 }
 
             } else {

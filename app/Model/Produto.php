@@ -15,19 +15,44 @@ class Produto {
     private $tamanhoVeste;
     private $valor;
     private $descricao;
+    private $tags;
+    private $peso;
+    private $largura;
+    private $altura;
+    private $comprimento;
+    private $status;
     private $categoria_id;
 
     function __construct() {
         $this->conn = (new BancoDeDados())->Conexao();
     }
 
-    public function read() {
-        $query = 'SELECT * FROM ' . $this->nomeTabela;
+    public function read($where='') {
+        $query = 'SELECT * FROM ' . $this->nomeTabela." WHERE 1=1 ".$where;
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 
+    public function fill($data) {
+        // Preenche cada propriedade da classe com os dados fornecidos no array, se existir.
+        $this->id = $data['id'] ?? null;
+        $this->nome = $data['nome'] ?? null;
+        $this->nomeURL = $data['nomeURL'] ?? null;
+        $this->imagem = $data['imagem'] ?? null;
+        $this->tamanho = $data['tamanho'] ?? null;
+        $this->tamanhoVeste = $data['tamanhoVeste'] ?? null;
+        $this->valor = $data['valor'] ?? null;
+        $this->descricao = $data['descricao'] ?? null;
+        $this->tags = $data['tags'] ?? null;
+        $this->peso = $data['peso'] ?? null;
+        $this->largura = $data['largura'] ?? null;
+        $this->altura = $data['altura'] ?? null;
+        $this->comprimento = $data['comprimento'] ?? null;
+        $this->status = $data['status'] ?? null;
+        $this->categoria_id = $data['categoria_id'] ?? null;
+    }
+    
     public function create() {
         $query = "INSERT INTO " . $this->nomeTabela . " 
                   SET nome=:nome, 
@@ -37,7 +62,7 @@ class Produto {
                       tamanhoVeste=:tamanhoVeste, 
                       valor=:valor, 
                       descricao=:descricao, 
-                      categoria_id=:categoria_id";
+                      idcategoria=:categoria_id";
         
         $stmt = $this->conn->prepare($query);
 
@@ -109,6 +134,23 @@ class Produto {
         return false;
     }
 
+    public function delete() {
+        $this->status = "Excluido";
+        $query = "UPDATE " . $this->nomeTabela . " 
+                  SET status = :status
+                  WHERE id=:id";
+
+        $stmt = $this->conn->prepare($query);
+        $this->id = htmlspecialchars(strip_tags(intval($this->id)));
+        $stmt->bindParam(':status', $this->status);
+        $stmt->bindParam(':id', $this->id);
+
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
     public function produtosVitrine() {
         $produtosPorPagina = 12;  // Quantos produtos por página
         $paginaAtual = isset($_GET['pagina']) ? (int)$_GET['pagina'] : 1;  // Página atual
@@ -122,7 +164,7 @@ class Produto {
     }
 
     public function getTamanhosvitrine() {
-        $query = 'SELECT tamanho FROM ' . $this->nomeTabela . ' WHERE status > 0';
+        $query = 'SELECT DISTINCT tamanho FROM ' . $this->nomeTabela . ' WHERE status > 0';
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_ASSOC);
@@ -153,6 +195,14 @@ class Produto {
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
+    public function getProdutoPorId(){
+        $id = @$_GET['id'];
+        $query = "SELECT * FROM " . $this->nomeTabela . " WHERE id = :id LIMIT 1";
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
+    }
     public function getImagensProdutos($produtoId){
         $produtoId = intval($produtoId);
         $imagens = new Imagen($this->conn);

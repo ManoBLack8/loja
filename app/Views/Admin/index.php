@@ -11,7 +11,7 @@ require_once '../app/Views/layout/header.php';
         <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
-            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../../index.php">
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="../../Admin">
 
                 <div class="sidebar-brand-text mx-3">Administrador</div>
             </a>

@@ -1,5 +1,7 @@
 <?php
 require '../vendor/autoload.php';
+$dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__);
+$dotenv->load();
 use App\Controllers\HomeController;
 
 // Roteamento básico (simples demais para produção)
