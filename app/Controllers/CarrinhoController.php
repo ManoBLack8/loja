@@ -5,14 +5,10 @@ use Config\BancoDeDados;
 use App\Model\Carrinho;
 class CarrinhoController extends Controller {
 
-    private $db;
     private $carrinho;
 
     public function __construct() {
         @session_start();
-        $database = new BancoDeDados();
-        $this->db = $database->Conexao();
-        $this->carrinho = new Carrinho($this->db);
     }
     public function index(){
         $carrinho =$this->carrinho->listaCarrinhoUsuario();

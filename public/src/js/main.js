@@ -1,14 +1,4 @@
-/*  ---------------------------------------------------
-    Template Name: Ogani
-    Description:  Ogani eCommerce  HTML Template
-    Author: Colorlib
-    Author URI: https://colorlib.com
-    Version: 1.0
-    Created: Colorlib
----------------------------------------------------------  */
-
 'use strict';
-
 (function ($) {
 
     /*------------------
@@ -66,7 +56,7 @@
     $(".latest-product__slider").owlCarousel({
         loop: true,
         margin: 0,
-        items: 1 ,
+        items: 1,
         dots: true,
         nav: true,
         animateOut: 'fadeOut',
@@ -204,4 +194,588 @@
     });
     
 
+
 })(jQuery);
+
+$(document).ready(function() {
+
+    // COMEÇO DA PAGINA DE CHECKOUT
+    function limpa_formulário_cep() {
+        // Limpa valores do formulário de cep.
+        $("#rua").val("");
+        $("#bairro").val("");
+        $("#cidade").val("");
+        $("#uf").val("");
+        $("#complemento").val("");
+    }
+    
+    //Quando o campo cep perde o foco.
+    $("#cep").blur(function() {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = $(this).val().replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+
+                //Preenche os campos com "..." enquanto consulta webservice.
+                $("#rua").val("...");
+                $("#bairro").val("...");
+                $("#cidade").val("...");
+                $("#uf").val("...");
+                $("#complemento").val("...");
+
+                //Consulta o webservice viacep.com.br/
+                $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                    if (!("erro" in dados)) {
+                        //Atualiza os campos com os valores da consulta.
+                        $("#rua").val(dados.logradouro);
+                        $("#bairro").val(dados.bairro);
+                        $("#cidade").val(dados.localidade);
+                        $("#uf").val(dados.uf);
+                        $("#complemento").val("");
+                    } //end if.
+                    else {
+                        //CEP pesquisado não foi encontrado.
+                        limpa_formulário_cep();
+                        alert("CEP não encontrado.");
+                    }
+                });
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_formulário_cep();
+        }
+    });
+    // FIM DA PAGINA DE CHECKOUT
+
+    //COMEÇO DA PAGINA DE CARRINHO 
+    $('#btn-deletar').click(function (event) {
+        event.preventDefault();
+        $.ajax({
+            url: "carrinho/excluir_Carrinho",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function (mensagem) {
+
+                if (mensagem.trim() === 'Excluído com Sucesso!!') {
+
+
+                    $('#btn-cancelar-excluir').click();
+                    window.location = "Carrinho";
+                }
+
+                $('#mensagem_excluir').text(mensagem)
+
+
+
+            },
+
+        })
+    });
+
+    $('#btn-calcular').click(function (event) {
+        event.preventDefault();
+        sleep(10)
+        $.ajax({
+            url: "entregas.php",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function (data) {
+                $('#entregas').html(data)
+                
+                
+                
+            },
+
+        })
+    });
+
+    $('#btn-cupom').click(function (event) {
+        event.preventDefault();
+        
+        
+
+        $.ajax({
+            url: "Controller/CupomController.php",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function (data) {
+                $('#cupom').html(data)
+            },
+
+        })
+    });
+
+    function limpa_formulário_cep() {
+        // Limpa valores do formulário de cep.
+        $("#cidade").val("");
+    }
+    
+    //Quando o campo cep perde o foco.
+    $("#cep").blur(function() {
+
+        //Nova variável "cep" somente com dígitos.
+        var cep = $(this).val().replace(/\D/g, '');
+
+        //Verifica se campo cep possui valor informado.
+        if (cep != "") {
+
+            //Expressão regular para validar o CEP.
+            var validacep = /^[0-9]{8}$/;
+
+            //Valida o formato do CEP.
+            if(validacep.test(cep)) {
+                //Consulta o webservice viacep.com.br/
+                $.getJSON("https://viacep.com.br/ws/"+ cep +"/json/?callback=?", function(dados) {
+
+                    if (!("erro" in dados)) {
+                        //Atualiza os campos com os valores da consulta.
+                        $("#cidade").val(dados.localidade);
+                    } //end if.
+                    else {
+                        //CEP pesquisado não foi encontrado.
+                        limpa_formulário_cep();
+                        alert("CEP não encontrado.");
+                    }
+                });
+            } //end if.
+            else {
+                //cep é inválido.
+                limpa_formulário_cep();
+                alert("Formato de CEP inválido.");
+            }
+        } //end if.
+        else {
+            //cep sem valor, limpa formulário.
+            limpa_formulário_cep();
+        }
+    });
+
+    function sleep(ms) {
+        return new Promise(resolve => setTimeout(resolve, ms));
+    }
+    //FIM DA PAGINA DE CARRINHO
+
+
+    //COMECO DE CONTATO
+    $('#btncontato').click(function(event) {
+        event.preventDefault();
+        $('#mensagem-i').removeClass('text-success')
+        $('#mensagem-i').removeClass('text-danger')
+        $('#mensagem-i').addClass('text-info')
+         $('#mensagem-i').text('Enviando...')
+        $.ajax({
+            url:"enviar.php",
+            method:"post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function(msg) {
+                if (msg.trim() === 'Enviado com Sucesso!') {
+                    $('#mensagem-i').removeClass('text-info')
+                    $('#mensagem-i').addClass('text-success')
+                    $('#mensagem-i').text(msg);
+                    $('#nomecontato').val('');
+                    $('#emailcontato').val('');
+                    $('#msgcontato').val('');
+                }
+    
+                else{
+                    $('#mensagem-i').text(msg)
+    
+                }
+            }
+        })
+    
+    });
+    // FIM DE CONTATO
+
+    //COMECO DE SHOP 
+    $(document).ready(function () {
+        $('#btn-deletar').click(function (event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: "carrinho/inserir_Carrinho",
+                method: "post",
+                data: $('form').serialize(),
+                dataType: "text",
+                success: function (mensagem) {
+
+                    if (mensagem.trim() === 'Cadastrado com Sucesso!') {
+
+
+                        $('#btn-cancelar-excluir').click();
+                        window.location = "Shop";
+                    }
+
+                    $('#mensagem_excluir').text(mensagem)
+
+
+
+                },
+
+            })
+        })
+    });
+    //FIM DE SHOP
+
+    //COMEÇO ADMIN 
+    $('#btn-salvar-perfil').click(function(event){
+        event.preventDefault();
+        
+        $.ajax({
+            url:"editar-perfil.php",
+            method:"post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function(msg){
+               if(msg.trim() === 'Salvo com Sucesso!'){
+                                        
+                    $('#btn-fechar-perfil').click();
+                    window.location='index.php';
+
+                    }
+                 else{
+                    $('#mensagem-perfil').addClass('text-danger')
+                    $('#mensagem-perfil').text(msg);
+                   
+
+                 }
+            }
+        })
+    })
+    // FIM ADMIN
+
+    //COMECO CATEGORIA 
+     $('#btn-deletar-categoria').click(function (event) {
+        event.preventDefault();
+
+        $.ajax({
+            url: "/excluir.php",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function (mensagem) {
+
+                if (mensagem.trim() === 'Excluído com Sucesso!!') {
+
+
+                    $('#btn-cancelar-excluir').click();
+                    window.location = "index.php?pag=" + pag;
+                }
+
+                $('#mensagem_excluir').text(mensagem)
+
+
+
+            },
+
+        })
+    });
+
+    $("#form").submit(function (event) {
+        event.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: "/back_escola.php",
+            type: 'POST',
+            data: formData,
+
+            success: function (mensagem) {
+
+                $('#mensagem').removeClass()
+
+                if (mensagem.trim() == "Salvo com Sucesso!!") {
+                    
+                    //$('#nome').val('');
+                    //$('#cpf').val('');
+                    $('#btn-fechar').click();
+                    window.location = "index.php"
+
+                } else {
+
+                    $('#mensagem').addClass('text-danger')
+                }
+
+                $('#mensagem').text(mensagem)
+
+            },
+
+            cache: false,
+            contentType: false,
+            processData: false,
+            xhr: function () {  // Custom XMLHttpRequest
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) { // Avalia se tem suporte a propriedade upload
+                    myXhr.upload.addEventListener('progress', function () {
+                        /* faz alguma coisa durante o progresso do upload */
+                    }, false);
+                }
+                return myXhr;
+            }
+        });
+    });
+
+    $('#btn-deletar-categoria').click(function (event) {
+        event.preventDefault();
+
+        $.ajax({
+            url: "/excluir.php",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function (mensagem) {
+
+                if (mensagem.trim() === 'Excluído com Sucesso!!') {
+
+
+                    $('#btn-cancelar-excluir').click();
+                    window.location = "index.php?pag=" + pag;
+                }
+
+                $('#mensagem_excluir').text(mensagem)
+
+
+
+            },
+
+        })
+    })
+
+    function carregarImg() {
+
+        var target = document.getElementById('target');
+        var file = document.querySelector("input[type=file]").files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            target.src = reader.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+
+
+        } else {
+            target.src = "";
+        }
+    }
+    $('#dataTable').dataTable({
+        "ordering": false
+    })
+    // FIM CATEGORIA 
+
+    // COMECO PRODUTOS
+    $("#form").submit(function () {
+        event.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: pag + "/inserir.php",
+            type: 'POST',
+            data: formData,
+
+            success: function (mensagem) {
+
+                $('#mensagem').removeClass()
+
+                if (mensagem.trim() == "Salvo com Sucesso!!") {
+                    
+                    //$('#nome').val('');
+                    //$('#cpf').val('');
+                    $('#btn-fechar').click();
+                    window.location = "index.php?pag="+pag;
+
+                } else {
+
+                    $('#mensagem').addClass('text-danger')
+                }
+
+                $('#mensagem').text(mensagem)
+
+            },
+
+            cache: false,
+            contentType: false,
+            processData: false,
+            xhr: function () {  // Custom XMLHttpRequest
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) { // Avalia se tem suporte a propriedade upload
+                    myXhr.upload.addEventListener('progress', function () {
+                        /* faz alguma coisa durante o progresso do upload */
+                    }, false);
+                }
+                return myXhr;
+            }
+        });
+    });
+
+    $('#btn-deletar').click(function (event) {
+        event.preventDefault();
+
+        $.ajax({
+            url: pag + "/excluir.php",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function (mensagem) {
+
+                if (mensagem.trim() === 'Excluído com Sucesso!!') {
+
+
+                    $('#btn-cancelar-excluir').click();
+                    window.location = "index.php?pag=" + pag;
+                }
+
+                $('#mensagem_excluir').text(mensagem)
+
+
+
+            },
+
+        })
+    });
+
+    $("#form-fotos").submit(function () {
+        event.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: pag + "/inserir-imagens.php",
+            type: 'POST',
+            data: formData,
+
+            success: function (mensagem) {
+
+                $('#mensagem').removeClass()
+
+                if (mensagem.trim() == "Salvo com Sucesso!!") {
+
+                   $('#mensagem_fotos').addClass('text-success')
+                   $('#mensagem_fotos').text(mensagem)
+                   listarImagensProd();
+
+                } else {
+
+                    $('#mensagem_fotos').addClass('text-danger')
+                }
+
+                $('#mensagem_fotos').text(mensagem)
+
+            },
+
+            cache: false,
+            contentType: false,
+            processData: false,
+            xhr: function () {  // Custom XMLHttpRequest
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) { // Avalia se tem suporte a propriedade upload
+                    myXhr.upload.addEventListener('progress', function () {
+                        /* faz alguma coisa durante o progresso do upload */
+                    }, false);
+                }
+                return myXhr;
+            }
+        });
+    });
+
+    $.ajax({
+        url: pag + "/listar-imagens.php",
+        method: "post",
+        data: $('form').serialize(),
+        dataType: "html",
+        success: function (result) {
+
+            $('#listar-img').html(result);
+        }
+    })
+    function listarImagensProd() {
+        $.ajax({
+            url: pag + "/listar-imagens.php",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "html",
+            success: function (result) {
+
+                $('#listar-img').html(result);
+            }
+        })
+    }
+    $('#btn-deletar-img').click(function (event) {
+        event.preventDefault();
+
+        $.ajax({
+            url: pag + "/excluir-imagem.php",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "text",
+            success: function (mensagem) {
+
+                if (mensagem.trim() === 'Excluído com Sucesso!!') {
+
+
+                    $('#btn-cancelar-excluir').click();
+                    window.location = "index.php?pag=" + pag;
+                }
+
+                $('#mensagem_excluir').text(mensagem)
+
+
+
+            },
+
+        })
+    })
+
+    function carregarImg() {
+
+        var target = document.getElementById('target');
+        var file = document.querySelector("input[type=file]").files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            target.src = reader.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+
+
+        } else {
+            target.src = "";
+        }
+    }
+
+    function deletarImg(img) {
+
+        document.getElementById('id_foto').value = img;
+        $('#modalDeletarImg').modal('show');
+
+    }
+    
+    $(document).ready(function () {
+        $('#dataTable').dataTable({
+            "ordering": false
+        })
+
+    });
+
+});

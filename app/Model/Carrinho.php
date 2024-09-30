@@ -18,7 +18,6 @@ class Carrinho {
     
 
     public function listaCarrinhoUsuario() {
-        $_SESSION['usuario']['id'] = 1;
         $usuario_id = @$_SESSION['usuario']['id'];
         $query = 
         'SELECT

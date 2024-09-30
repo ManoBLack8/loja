@@ -269,30 +269,3 @@ require_once '../app/Views/layout/header.php';
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
 <?php require_once '../app/Views/layout/footer.php'; ?>
-
-<script type="text/javascript">
-    $('#btn-salvar-perfil').click(function(event){
-        event.preventDefault();
-        
-        $.ajax({
-            url:"editar-perfil.php",
-            method:"post",
-            data: $('form').serialize(),
-            dataType: "text",
-            success: function(msg){
-               if(msg.trim() === 'Salvo com Sucesso!'){
-                                        
-                    $('#btn-fechar-perfil').click();
-                    window.location='index.php';
-
-                    }
-                 else{
-                    $('#mensagem-perfil').addClass('text-danger')
-                    $('#mensagem-perfil').text(msg);
-                   
-
-                 }
-            }
-        })
-    })
-</script>
