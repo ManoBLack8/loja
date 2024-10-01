@@ -23,27 +23,22 @@ class LoginController extends Controller {
             $usuario->setSenha($senha);
             if ($usuario->loginUsuario()) {
                 if($usuario->getNivelAcesso() == 'admin'){
-<<<<<<< HEAD
-                    $this->Modal('Usuário autenticado com sucesso', 'success');
-=======
-                    //$this->Modal('Usuário autenticado com sucesso', 'success');
->>>>>>> 34308f421c061bcada8cd3c39a97c39b93b9cfa0
                     $this->rendirecionar("../Admin");
 
                 }else{
                     $this->Modal('Usuário autenticado com sucesso', 'success');
-                    $this->rendirecionar("../Usuario");                    
+                    $this->rendirecionar("../Usuario/index");                    
                 }
 
             } else {
                 // Falha no login
                 echo "Usuário ou senha inválidos";
-                $this->render("Login");
+                $this->render("Login/index");
             }
         } else {
             // Campos não preenchidos
             echo "Preencha todos os campos.";
-            $this->render("Login");
+            $this->render("Login/index");
         }
     }
 }
