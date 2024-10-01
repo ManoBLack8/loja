@@ -268,6 +268,7 @@ require_once '../app/Views/layout/header.php';
             </body>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.11/jquery.mask.min.js"></script>
+<<<<<<< HEAD
 <?php require_once '../app/Views/layout/footer.php'; ?>
 
 <script type="text/javascript">
@@ -448,3 +449,6 @@ require_once '../app/Views/layout/header.php';
 
     });
 </script>
+=======
+<?php require_once '../app/Views/layout/footer.php'; ?>
+>>>>>>> 34308f421c061bcada8cd3c39a97c39b93b9cfa0

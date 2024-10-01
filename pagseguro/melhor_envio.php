@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <?php
   $token_type = "Bearer";
   $expires_in = 2592000;
@@ -63,6 +64,8 @@ $response = json_decode(curl_exec($curl));
 curl_close($curl);
 require_once("cabecalho.php");
 ?>
+=======
+>>>>>>> 34308f421c061bcada8cd3c39a97c39b93b9cfa0
 <body>
     <section>
         <div class="container">
