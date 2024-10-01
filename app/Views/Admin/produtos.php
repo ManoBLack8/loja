@@ -11,6 +11,7 @@
             <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
                 <thead>
                     <tr>
+                        <th>Selecione</th>
                         <th>Nome</th>
                         <th>Imagem</th>
                         <th>Valor</th>
@@ -22,6 +23,7 @@
                    <?php foreach($data["produtos"] as $produto){  
                     ?>
                     <tr>
+                        <td><input type="checkbox" name="id_produto[]" id="id_produto[]"></td>
                         <td><?= $produto["nome"] ?></td>
                         <?php if (!empty($imagem2)) { ?>
                            <td><img src="../../src/img/produtos/<?= $imagem2 ?>" width="200" id="target"></td> 
@@ -33,6 +35,7 @@
                         <td>
                              <a href="produtos?funcao=editar&id=<?= $produto["id"] ?>"><button class="btn btn-primary"><i class="fa fa-edit" ></i></button></a>
                              <a href="produtos?funcao=deletar&id=<?= $produto["id"] ?>"><button class="btn btn-danger"><i class="fa fa-trash" ></i></button></a>
+                             <a href="produtos?funcao=imagens&id=<?= $produto["id"] ?>" class='btn btn-info' title='Inserir Imagens'><i class='fa fa-images'></i></a>
                         </td>
                     </tr>
                     <?php } ?>
@@ -72,7 +75,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-cancelar-excluir">Cancelar</button>
                 <form method="post">
 
-                    <input type="hidden" id="id"  name="id" value="<?php echo @$_GET['id'] ?>" required>
+                    <input type="hidden" id="id"  name="id" value="<?= @$_GET['id'] ?>" required>
 
                     <button type="button" id="btn-deletar" name="btn-deletar" class="btn btn-danger">Excluir</button>
                 </form>
@@ -118,7 +121,7 @@
                     <div class="col-md-12" align="right">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-cancelar-fotos">Cancelar</button>
                         
-                        <input type="hidden" id="id"  name="id" value="<?php echo @$_GET['id'] ?>">
+                        <input type="hidden" id="id"  name="id" value="<?= @$_GET['id'] ?>">
 
                         <button type="submit" id="btn-fotos" name="btn-fotos" class="btn btn-info">Salvar</button>
 

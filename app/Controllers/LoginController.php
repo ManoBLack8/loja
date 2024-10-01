@@ -23,8 +23,8 @@ class LoginController extends Controller {
             $usuario->setSenha($senha);
             if ($usuario->loginUsuario()) {
                 if($usuario->getNivelAcesso() == 'admin'){
-                    //$this->Modal('Usuário autenticado com sucesso', 'success');
-                    $this->rendirecionar("../Admin/index");
+                    $this->Modal('Usuário autenticado com sucesso', 'success');
+                    $this->rendirecionar("../Admin");
 
                 }else{
                     $this->Modal('Usuário autenticado com sucesso', 'success');

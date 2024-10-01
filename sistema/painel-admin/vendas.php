@@ -10,8 +10,8 @@ require_once("../../conexao.php");
 
 
 <div class="row mt-4 mb-4">
-    <a type="button" class="btn-primary btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Novo Produto</a>
-    <a type="button" class="btn-primary btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>
+    <a type="button" class="btn-primary btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?= $pag ?>&funcao=novo">Novo Produto</a>
+    <a type="button" class="btn-primary btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?= $pag ?>&funcao=novo">+</a>
     
 </div>
 <!-- DataTales Example -->
@@ -60,10 +60,10 @@ require_once("../../conexao.php");
 
 
                     <tr>
-                        <td><?php echo $id ?></td>
-                        <td><?php echo $nome ?></td>
-                        <td><?php echo $codigo ?></td>
-                        <td><?php echo $situ ?></td>
+                        <td><?= $id ?></td>
+                        <td><?= $nome ?></td>
+                        <td><?= $codigo ?></td>
+                        <td><?= $situ ?></td>
                     </tr>
 <?php } ?>
 
@@ -125,7 +125,7 @@ require_once("../../conexao.php");
 
                 ?>
                 
-                <h5 class="modal-title" id="exampleModalLabel"><?php echo $titulo ?></h5>
+                <h5 class="modal-title" id="exampleModalLabel"><?= $titulo ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -134,31 +134,31 @@ require_once("../../conexao.php");
                 <div class="modal-body">
                     <div class="form-group">
                         <label >Imagem</label>
-                        <input type="file" value="<?php echo @$imagem2 ?>"  class="form-control-file" id="imagem" name="imagem" onChange="carregarImg();">
+                        <input type="file" value="<?= @$imagem2 ?>"  class="form-control-file" id="imagem" name="imagem" onChange="carregarImg();">
                     </div>
 
                     <?php if(@$imagem2 != ""){ ?>
-                    	 <img src="../../img/<?php echo $imagem2 ?>" width="200" id="target">
+                    	 <img src="../../img/<?= $imagem2 ?>" width="200" id="target">
                  	<?php  }else{ ?>
                     <img src="../../src/img/produtos/sem-foto.png" width="200" id="target">
                 	<?php } ?>
                     <div class = "row">
                     <div class="form-group">
                         <label >Nome</label>
-                        <input value="<?php echo @$nome2 ?>" type="text" class="form-control" id="nomep" name="nomep" placeholder="Nome">
+                        <input value="<?= @$nome2 ?>" type="text" class="form-control" id="nomep" name="nomep" placeholder="Nome">
                     </div>
 
                     <div class="form-group ml-3">
                         <label >Tamanho</label>
-                        <input type="text" value="<?php echo @$tamanho2 ?>"  class="form-control" id="tamanho" name="tamanho" >
+                        <input type="text" value="<?= @$tamanho2 ?>"  class="form-control" id="tamanho" name="tamanho" >
                     </div>
                     <div class="form-group ml-3">
                         <label >Tamanho veste</label>
-                        <input type="text" value="<?php echo @$tamanhoveste2 ?>"  class="form-control" id="tamanhove" name="tamanhove">
+                        <input type="text" value="<?= @$tamanhoveste2 ?>"  class="form-control" id="tamanhove" name="tamanhove">
                     </div>
                     <div class="form-group">
                         <label >Valor</label>
-                        <input type="text" value="<?php echo @$preco2 ?>"  class="form-control" id="preco" name="preco">
+                        <input type="text" value="<?= @$preco2 ?>"  class="form-control" id="preco" name="preco">
                     </div>
                     <div class="col-md-4">
                         <div class="form-group">
@@ -189,7 +189,7 @@ require_once("../../conexao.php");
                                ?>
                            </select>
                            <input  type="hidden" id="txtCat" name="txtCat">
-                           <input value="<?php echo $sub_cat2 ?>" type="hidden" id="txtSub" name="txtSub">
+                           <input value="<?= $sub_cat2 ?>" type="hidden" id="txtSub" name="txtSub">
                        </div>
                    </div>
                     <div class="form-group">
@@ -204,11 +204,11 @@ require_once("../../conexao.php");
                     </div>                  
                     <div class="form-group">
                         <label >Descrição</label>
-                        <textarea  class="form-control form-control-sm" id="desc" name="desc" ><?php echo @$desc2 ?></textarea>
+                        <textarea  class="form-control form-control-sm" id="desc" name="desc" ><?= @$desc2 ?></textarea>
                     </div>
                     <div class="form-group">
                         <label >Palavras Chaves</label>
-                        <input value="<?php echo @$palavras2 ?>" type="text" class="form-control form-control-sm" id="tags" name="tags" placeholder="Palavras Chave">
+                        <input value="<?= @$palavras2 ?>" type="text" class="form-control form-control-sm" id="tags" name="tags" placeholder="Palavras Chave">
                
                     </div>
 
@@ -216,7 +216,7 @@ require_once("../../conexao.php");
             <div class="col-md-3">
                  <div class="form-group">
                     <label >Peso</label>
-                    <input value="<?php echo @$peso2 ?>" type="text" class="form-control form-control-sm" id="peso" name="peso" placeholder="Peso">
+                    <input value="<?= @$peso2 ?>" type="text" class="form-control form-control-sm" id="peso" name="peso" placeholder="Peso">
                
                 </div>
             </div>
@@ -224,7 +224,7 @@ require_once("../../conexao.php");
              <div class="col-md-3">
                  <div class="form-group">
                     <label >Largura</label>
-                    <input value="<?php echo @$largura2 ?>" type="text" class="form-control form-control-sm" id="largura" name="largura" placeholder="Largura">
+                    <input value="<?= @$largura2 ?>" type="text" class="form-control form-control-sm" id="largura" name="largura" placeholder="Largura">
                
                 </div>
             </div>
@@ -233,7 +233,7 @@ require_once("../../conexao.php");
             <div class="col-md-3">
                  <div class="form-group">
                     <label >Altura</label>
-                    <input value="<?php echo @$altura2 ?>" type="text" class="form-control form-control-sm" id="altura" name="altura" placeholder="Altura">
+                    <input value="<?= @$altura2 ?>" type="text" class="form-control form-control-sm" id="altura" name="altura" placeholder="Altura">
                
                 </div>
             </div>
@@ -242,7 +242,7 @@ require_once("../../conexao.php");
             <div class="col-md-3">
                  <div class="form-group">
                     <label >Comprimento</label>
-                    <input value="<?php echo @$comprimento2 ?>" type="text" class="form-control form-control-sm" id="comprimento" name="comprimento" placeholder="Comprimento">
+                    <input value="<?= @$comprimento2 ?>" type="text" class="form-control form-control-sm" id="comprimento" name="comprimento" placeholder="Comprimento">
                
                 </div>
             </div>
@@ -267,8 +267,8 @@ require_once("../../conexao.php");
 
 
 
-                <input value="<?php echo @$_GET['id'] ?>" type="hidden" name="txtid2" id="txtid2">
-                <input value="<?php echo @$nome2 ?>" type="hidden" name="antigo" id="antigo">
+                <input value="<?= @$_GET['id'] ?>" type="hidden" name="txtid2" id="txtid2">
+                <input value="<?= @$nome2 ?>" type="hidden" name="antigo" id="antigo">
 
                     <button type="button" id="btn-fechar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" name="btn-salvar" id="btn-salvar" class="btn btn-primary">Salvar</button>
@@ -305,7 +305,7 @@ require_once("../../conexao.php");
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-cancelar-excluir">Cancelar</button>
                 <form method="post">
 
-                    <input type="hidden" id="id"  name="id" value="<?php echo @$_GET['id'] ?>" required>
+                    <input type="hidden" id="id"  name="id" value="<?= @$_GET['id'] ?>" required>
 
                     <button type="button" id="btn-deletar" name="btn-deletar" class="btn btn-danger">Excluir</button>
                 </form>
@@ -351,7 +351,7 @@ require_once("../../conexao.php");
                     <div class="col-md-12" align="right">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-cancelar-fotos">Cancelar</button>
                         
-                        <input type="hidden" id="id"  name="id" value="<?php echo @$_GET['id'] ?>">
+                        <input type="hidden" id="id"  name="id" value="<?= @$_GET['id'] ?>">
 
                         <button type="submit" id="btn-fotos" name="btn-fotos" class="btn btn-info">Salvar</button>
 

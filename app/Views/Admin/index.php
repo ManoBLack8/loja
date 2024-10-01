@@ -207,17 +207,17 @@ require_once '../app/Views/layout/header.php';
 
                                     <div class="form-group">
                                         <label >Nome</label>
-                                        <input value="<?php echo @$nome_usu ?>" type="text" class="form-control" id="nome-usuario" name="nome-usuario" placeholder="Nome">
+                                        <input value="<?= @$nome_usu ?>" type="text" class="form-control" id="nome-usuario" name="nome-usuario" placeholder="Nome">
                                     </div>
 
                                     <div class="form-group">
                                         <label >CPF</label>
-                                        <input value="<?php echo @$cpf_usu ?>" type="text" class="form-control" id="cpf-usuario" name="cpf-usuario" placeholder="CPF">
+                                        <input value="<?= @$cpf_usu ?>" type="text" class="form-control" id="cpf-usuario" name="cpf-usuario" placeholder="CPF">
                                     </div>
 
                                     <div class="form-group">
                                         <label >Email</label>
-                                        <input value="<?php echo @$email_usu ?>" type="email" class="form-control" id="email-usuario" name="email-usuario" placeholder="Email">
+                                        <input value="<?= @$email_usu ?>" type="email" class="form-control" id="email-usuario" name="email-usuario" placeholder="Email">
                                     </div>
 
                                     <div class="row">
@@ -253,8 +253,8 @@ require_once '../app/Views/layout/header.php';
 
 
 
-                                    <input value="<?php echo $_SESSION["usuario"]["id"] ?>" type="hidden" name="txtid" id="txtid">
-                                    <input value="<?php echo $_SESSION["usuario"]["documento"] ?>" type="hidden" name="antigo" id="antigo">
+                                    <input value="<?= $_SESSION["usuario"]["id"] ?>" type="hidden" name="txtid" id="txtid">
+                                    <input value="<?= $_SESSION["usuario"]["documento"] ?>" type="hidden" name="antigo" id="antigo">
 
                                     <button type="button" id="btn-fechar-perfil" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                     <button type="submit" name="btn-salvar-perfil" id="btn-salvar-perfil" class="btn btn-primary">Salvar</button>
@@ -295,4 +295,156 @@ require_once '../app/Views/layout/header.php';
             }
         })
     })
+</script>
+
+
+<!--AJAX PARA INSERÇÃO E EDIÇÃO DOS DADOS COM IMAGEM -->
+<script type="text/javascript">
+    $("#form-fotos").submit(function () {
+
+        event.preventDefault();
+        var formData = new FormData(this);
+
+        $.ajax({
+            url: "../Api/inseriImagen",
+            type: 'POST',
+            data: formData,
+
+            success: function (mensagem) {
+
+                $('#mensagem').removeClass()
+
+                if (mensagem.trim() == "Salvo com Sucesso!!") {
+
+                   $('#mensagem_fotos').addClass('text-success')
+                   $('#mensagem_fotos').text(mensagem)
+                   listarImagensProd();
+
+                } else {
+
+                    $('#mensagem_fotos').addClass('text-danger')
+                }
+
+                $('#mensagem_fotos').text(mensagem)
+
+            },
+
+            cache: false,
+            contentType: false,
+            processData: false,
+            xhr: function () {  // Custom XMLHttpRequest
+                var myXhr = $.ajaxSettings.xhr();
+                if (myXhr.upload) { // Avalia se tem suporte a propriedade upload
+                    myXhr.upload.addEventListener('progress', function () {
+                        /* faz alguma coisa durante o progresso do upload */
+                    }, false);
+                }
+                return myXhr;
+            }
+        });
+    });
+</script>
+
+
+<script type="text/javascript">
+    $.ajax({
+        url: "../Api/listarImagen",
+        method: "post",
+        data: $('form').serialize(),
+        dataType: "html",
+        success: function (result) {
+
+            $('#listar-img').html(result);
+        }
+    })
+    function listarImagensProd() {
+
+        $.ajax({
+            url: "../../../Api/listarImagen",
+            method: "post",
+            data: $('form').serialize(),
+            dataType: "html",
+            success: function (result) {
+
+                $('#listar-img').html(result);
+            }
+        })
+    }
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        $('#btn-deletar-img').click(function (event) {
+            event.preventDefault();
+
+            $.ajax({
+                url: "../Api/inseriImagen3",
+                method: "post",
+                data: $('form').serialize(),
+                dataType: "text",
+                success: function (mensagem) {
+
+                    if (mensagem.trim() === 'Excluído com Sucesso!!') {
+
+
+                        $('#btn-cancelar-excluir').click();
+                        window.location = "index.php?pag=" + pag;
+                    }
+
+                    $('#mensagem_excluir').text(mensagem)
+
+
+
+                },
+
+            })
+        })
+    })
+</script>
+
+<!--SCRIPT PARA CARREGAR IMAGEM -->
+<script type="text/javascript">
+
+    function carregarImg() {
+
+        var target = document.getElementById('target');
+        var file = document.querySelector("input[type=file]").files[0];
+        var reader = new FileReader();
+
+        reader.onloadend = function () {
+            target.src = reader.result;
+        };
+
+        if (file) {
+            reader.readAsDataURL(file);
+
+
+        } else {
+            target.src = "";
+        }
+    }
+
+</script>
+
+
+<!--FUNCAO PARA CHAMAR MODAL DE DELETAR IMAGEM DAS FOTOS -->
+<script type="text/javascript">
+    function deletarImg(img) {
+
+        document.getElementById('id_foto').value = img;
+        $('#modalDeletarImg').modal('show');
+
+    }
+</script>
+
+
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#dataTable').dataTable({
+            "ordering": false
+        })
+
+    });
 </script>

@@ -4,7 +4,7 @@
     RewriteCond %{REQUEST_FILENAME} !-d
     RewriteRule ^(.*)$ index.php?url=$1 [L,QSA]
 </IfModule>
-
+DirectoryIndex index.php index.html
 # Permitir acesso a arquivos estáticos
 <FilesMatch "\.(js|css|jpg|png|gif|ico|svg)$">
     Require all granted

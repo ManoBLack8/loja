@@ -51,15 +51,15 @@ $id2 = @$_SESSION['id_usuario'];
                             <tbody>
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <img src="img/produtos/<?php echo $imagemc ?>"  alt="">
-                                        <h5><?php echo $nomecar ?></h5>
+                                        <img src="img/produtos/<?= $imagemc ?>"  alt="">
+                                        <h5><?= $nomecar ?></h5>
                                     </td>
                                     
                                     <td class="shoping__cart__total">
-                                        R$<?php echo $valorcar ?>
+                                        R$<?= $valorcar ?>
                                     </td>
                                     <td>
-                                    <a width="120" href="Carrinho?funcao=delcarrinho&id=<?php echo $id ?>" class='text-danger mr-1' title="Excluir registro"><i class="fa fa-2x fa-times"></i></a>
+                                    <a width="120" href="Carrinho?funcao=delcarrinho&id=<?= $id ?>" class='text-danger mr-1' title="Excluir registro"><i class="fa fa-2x fa-times"></i></a>
                                     </td>
                                 </tr>
                                 
@@ -144,7 +144,7 @@ $id2 = @$_SESSION['id_usuario'];
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-cancelar-excluir">Cancelar</button>
                 <form method="post">
 
-                    <input type="hidden" id="id"  name="id" value="<?php echo @$_GET['id'] ?>" required>
+                    <input type="hidden" id="id"  name="id" value="<?= @$_GET['id'] ?>" required>
 
                     <button type="button" id="btn-deletar" name="btn-deletar" class="btn btn-danger">Excluir</button>
                 </form>
@@ -174,7 +174,7 @@ $id2 = @$_SESSION['id_usuario'];
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-cancelar-excluir">Cancelar</button>
                 <form method="post">
 
-                    <input type="hidden" id="id"  name="id" value="<?php echo @$_GET['id'] ?>" required>
+                    <input type="hidden" id="id"  name="id" value="<?= @$_GET['id'] ?>" required>
 
                     <button type="button" id="btn-deletar" name="btn-deletar" class="btn btn-danger">Excluir</button>
                 </form>

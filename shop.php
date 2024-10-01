@@ -81,16 +81,16 @@ require_once("Controller/ShopController.php");
                         <div class="col-lg-4 col-md-6 col-sm-6">
                             <div class="product__item">
                                 <div class="product__item__pic">
-                                <img src="img/produtos/<?php echo $imagem ?>" alt="">
+                                <img src="img/produtos/<?= $imagem ?>" alt="">
                                     <ul class="product__item__pic__hover">
                                         <li><a href="#"><i class="fa fa-heart"></i></a></li>
-                                        <li><a href="shop-detalhes.php?id=<?php echo $id ?>"><i class="fa fa-eye"></i></a></li>
+                                        <li><a href="shop-detalhes.php?id=<?= $id ?>"><i class="fa fa-eye"></i></a></li>
                                         <li><a href="?pag=<?= @$_GET['pag'] ?>&cat=<?= @$_GET['cat']?>&tamanho=<?= @$_GET['tamanho']?>&funcao=carrinho&id=<?=$id ?>" ><i class="fa fa-shopping-cart"></i></a></li>
                                     </ul>
                                 </div>
                                 <div class="product__item__text">
-                                    <h6><a href="shop-detalhes.php?id=<?php echo $id ; ?>"><?php echo $nome ?></a></h6>
-                                    <h5>R$<?php echo $valor ?></h5>
+                                    <h6><a href="shop-detalhes.php?id=<?= $id ; ?>"><?= $nome ?></a></h6>
+                                    <h5>R$<?= $valor ?></h5>
                                 </div>
                             </div>
                         </div>
@@ -133,7 +133,7 @@ require_once("Controller/ShopController.php");
             </div>
             <div class="modal-body">
 
-                <p>Deseja adicionar <?php echo $nome2 ?> ao carrinho</p>
+                <p>Deseja adicionar <?= $nome2 ?> ao carrinho</p>
 
                 <div align="center" id="mensagem_excluir" class="">
 

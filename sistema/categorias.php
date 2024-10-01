@@ -12,8 +12,8 @@ require_once("cabeçalho.php");
 ?>
 
 <div class="row mt-4 mb-4">
-    <a type="button" class="btn-primary btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Nova Categoria</a>
-    <a type="button" class="btn-primary btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>
+    <a type="button" class="btn-primary btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?= $pag ?>&funcao=novo">Nova Categoria</a>
+    <a type="button" class="btn-primary btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?= $pag ?>&funcao=novo">+</a>
     
 </div>
 
@@ -59,14 +59,14 @@ require_once("cabeçalho.php");
 
 
                     <tr>
-                        <td><?php echo $nome ?></td>
-                        <td><?php echo $itens ?></td>
-                        <td><img src="../../img/produtos/<?php echo $imagem ?>" width="50"></td>
+                        <td><?= $nome ?></td>
+                        <td><?= $itens ?></td>
+                        <td><img src="../../img/produtos/<?= $imagem ?>" width="50"></td>
                         
 
                         <td>
-                             <a href="index.php?pag=<?php echo $pag ?>&funcao=editar&id=<?php echo $id ?>" class='text-primary mr-1' title='Editar Dados'><i class='far fa-edit'></i></a>
-                            <a href="index.php?pag=<?php echo $pag ?>&funcao=excluir&id=<?php echo $id ?>" class='text-danger mr-1' title='Excluir Registro'><i class='far fa-trash-alt'></i></a>
+                             <a href="index.php?pag=<?= $pag ?>&funcao=editar&id=<?= $id ?>" class='text-primary mr-1' title='Editar Dados'><i class='far fa-edit'></i></a>
+                            <a href="index.php?pag=<?= $pag ?>&funcao=excluir&id=<?= $id ?>" class='text-danger mr-1' title='Excluir Registro'><i class='far fa-trash-alt'></i></a>
                         </td>
                     </tr>
 <?php } ?>
@@ -110,7 +110,7 @@ require_once("cabeçalho.php");
 
                 ?>
                 
-                <h5 class="modal-title" id="exampleModalLabel"><?php echo $titulo ?></h5>
+                <h5 class="modal-title" id="exampleModalLabel"><?= $titulo ?></h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -120,16 +120,16 @@ require_once("cabeçalho.php");
 
                     <div class="form-group">
                         <label >Nome</label>
-                        <input value="<?php echo @$nome2 ?>" type="text" class="form-control" id="nome-cat" name="nome-cat" placeholder="Nome">
+                        <input value="<?= @$nome2 ?>" type="text" class="form-control" id="nome-cat" name="nome-cat" placeholder="Nome">
                     </div>
 
                     <div class="form-group">
                         <label >Imagem</label>
-                        <input type="file" value="<?php echo @$imagem2 ?>"  class="form-control-file" id="imagem" name="imagem" onChange="carregarImg();">
+                        <input type="file" value="<?= @$imagem2 ?>"  class="form-control-file" id="imagem" name="imagem" onChange="carregarImg();">
                     </div>
 
                     <?php if(@$imagem2 != ""){ ?>
-                    	 <img src="../../img/produtos/<?php echo $imagem2 ?>" width="200" height="200" id="target">
+                    	 <img src="../../img/produtos/<?= $imagem2 ?>" width="200" height="200" id="target">
                  	<?php  }else{ ?>
                     <img src="../../img/produtosprodutos/sem-foto.png" width="200" height="200" id="target">
                 	<?php } ?>
@@ -151,8 +151,8 @@ require_once("cabeçalho.php");
 
 
 
-                <input value="<?php echo @$_GET['id'] ?>" type="hidden" name="txtid2" id="txtid2">
-                <input value="<?php echo @$nome2 ?>" type="hidden" name="antigo" id="antigo">
+                <input value="<?= @$_GET['id'] ?>" type="hidden" name="txtid2" id="txtid2">
+                <input value="<?= @$nome2 ?>" type="hidden" name="antigo" id="antigo">
 
                     <button type="button" id="btn-fechar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                     <button type="submit" name="btn-salvar" id="btn-salvar" class="btn btn-primary">Salvar</button>
@@ -189,7 +189,7 @@ require_once("cabeçalho.php");
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-cancelar-excluir">Cancelar</button>
                 <form method="post">
 
-                    <input type="hidden" id="id"  name="id" value="<?php echo @$_GET['id'] ?>" required>
+                    <input type="hidden" id="id"  name="id" value="<?= @$_GET['id'] ?>" required>
 
                     <button type="button" id="btn-deletar" name="btn-deletar" class="btn btn-danger">Excluir</button>
                 </form>

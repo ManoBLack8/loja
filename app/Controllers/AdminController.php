@@ -56,18 +56,23 @@ class AdminController extends Controller{
             $_POST = [];
             $p = null;
            $this->rendirecionar("Produtos");
+        }elseif(@$_GET["funcao"] == "imagens"){
+            $this->ModalForm("Produto/imagens");
         }
         $this->render("Admin/index", $data=[
             "pag" => "produtos",
-            "produtos"=> $produtos->read("AND status != 'Excluido'")]);
+            "produtos"=> $produtos->read("AND status != 'Excluido'")
+        ]);
     }
 
     public function categorias(){
         $categorias = new Categoria();
         
         if(@$_GET["funcao"]=="novo"){
+            $this->ModalForm("Categoria/adicionar");
+        }else if(@$_GET["funcao"]=="editar"){
             $this->ModalForm("Categoria/adicionar",$modal=[
-                "produtos" => $categorias->read()
+                "categoria" => $categorias->getCategoriaPorId($_GET["id"])
             ]);
         }
 

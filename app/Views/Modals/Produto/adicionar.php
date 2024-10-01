@@ -11,7 +11,9 @@
                 <div class="modal-header">
                     <?php
                     $titulo = "Cadastrar Produtos";
+                    $opc = "cadastro"; 
                     if (isset($modal["produtos"]) && count($modal["produtos"]) > 0) {
+                        $opc = "edicao";
                         foreach ($modal["produtos"] as $produto) {
                             $titulo = "Editar Produtos";
                             $imagem2 = $produto["imagem"];
@@ -37,7 +39,7 @@
                 </div>
 
                 <form id="form" name="" action="" method="POST">
-                    <input type="hidden" name="acao" value="<?= @$id2 < 1 ? 'cadastro':'edicao'  ?>">
+                    <input type="hidden" name="acao" value="<?= $opc ?>">
                     <div class="modal-body">
                         <!-- Imagem -->
                         <div class="form-group">

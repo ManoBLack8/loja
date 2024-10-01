@@ -1,6 +1,6 @@
 <div class="row mt-4 mb-4">
-    <a type="button" class="btn-primary btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?php echo $pag ?>&funcao=novo">Novo Produto</a>
-    <a type="button" class="btn-primary btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?php echo $pag ?>&funcao=novo">+</a>
+    <a type="button" class="btn-primary btn-sm ml-3 d-none d-md-block" href="index.php?pag=<?= $pag ?>&funcao=novo">Novo Produto</a>
+    <a type="button" class="btn-primary btn-sm ml-3 d-block d-sm-none" href="index.php?pag=<?= $pag ?>&funcao=novo">+</a>
     
 </div>
 
@@ -82,7 +82,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-cancelar-excluir">Cancelar</button>
                 <form method="post">
 
-                    <input type="hidden" id="id"  name="id" value="<?php echo @$_GET['id'] ?>" required>
+                    <input type="hidden" id="id"  name="id" value="<?= @$_GET['id'] ?>" required>
 
                     <button type="button" id="btn-deletar" name="btn-deletar" class="btn btn-danger">Excluir</button>
                 </form>
@@ -128,7 +128,7 @@
                     <div class="col-md-12" align="right">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-cancelar-fotos">Cancelar</button>
                         
-                        <input type="hidden" id="id"  name="id" value="<?php echo @$_GET['id'] ?>">
+                        <input type="hidden" id="id"  name="id" value="<?= @$_GET['id'] ?>">
 
                         <button type="submit" id="btn-fotos" name="btn-fotos" class="btn btn-info">Salvar</button>
 

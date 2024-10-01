@@ -3,10 +3,6 @@
     <a type="button" class="btn-primary btn-sm ml-3 d-block d-sm-none" href="?funcao=novo">+</a>
     
 </div>
-
-
-
-<!-- DataTales Example -->
 <div class="card shadow mb-4">
 
     <div class="card-body">
@@ -19,26 +15,17 @@
                         <th>AÇOES</th>
                     </tr>
                 </thead>
-
                 <tbody>
-
-                   <?php foreach($data["categorias"] as $categorias){?>
-
-
+                    <?php foreach($data["categorias"] as $categorias){?>
                     <tr>
                         <td><?= $categorias["id"] ?></td>
                         <td><?= $categorias["nome"] ?></td>
                         <td>
-                             <a href="index.php?pag=<?php echo $pag ?>&funcao=editar&id=<?php echo $id ?>" class='text-primary mr-1' title='Editar Dados'><i class='far fa-edit'></i></a>
-                            <a href="index.php?pag=<?php echo $pag ?>&funcao=excluir&id=<?php echo $id ?>" class='text-danger mr-1' title='Excluir Registro'><i class='far fa-trash-alt'></i></a>
+                             <a href="?funcao=editar&id=<?= $categorias["id"] ?>" class='text-primary mr-1' title='Editar Dados'><i class='far fa-edit'></i></a>
+                            <a href="?funcao=excluir&id=<?= $categorias["id"] ?>" class='text-danger mr-1' title='Excluir Registro'><i class='far fa-trash-alt'></i></a>
                         </td>
                     </tr>
-<?php } ?>
-
-
-
-
-
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
@@ -79,7 +66,7 @@
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-cancelar-excluir">Cancelar</button>
                 <form method="post">
 
-                    <input type="hidden" id="id"  name="id" value="<?php echo @$_GET['id'] ?>" required>
+                    <input type="hidden" id="id"  name="id" value="<?= @$_GET['id'] ?>" required>
 
                     <button type="button" id="btn-deletar" name="btn-deletar" class="btn btn-danger">Excluir</button>
                 </form>

@@ -84,11 +84,11 @@ $menu10 = "carac";
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu1 ?>">Produtos</a>
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu2 ?>">Categorias</a>
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu3 ?>">Sub Categorias</a>
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu9 ?>">Tipo Envios</a>
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu10 ?>">Características</a>
+                        <a class="collapse-item" href="index.php?pag=<?= $menu1 ?>">Produtos</a>
+                        <a class="collapse-item" href="index.php?pag=<?= $menu2 ?>">Categorias</a>
+                        <a class="collapse-item" href="index.php?pag=<?= $menu3 ?>">Sub Categorias</a>
+                        <a class="collapse-item" href="index.php?pag=<?= $menu9 ?>">Tipo Envios</a>
+                        <a class="collapse-item" href="index.php?pag=<?= $menu10 ?>">Características</a>
                     </div>
                 </div>
             </li>
@@ -102,8 +102,8 @@ $menu10 = "carac";
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
 
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu4 ?>">Combos</a>
-                        <a class="collapse-item" href="index.php?pag=<?php echo $menu5 ?>">Promoções</a>
+                        <a class="collapse-item" href="index.php?pag=<?= $menu4 ?>">Combos</a>
+                        <a class="collapse-item" href="index.php?pag=<?= $menu5 ?>">Promoções</a>
 
                     </div>
                 </div>
@@ -121,20 +121,20 @@ $menu10 = "carac";
 
             <!-- Nav Item - Charts -->
             <li class="nav-item">
-                <a class="nav-link" href="index.php?pag=<?php echo $menu6 ?>">
+                <a class="nav-link" href="index.php?pag=<?= $menu6 ?>">
                     <i class="fas fa-fw fa-chart-area"></i>
                     <span>Clientes</span></a>
                 </li>
 
                 <!-- Nav Item - Tables -->
                 <li class="nav-item">
-                    <a class="nav-link" href="index.php?pag=<?php echo $menu7 ?>">
+                    <a class="nav-link" href="index.php?pag=<?= $menu7 ?>">
                         <i class="fas fa-fw fa-table"></i>
                         <span>Vendas</span></a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link" href="index.php?pag=<?php echo $menu8 ?>">
+                        <a class="nav-link" href="index.php?pag=<?= $menu8 ?>">
                             <i class="fas fa-fw fa-table"></i>
                             <span>Backup</span></a>
                         </li>
@@ -174,7 +174,7 @@ $menu10 = "carac";
                                     <!-- Nav Item - User Information -->
                                     <li class="nav-item dropdown no-arrow">
                                         <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?php echo @$nome_usu ?></span>
+                                            <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= @$nome_usu ?></span>
                                             <img class="img-profile rounded-circle" src="../../src/img/produtos/sem-foto.png">
 
                                         </a>
@@ -284,17 +284,17 @@ $menu10 = "carac";
 
                                     <div class="form-group">
                                         <label >Nome</label>
-                                        <input value="<?php echo @$nome_usu ?>" type="text" class="form-control" id="nome-usuario" name="nome-usuario" placeholder="Nome">
+                                        <input value="<?= @$nome_usu ?>" type="text" class="form-control" id="nome-usuario" name="nome-usuario" placeholder="Nome">
                                     </div>
 
                                     <div class="form-group">
                                         <label >CPF</label>
-                                        <input value="<?php echo @$cpf_usu ?>" type="text" class="form-control" id="cpf-usuario" name="cpf-usuario" placeholder="CPF">
+                                        <input value="<?= @$cpf_usu ?>" type="text" class="form-control" id="cpf-usuario" name="cpf-usuario" placeholder="CPF">
                                     </div>
 
                                     <div class="form-group">
                                         <label >Email</label>
-                                        <input value="<?php echo @$email_usu ?>" type="email" class="form-control" id="email-usuario" name="email-usuario" placeholder="Email">
+                                        <input value="<?= @$email_usu ?>" type="email" class="form-control" id="email-usuario" name="email-usuario" placeholder="Email">
                                     </div>
 
                                     <div class="row">
@@ -330,8 +330,8 @@ $menu10 = "carac";
 
 
 
-                                    <input value="<?php echo $_SESSION['id_usuario'] ?>" type="hidden" name="txtid" id="txtid">
-                                    <input value="<?php echo $_SESSION['cpf_usuario'] ?>" type="hidden" name="antigo" id="antigo">
+                                    <input value="<?= $_SESSION['id_usuario'] ?>" type="hidden" name="txtid" id="txtid">
+                                    <input value="<?= $_SESSION['cpf_usuario'] ?>" type="hidden" name="antigo" id="antigo">
 
                                     <button type="button" id="btn-fechar-perfil" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
                                     <button type="submit" name="btn-salvar-perfil" id="btn-salvar-perfil" class="btn btn-primary">Salvar</button>

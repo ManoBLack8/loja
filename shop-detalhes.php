@@ -26,7 +26,7 @@ $ress = $query2->fetchAll(PDO::FETCH_ASSOC);
                     <div class="product__details__pic">
                         <div class="product__details__pic__item">
                             <img class="product__details__pic__item--large"
-                                src="img/produtos/<?php echo $imagem2 ?>" width="470"  alt="">
+                                src="img/produtos/<?= $imagem2 ?>" width="470"  alt="">
                         </div>
                         <div class="product__details__pic__slider owl-carousel">
                             <?php

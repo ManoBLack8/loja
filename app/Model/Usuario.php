@@ -50,6 +50,9 @@ class Usuario
     public function getNivelAcesso(){
         return $this->nivelAcesso;
     }
+    public function setUltimoAcesso($ultimoAcesso){
+        $this->ultimoAcesso = $ultimoAcesso;
+    }
     public function read() {
         $query = 'SELECT * FROM ' . $this->nomeTabela;
         $stmt = $this->conn->prepare($query);
