@@ -149,5 +149,11 @@ class Usuario
     public function sessaoUsuarioInicio($user) {
         $_SESSION["usuario"] = (array) $user;
     }
+
+    public function logout() {
+        @$_SESSION ["usuario"] = null;
+        @session_start();
+        @session_destroy();
+    }
 }
 ?>
