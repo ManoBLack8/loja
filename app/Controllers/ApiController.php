@@ -1,17 +1,17 @@
 <?php
 namespace App\Controllers;
 
+use App\Model\Imagen;
 use Config\BancoDeDados;
+class ApiController extends Controller{
 
-class ApiController {
-
-    private $conn;
-    function __construct(){
-        $this->conn = new BancoDeDados;
-        $this->conn = $this->conn->Conexao();
+    function index($oi){
+        echo $oi;
     }
-    function inseriImagen(){
-        include "../api/Ajax/inserirImagens.php";
+    function inserirImagenProduto($id){
+        $imagens = new Imagen();
+        $imagens->inserirImagemProduto(1);
+
     }
     function listarImagens(){
         include "../api/Ajax/listarImagens.phpj";

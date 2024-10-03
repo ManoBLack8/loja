@@ -16,7 +16,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form id="form-fotos" method="POST" enctype="multipart/form-data" >
+                <form id="#form-img-produto" method="POST" enctype="multipart/form-data" >
                     <div class="row">
                         <div class="col-md-5">
                             <div class="col-md-12 form-group">

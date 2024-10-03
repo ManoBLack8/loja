@@ -589,7 +589,7 @@ $(document).ready(function() {
         var formData = new FormData(this);
 
         $.ajax({
-            url: pag + "/inserir.php",
+            url: "api/inserir.php",
             type: 'POST',
             data: formData,
 
@@ -654,12 +654,12 @@ $(document).ready(function() {
         })
     });
 
-    $("#form-fotos").submit(function () {
+    $("#form-img-produto").submit(function (event) {
         event.preventDefault();
         var formData = new FormData(this);
 
         $.ajax({
-            url: pag + "/inserir-imagens.php",
+            url: "api/inserirImagensProduto",
             type: 'POST',
             data: formData,
 
