@@ -13,7 +13,8 @@ class ApiController extends Controller{
         $imagens->inserirImagemProduto(1);
 
     }
-    function listarImagens(){
-        include "../api/Ajax/listarImagens.phpj";
+    function listarImagens($id){
+        $imagens = new Imagen();
+        $imagens->listarImagensProduto($id);
     }
 }

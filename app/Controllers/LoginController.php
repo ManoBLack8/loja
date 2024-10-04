@@ -7,11 +7,11 @@ class LoginController extends Controller {
 
     public function index() {
         session_start();
-        if($_SESSION["usuario"]["nivelAcesso"] == 'usuario'){
+        if(@$_SESSION["usuario"]["nivelAcesso"] == 'usuario'){
             $this->rendirecionar("../Usuario");
         }
         
-        if($_SESSION["usuario"]["nivelAcesso"] == 'admin'){
+        if(@$_SESSION["usuario"]["nivelAcesso"] == 'admin'){
             $this->rendirecionar("../Admin");
         }
         $usuario = new Usuario();
@@ -22,8 +22,9 @@ class LoginController extends Controller {
             $usuario->setDocumento($emailDocumento);
             $usuario->setSenha($senha);
             if ($usuario->loginUsuario()) {
-                if($usuario->getNivelAcesso() == 'admin'){
-                    $this->rendirecionar("../Admin");
+                var_dump($usuario);
+                if(@$usuario->getNivelAcesso() == 'admin'){
+                    $this->rendirecionar("../admin/index");
 
                 }else{
                     $this->Modal('Usuário autenticado com sucesso', 'success');
@@ -36,9 +37,13 @@ class LoginController extends Controller {
                 $this->render("Login/index");
             }
         } else {
-            // Campos não preenchidos
-            echo "Preencha todos os campos.";
-            $this->render("Login/index");
+            if($_POST){
+                $this->Modal("Preencha todos os campos.", "danger");
+                $this->render("Login/index");
+            }
+            else{
+                $this->render("Login/index");
+            }
         }
     }
 }

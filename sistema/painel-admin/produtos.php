@@ -337,19 +337,15 @@ require_once("../../conexao.php");
 
                         </div>
 
-                        <div class="col-md-7" id="listar-img" on">
+                        <div class="col-md-7" id="listar-img">
 
                         </div>
-
-
-
-
                     </div>
 
                     <div class="col-md-12" align="right">
                         <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-cancelar-fotos">Cancelar</button>
                         
-                        <input type="hidden" id="id"  name="id" value="<?= @$_GET['id'] ?>">
+                        <input type="hidden" id="id_produto_img"  name="id" value="<?= @$_GET['id'] ?>">
 
                         <button type="submit" id="btn-fotos" name="btn-fotos" class="btn btn-info">Salvar</button>
 

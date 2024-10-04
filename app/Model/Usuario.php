@@ -88,6 +88,14 @@ class Usuario
         return $stmt->execute();
     }
 
+    public function fill(array $data): void {
+        foreach ($data as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->$key = htmlspecialchars(strip_tags($value));
+            }
+        }
+    }
+
     public function update() {
         $query = "UPDATE " . $this->nomeTabela . " 
         SET nome=:nome, email=:email, senha=:senha, telefone=:telefone, dtNascimento=:dtNascimento, sexo=:sexo, documento=:documento, nivelAcesso=:nivelAcesso, ipUsuario=:ipUsuario, navegadorUsuario=:navegadorUsuario, ultimoAcesso=:ultimoAcesso, dtCriacao=:dtCriacao, endereco_id=:endereco_id 
@@ -137,7 +145,7 @@ class Usuario
     
         $stmt->execute();
         $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        
+        $this->fill($user[0]);
         if ($user = (object) $user[0]) {
             $this->sessaoUsuarioInicio($user);
             return true;

@@ -2,6 +2,7 @@
 namespace App\Controllers;
 
 use App\Model\Categoria;
+use App\Model\Imagen;
 use App\Model\Pedido;
 use App\Model\Produto;
 use App\Model\Usuario;
@@ -57,8 +58,35 @@ class AdminController extends Controller{
             $p = null;
            $this->rendirecionar("Produtos");
         }elseif(@$_GET["funcao"] == "imagens"){
+            $fotos = $_FILES['imgproduto'] ?? null;
+            if($fotos){
+                // Verifica se há múltiplos arquivos e os processa
+                $totalArquivos = count($_FILES['imgproduto']['name']);
+                for($i = 0; $i < $totalArquivos; $i++){
+                    $nomeArquivo = $_FILES['imgproduto']['name'][$i];
+                    $arquivoTmp = $_FILES['imgproduto']['tmp_name'][$i];
+                    $caminhoDestino = "./src/img/produtos/" . $nomeArquivo;
+    
+                    // Move o arquivo para o diretório de destino
+                    if(move_uploaded_file($arquivoTmp, $caminhoDestino)){
+                        $imagem = new Imagen();
+                        $imagem->setImagens($nomeArquivo);
+                        $imagem->create($_POST["id"]);
+                    } else {
+                        // Tratar erro ao mover arquivo
+                        echo "Erro ao mover o arquivo $nomeArquivo";
+                    }
+                }
+            }
+    
             $this->ModalForm("Produto/imagens");
         }
+    
+        // Renderização da página de produtos
+        $this->render("Admin/index", $data=[
+            "pag" => "produtos",
+            "produtos" => $produtos->read("AND status != 'Excluido'")
+        ]);
         $this->render("Admin/index", $data=[
             "pag" => "produtos",
             "produtos"=> $produtos->read("AND status != 'Excluido'")
@@ -138,6 +166,11 @@ class AdminController extends Controller{
         $this->render("Admin/index", $data=[
             "pag" => "vendas",
             "pedidos"=> $pedidos->read()]);
+    }
+
+    public function logout(){
+        $usuario = new Usuario();
+        $usuario->logout();
     }
 
     

@@ -7,7 +7,7 @@ class Controller {
     }
 
     protected function rendirecionar($view){
-        header("location: ./$view");
+        header("location: $view");
     }
 
     protected function Modal($texto, $alerta){

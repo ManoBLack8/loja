@@ -698,7 +698,7 @@ $(document).ready(function() {
     });
 
     $.ajax({
-        url: pag + "/listar-imagens.php",
+        url: "/api/listarImagens",
         method: "post",
         data: $('form').serialize(),
         dataType: "html",
@@ -707,23 +707,11 @@ $(document).ready(function() {
             $('#listar-img').html(result);
         }
     })
-    function listarImagensProd() {
-        $.ajax({
-            url: pag + "/listar-imagens.php",
-            method: "post",
-            data: $('form').serialize(),
-            dataType: "html",
-            success: function (result) {
-
-                $('#listar-img').html(result);
-            }
-        })
-    }
     $('#btn-deletar-img').click(function (event) {
         event.preventDefault();
 
         $.ajax({
-            url: pag + "/excluir-imagem.php",
+            url: "/excluir-imagem.php",
             method: "post",
             data: $('form').serialize(),
             dataType: "text",
@@ -779,3 +767,26 @@ $(document).ready(function() {
     });
 
 });
+
+$.ajax({
+    url: "../api/listarImagens"+$("#id_produto_img").val(),
+    method: "post",
+    data: $('form').serialize(),
+    dataType: "html",
+    success: function (result) {
+
+        $('#listar-img').html(result);
+    }
+})
+function listarImagensProd(id_foto) {
+    $.ajax({
+        url: "../api/listarImagens/"+id_foto,
+        method: "post",
+        data: $('form').serialize(),
+        dataType: "html",
+        success: function (result) {
+
+            $('#listar-img').html(result);
+        }
+    })
+}
