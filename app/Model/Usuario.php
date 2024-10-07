@@ -22,14 +22,12 @@ class Usuario
     private $navegadorUsuario;
     private $ultimoAcesso;
     private $dtCriacao;
-    private $endereco_id;
 
     public function __construct() {
         $this->conn = (new BancoDeDados())->Conexao();
     }
 
     // Getters e Setters gerados de forma automática para maior simplicidade
-
     
     public function getEmail(){
         return $this->email;
@@ -50,9 +48,11 @@ class Usuario
     public function getNivelAcesso(){
         return $this->nivelAcesso;
     }
+    
     public function setUltimoAcesso($ultimoAcesso){
         $this->ultimoAcesso = $ultimoAcesso;
     }
+
     public function read() {
         $query = 'SELECT * FROM ' . $this->nomeTabela;
         $stmt = $this->conn->prepare($query);
@@ -62,7 +62,10 @@ class Usuario
 
     public function create() {
         $query = "INSERT INTO " . $this->nomeTabela . " 
-        SET nome=:nome, email=:email, senha=:senha, telefone=:telefone, dtNascimento=:dtNascimento, sexo=:sexo, documento=:documento, nivelAcesso=:nivelAcesso, ipUsuario=:ipUsuario, navegadorUsuario=:navegadorUsuario, ultimoAcesso=:ultimoAcesso, dtCriacao=:dtCriacao, endereco_id=:endereco_id";
+        SET nome=:nome, email=:email, senha=:senha, telefone=:telefone, dtNascimento=:dtNascimento, 
+        sexo=:sexo, documento=:documento, nivelAcesso=:nivelAcesso, ipUsuario=:ipUsuario, navegadorUsuario=:navegadorUsuario, 
+        ultimoAcesso=:ultimoAcesso, dtCriacao=:dtCriacao";
+
         $stmt = $this->conn->prepare($query);
 
         $this->senha = md5($this->senha);
@@ -83,7 +86,6 @@ class Usuario
         $stmt->bindParam(':navegadorUsuario', $this->navegadorUsuario);
         $stmt->bindParam(':ultimoAcesso', $this->ultimoAcesso);
         $stmt->bindParam(':dtCriacao', $this->dtCriacao);
-        $stmt->bindParam(':endereco_id', $this->endereco_id);
 
         return $stmt->execute();
     }
@@ -98,12 +100,14 @@ class Usuario
 
     public function update() {
         $query = "UPDATE " . $this->nomeTabela . " 
-        SET nome=:nome, email=:email, senha=:senha, telefone=:telefone, dtNascimento=:dtNascimento, sexo=:sexo, documento=:documento, nivelAcesso=:nivelAcesso, ipUsuario=:ipUsuario, navegadorUsuario=:navegadorUsuario, ultimoAcesso=:ultimoAcesso, dtCriacao=:dtCriacao, endereco_id=:endereco_id 
-        WHERE id=:id";
+        SET nome=:nome, email=:email, senha=:senha, telefone=:telefone, dtNascimento=:dtNascimento, 
+        sexo=:sexo, documento=:documento, nivelAcesso=:nivelAcesso, ipUsuario=:ipUsuario, navegadorUsuario=:navegadorUsuario, 
+        ultimoAcesso=:ultimoAcesso, dtCriacao=:dtCriacao WHERE id=:id";
+        
         $stmt = $this->conn->prepare($query);
 
         $this->senha = md5($this->senha);
-        
+
         $stmt->bindParam(':nome', $this->nome);
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':senha', $this->senha);
@@ -116,7 +120,6 @@ class Usuario
         $stmt->bindParam(':navegadorUsuario', $this->navegadorUsuario);
         $stmt->bindParam(':ultimoAcesso', $this->ultimoAcesso);
         $stmt->bindParam(':dtCriacao', $this->dtCriacao);
-        $stmt->bindParam(':endereco_id', $this->endereco_id);
         $stmt->bindParam(':id', $this->id);
 
         return $stmt->execute();
@@ -137,8 +140,6 @@ class Usuario
     public function loginUsuario(){
         $query = 'SELECT * FROM ' . $this->nomeTabela . ' WHERE email=:email AND senha=:senha LIMIT 1';
         $stmt = $this->conn->prepare($query);
-        
-        //$this->senha = md5($this->senha);
 
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':senha', $this->senha);
@@ -159,9 +160,8 @@ class Usuario
     }
 
     public function logout() {
-        @$_SESSION ["usuario"] = null;
+        @$_SESSION["usuario"] = null;
         @session_start();
         @session_destroy();
     }
 }
-?>

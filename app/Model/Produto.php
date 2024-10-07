@@ -21,7 +21,7 @@ class Produto {
     private $altura;
     private $comprimento;
     private $status;
-    private $idcategoria;
+    private $categoria_id;
 
     function __construct() {
         $this->conn = (new BancoDeDados())->Conexao();
@@ -51,7 +51,7 @@ class Produto {
                       tamanhoVeste=:tamanhoVeste, 
                       valor=:valor, 
                       descricao=:descricao, 
-                      idcategoria=:idcategoria";
+                      categoria_id=:categoria_id";
         
         $stmt = $this->conn->prepare($query);
 
@@ -63,7 +63,7 @@ class Produto {
         $this->tamanhoVeste = htmlspecialchars(strip_tags($this->tamanhoVeste));
         $this->valor = htmlspecialchars(strip_tags($this->valor));
         $this->descricao = htmlspecialchars(strip_tags($this->descricao));
-        $this->idcategoria = htmlspecialchars(strip_tags($this->idcategoria));
+        $this->categoria_id = htmlspecialchars(strip_tags($this->categoria_id));
 
         // Bind parameters
         $stmt->bindParam(':nome', $this->nome);
@@ -73,7 +73,7 @@ class Produto {
         $stmt->bindParam(':tamanhoVeste', $this->tamanhoVeste);
         $stmt->bindParam(':valor', $this->valor);
         $stmt->bindParam(':descricao', $this->descricao);
-        $stmt->bindParam(':idcategoria', $this->idcategoria);
+        $stmt->bindParam(':categoria_id', $this->categoria_id);
 
         if ($stmt->execute()) {
             return true;
@@ -90,7 +90,7 @@ class Produto {
                       tamanhoVeste=:tamanhoVeste, 
                       valor=:valor, 
                       descricao=:descricao, 
-                      idcategoria =: idcategoria
+                      categoria_id =: categoria_id
                   WHERE id=:id";
 
         $stmt = $this->conn->prepare($query);
@@ -103,7 +103,7 @@ class Produto {
         $this->tamanhoVeste = htmlspecialchars(strip_tags($this->tamanhoVeste));
         $this->valor = htmlspecialchars(strip_tags($this->valor));
         $this->descricao = htmlspecialchars(strip_tags($this->descricao));
-        $this->idcategoria = htmlspecialchars(strip_tags($this->idcategoria));
+        $this->categoria_id = htmlspecialchars(strip_tags($this->categoria_id));
         $this->id = htmlspecialchars(strip_tags($this->id));
 
         // Bind parameters
@@ -114,7 +114,7 @@ class Produto {
         $stmt->bindParam(':tamanhoVeste', $this->tamanhoVeste);
         $stmt->bindParam(':valor', $this->valor);
         $stmt->bindParam(':descricao', $this->descricao);
-        $stmt->bindParam(':idcategoria', $this->idcategoria);
+        $stmt->bindParam(':categoria_id', $this->categoria_id);
         $stmt->bindParam(':id', $this->id);
 
         if ($stmt->execute()) {
