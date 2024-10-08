@@ -38,12 +38,12 @@ require_once '../app/Views/layout/header.php';
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-
+                        <a class="collapse-item" href="../Admin/lotes">Lotes</a>
                         <a class="collapse-item" href="../Admin/produtos">Produtos</a>
                         <a class="collapse-item" href="../Admin/categorias">Categorias</a>
-                        <a class="collapse-item" href="../Admin/subCategorias">Sub Categorias</a>
-                        <a class="collapse-item" href="../Admin/tipoEnvios">Tipo Envios</a>
-                        <a class="collapse-item" href="../Admin/caracteristicas">Características</a>
+                        <!-- <a class="collapse-item" href="../Admin/subCategorias">Sub Categorias</a> -->
+                        <!-- <a class="collapse-item" href="../Admin/tipoEnvios">Tipo Envios</a> -->
+                        <!-- <a class="collapse-item" href="../Admin/caracteristicas">Características</a> -->
                     </div>
                 </div>
             </li>
@@ -56,9 +56,9 @@ require_once '../app/Views/layout/header.php';
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-
-                        <a class="collapse-item" href="../Admin/combos">Combos</a>
-                        <a class="collapse-item" href="../Admin/promocoes">Promoções</a>
+                        <a class="collapse-item" href="../Admin/cupoms">Cupoms de desconto</a>
+                        <!-- <a class="collapse-item" href="../Admin/combos">Combos</a>
+                        <a class="collapse-item" href="../Admin/promocoes">Promoções</a> -->
 
                     </div>
                 </div>

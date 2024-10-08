@@ -35,7 +35,7 @@ $titulo = isset($modal["categoria"]) ? "Editar Categoria" : "Cadastrar categoria
 
 
                 <input value="<?= @$_GET['id'] ?>" type="hidden" name="id" id="id">
-                <input value="cadastro" type="hidden" name="acao" id="acao">
+                <input value="<?= $_GET['funcao'] ?>" type="hidden" name="acao" id="acao">
 
                     <button type="button" id="btn-fechar" class="btn btn-secondary" onclick="fecharModal()" data-dismiss="modal">Cancelar</button>
                     <button type="submit" name="btn-salvar" id="btn-salvar" class="btn btn-primary">Salvar</button>

@@ -1,12 +1,11 @@
 <?php
 namespace App\Model;
 
-use PDO;
 use Config\BancoDeDados;
-
+use PDO;
 class Cupom {
     private $conn;
-    private $nomeTabela = 'cupoms';
+    private $nomeTabela = 'cupons';
 
     public $id;
     public $codigo;
@@ -23,6 +22,12 @@ class Cupom {
         $this->conn = (new BancoDeDados())->Conexao();
     }
 
+    public function read($where ="") {
+        $query = "SELECT * FROM " . $this->nomeTabela." WHERE 1=1 ".$where;
+        $stmt = $this->conn->prepare($query);
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
     // Método para criar cupom
     public function create() {
         $query = "INSERT INTO " . $this->nomeTabela . " 
@@ -58,6 +63,14 @@ class Cupom {
             return true;
         }
         return false;
+    }
+
+    public function fill(array $data): void {
+        foreach ($data as $key => $value) {
+            if (property_exists($this, $key)) {
+                $this->$key = htmlspecialchars(strip_tags($value));
+            }
+        }
     }
 
     // Método para verificar a validade do cupom

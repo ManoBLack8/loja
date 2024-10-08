@@ -32,8 +32,8 @@ class Categoria {
         return $stmt->execute();
     }
 
-    public function read() {
-        $query = "SELECT * FROM " . $this->nomeTabela;
+    public function read($where ="") {
+        $query = "SELECT * FROM " . $this->nomeTabela." WHERE 1=1 ".$where;
         $stmt = $this->conn->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
@@ -44,7 +44,7 @@ class Categoria {
                   SET nome = :nome, descricao = :descricao, status = :status 
                   WHERE id = :id";
         $stmt = $this->conn->prepare($query);
-
+        $this->status = $this->status ?? 'ativo'; 
         $stmt->bindParam(':nome', $this->nome);
         $stmt->bindParam(':descricao', $this->descricao);
         $stmt->bindParam(':status', $this->status);
@@ -53,10 +53,14 @@ class Categoria {
         return $stmt->execute();
     }
 
-    public function delete() {
-        $query = "DELETE FROM " . $this->nomeTabela . " WHERE id = :id";
+    public function delete($id) {
+        $query = "UPDATE " . $this->nomeTabela . "
+        SET status = :status WHERE id = :id";
+        $this->id = intval($id);
+        $this->status = 'inativo';
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $this->id);
+        $stmt->bindParam(':status', $this->status);
         return $stmt->execute();
     }
 
@@ -67,5 +71,14 @@ class Categoria {
                 $this->$key = htmlspecialchars(strip_tags($value));
             }
         }
+    }
+
+    public function getCategoriaPorId($id){
+        $query = "SELECT * FROM " . $this->nomeTabela . " WHERE id = :id LIMIT 1";
+        $stmt = $this->conn->prepare($query);
+        $id = intval($id);
+        $stmt->bindParam(':id', $id);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_ASSOC);
     }
 }
