@@ -140,14 +140,14 @@ class Usuario
     public function loginUsuario(){
         $query = 'SELECT * FROM ' . $this->nomeTabela . ' WHERE email=:email AND senha=:senha LIMIT 1';
         $stmt = $this->conn->prepare($query);
-
+        $this->senha = md5($this->senha);
         $stmt->bindParam(':email', $this->email);
         $stmt->bindParam(':senha', $this->senha);
     
         $stmt->execute();
         $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        $this->fill($user[0]);
-        if ($user = (object) $user[0]) {
+        if (count($user) > 0) {
+            $this->fill($user[0]);
             $this->sessaoUsuarioInicio($user);
             return true;
         }

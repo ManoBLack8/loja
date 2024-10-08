@@ -1,12 +1,18 @@
 <?php 
 $titulo = isset($modal["categoria"]) ? "Editar Categoria" : "Cadastrar categoria";
 ?>
-<div class="modal fade" id="modalDados" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
+<style>
+    .show-modal {
+        display: flex !important;
+    }
+</style>
+
+<div class="modal overflow-auto" id="modal" tabindex="-1">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel"><?= @$titulo ?></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" onclick="fecharModal()" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
@@ -14,7 +20,7 @@ $titulo = isset($modal["categoria"]) ? "Editar Categoria" : "Cadastrar categoria
                 <div class="modal-body">
                     <div class="form-group">
                         <label>Nome</label>
-                        <input value="<?= @$modal["categoria"][0]["nome"] ?>" type="text" class="form-control" id="nome-cat" name="nome-cat" placeholder="Nome" required>
+                        <input value="<?= @$modal["categoria"][0]["nome"] ?>" type="text" class="form-control" id="nome" name="nome" placeholder="Nome" required>
                     </div>
                     <small>
                         <div id="mensagem">
@@ -28,10 +34,10 @@ $titulo = isset($modal["categoria"]) ? "Editar Categoria" : "Cadastrar categoria
 
 
 
-                <input value="<?= @$_GET['id'] ?>" type="hidden" name="txtid2" id="txtid2">
-                <input value="<?= @$nome2 ?>" type="hidden" name="antigo" id="antigo">
+                <input value="<?= @$_GET['id'] ?>" type="hidden" name="id" id="id">
+                <input value="cadastro" type="hidden" name="acao" id="acao">
 
-                    <button type="button" id="btn-fechar" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+                    <button type="button" id="btn-fechar" class="btn btn-secondary" onclick="fecharModal()" data-dismiss="modal">Cancelar</button>
                     <button type="submit" name="btn-salvar" id="btn-salvar" class="btn btn-primary">Salvar</button>
                 </div>
             </form>

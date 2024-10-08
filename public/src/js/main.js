@@ -490,50 +490,6 @@ $(document).ready(function() {
         })
     });
 
-    $("#form").submit(function (event) {
-        event.preventDefault();
-        var formData = new FormData(this);
-
-        $.ajax({
-            url: "/back_escola.php",
-            type: 'POST',
-            data: formData,
-
-            success: function (mensagem) {
-
-                $('#mensagem').removeClass()
-
-                if (mensagem.trim() == "Salvo com Sucesso!!") {
-                    
-                    //$('#nome').val('');
-                    //$('#cpf').val('');
-                    $('#btn-fechar').click();
-                    window.location = "index.php"
-
-                } else {
-
-                    $('#mensagem').addClass('text-danger')
-                }
-
-                $('#mensagem').text(mensagem)
-
-            },
-
-            cache: false,
-            contentType: false,
-            processData: false,
-            xhr: function () {  // Custom XMLHttpRequest
-                var myXhr = $.ajaxSettings.xhr();
-                if (myXhr.upload) { // Avalia se tem suporte a propriedade upload
-                    myXhr.upload.addEventListener('progress', function () {
-                        /* faz alguma coisa durante o progresso do upload */
-                    }, false);
-                }
-                return myXhr;
-            }
-        });
-    });
-
     $('#btn-deletar-categoria').click(function (event) {
         event.preventDefault();
 

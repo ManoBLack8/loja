@@ -25,8 +25,8 @@
                     <tr>
                         <td><input type="checkbox" name="id_produto[]" id="id_produto[]"></td>
                         <td><?= $produto["nome"] ?></td>
-                        <?php if (!empty($imagem2)) { ?>
-                           <td><img src="../../src/img/produtos/<?= $imagem2 ?>" width="200" id="target"></td> 
+                        <?php if (!empty($produto["imagem"])) { ?>
+                           <td><img src="../../src/img/produtos/<?= $produto["imagem"] ?>" width="80" id="target"></td> 
                         <?php } else { ?>
                             <td><img src="../../src/img/produtos/sem-foto.png" width="200" id="target"></td>
                         <?php } ?>

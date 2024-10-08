@@ -8,9 +8,9 @@ class ApiController extends Controller{
     function index($oi){
         echo $oi;
     }
-    function inserirImagenProduto($id){
+    function inserirImagenProduto($id, $arquivo){
         $imagens = new Imagen();
-        $imagens->inserirImagemProduto(1);
+        $imagens->inserirImagemProduto($id, $arquivo);
 
     }
     function listarImagens($id){

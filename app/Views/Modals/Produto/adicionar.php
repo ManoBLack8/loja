@@ -38,7 +38,7 @@
                     </button>
                 </div>
 
-                <form id="form" name="" action="" method="POST">
+                <form id="form" name="" action="" method="POST" enctype="multipart/form-data">
                     <input type="hidden" name="acao" value="<?= $opc ?>">
                     <div class="modal-body">
                         <!-- Imagem -->

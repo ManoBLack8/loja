@@ -10,7 +10,6 @@ class LoginController extends Controller {
         if(@$_SESSION["usuario"]["nivelAcesso"] == 'usuario'){
             $this->rendirecionar("../Usuario");
         }
-        
         if(@$_SESSION["usuario"]["nivelAcesso"] == 'admin'){
             $this->rendirecionar("../Admin");
         }
@@ -22,7 +21,6 @@ class LoginController extends Controller {
             $usuario->setDocumento($emailDocumento);
             $usuario->setSenha($senha);
             if ($usuario->loginUsuario()) {
-                var_dump($usuario);
                 if(@$usuario->getNivelAcesso() == 'admin'){
                     $this->rendirecionar("../admin/index");
 

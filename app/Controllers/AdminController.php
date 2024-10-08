@@ -11,7 +11,7 @@ class AdminController extends Controller{
 
     public function __construct(){
         session_start();
-        if($_SESSION["usuario"]["nivelAcesso"] != "admin"){
+        if($_SESSION["usuario"][0]["nivelAcesso"] != "admin"){
             $this->rendirecionar("../Login/index");
         }
     }
@@ -25,6 +25,7 @@ class AdminController extends Controller{
 
         if(@$_POST['acao'] == 'cadastro'){
             $p = new Produto();
+            $p->setImagem($_FILES["imagem"]);
             $p->fill($_POST);
             $p->create();
             $_POST = [];
@@ -100,14 +101,14 @@ class AdminController extends Controller{
             $this->ModalForm("Categoria/adicionar");
         }else if(@$_GET["funcao"]=="editar"){
             $this->ModalForm("Categoria/adicionar",$modal=[
-                "categoria" => $categorias->getCategoriaPorId($_GET["id"])
+                //"categoria" => $categorias->getCategoriaPorId($_GET["id"])
             ]);
         }
 
         if(@$_POST['acao'] == 'cadastro'){
             $c = new Categoria();
-            //$c->fill($_POST);
-          //  $c->create();
+            $c->fill($_POST);
+            $c->create();
             $_POST = [];
             $c = null;
             $this->rendirecionar("Produtos");

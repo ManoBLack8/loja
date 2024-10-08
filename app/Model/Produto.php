@@ -123,6 +123,35 @@ class Produto {
         return false;
     }
 
+    public function setImagem($arquivo){
+        $diretorio = '../../../img/produtos/';
+        $nomeImagem = basename($arquivo['name']);
+        $caminhoCompleto = $diretorio . $nomeImagem;
+
+        // Validações de arquivo
+        $extensao = pathinfo($nomeImagem, PATHINFO_EXTENSION);
+        if (!in_array($extensao, ['png', 'PNG', 'jpg', 'jpeg', 'gif'])) {
+            throw new \Exception('Extensão de imagem não permitida!');
+        }
+
+        // Valida se o diretório existe
+        if (!is_dir($diretorio)) {
+            mkdir($diretorio, 0755, true); // Cria o diretório se não existir
+        }
+
+        // Verifica se a imagem já existe, para não sobrescrever
+        if (file_exists($caminhoCompleto)) {
+            $nomeImagem = time() . '_' . $nomeImagem; // Adiciona timestamp para evitar conflitos
+            $caminhoCompleto = $diretorio . $nomeImagem;
+        }
+
+        // Move o arquivo para o diretório de destino
+        if (!move_uploaded_file($arquivo['tmp_name'], $caminhoCompleto)) {
+            throw new \Exception('Falha ao fazer o upload da imagem.');
+        }
+        $this->imagem = $nomeImagem;
+    }
+
     public function delete() {
         $this->status = "Excluido";
         $query = "UPDATE " . $this->nomeTabela . " 
