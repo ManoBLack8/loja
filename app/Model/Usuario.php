@@ -125,6 +125,16 @@ class Usuario
         return $stmt->execute();
     }
 
+    public function AtualizarUltimoAcesso(){
+        $query = "UPDATE " . $this->nomeTabela . " 
+        SET 
+        ultimoAcesso= NOW() WHERE id=:id";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $this->id);
+        return $stmt->execute();
+    }
+
     public function findByid($id) {
         $query = 'SELECT * FROM ' . $this->nomeTabela . ' WHERE id=:id LIMIT 1';
         $stmt = $this->conn->prepare($query);
@@ -148,6 +158,7 @@ class Usuario
         $user = $stmt->fetchAll(PDO::FETCH_ASSOC);
         if (count($user) > 0) {
             $this->fill($user[0]);
+            $this->AtualizarUltimoAcesso();
             $this->sessaoUsuarioInicio($user);
             return true;
         }
