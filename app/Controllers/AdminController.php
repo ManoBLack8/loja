@@ -173,11 +173,15 @@ class AdminController extends Controller{
         if(isset($_GET['funcao'])){
             if($_GET['funcao']=='novo'){
                 $this->ModalForm("Cupom/adicionar");
-                // $cupom = new Cupom();
-                // $cupom->fill($_POST);
-                // $cupom->create();
             }
             
+        }
+        if(isset($_POST["acao"])){
+            if ($_POST["acao"] == 'novo'){
+                $cupom = new Cupom();
+                $cupom->fill($_POST);
+                $cupom->create();
+            }
         }
 
         $cupoms = new Cupom();

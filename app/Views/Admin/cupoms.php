@@ -13,16 +13,18 @@
                         <th>ID</th>
                         <th>Codigo</th>
                         <th>ativo</th>
+                        <th>ações</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach(@$data["cupoms"] as $categorias){?>
+                    <?php foreach($data["cupoms"] as $cupom){ ?>
                     <tr>
-                        <td><?= $categorias["id"] ?></td>
-                        <td><?= $categorias["nome"] ?></td>
+                        <td><?= $cupom["id"] ?></td>
+                        <td><?= $cupom["codigo"] ?></td>
+                        <td><?= $cupom["status"] ?></td>
                         <td>
-                             <a href="?funcao=editar&id=<?= $categorias["id"] ?>" class='text-primary mr-1' title='Editar Dados'><i class='far fa-edit'></i></a>
-                            <a href="?funcao=excluir&id=<?= $categorias["id"] ?>" class='text-danger mr-1' title='Excluir Registro'><i class='far fa-trash-alt'></i></a>
+                            <a href="?funcao=editar&id=<?= $cupom["id"] ?>" class='text-primary mr-1' title='Editar Dados'><i class='far fa-edit'></i></a>
+                            <a href="?funcao=excluir&id=<?= $cupom["id"] ?>" class='text-danger mr-1' title='Excluir Registro'><i class='far fa-trash-alt'></i></a>
                         </td>
                     </tr>
                     <?php } ?>
@@ -31,48 +33,3 @@
         </div>
     </div>
 </div>
-
-
-
-
-
-<!-- Modal -->
-
-
-
-
-
-
-
-<div class="modal" id="modal-deletar" tabindex="-1" role="dialog">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">Excluir Registro</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-                <p>Deseja realmente Excluir este Registro?</p>
-
-                <div align="center" id="mensagem_excluir" class="">
-
-                </div>
-
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" id="btn-cancelar-excluir">Cancelar</button>
-                <form method="post">
-
-                    <input type="hidden" id="id"  name="id" value="<?= @$_GET['id'] ?>" required>
-
-                    <button type="button" id="btn-deletar" name="btn-deletar" class="btn btn-danger">Excluir</button>
-                </form>
-            </div>
-        </div>
-    </div>
-</div>
-
-
