@@ -141,7 +141,7 @@ require_once '../app/Views/layout/header.php';
                                             </a>
 
                                             <div class="dropdown-divider"></div>
-                                            <a class="dropdown-item" href="../logout.php">
+                                            <a class="dropdown-item" href="../admin/logout">
                                                 <i class="fas fa-sign-out-alt fa-sm fa-fw mr-2 text-danger"></i>
                                                 Sair
                                             </a>

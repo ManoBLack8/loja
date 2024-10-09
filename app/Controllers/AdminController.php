@@ -244,6 +244,7 @@ class AdminController extends Controller{
     public function logout(){
         $usuario = new Usuario();
         $usuario->logout();
+        $this->rendirecionar("../Login/index");
     }
 
     
