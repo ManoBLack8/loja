@@ -170,25 +170,48 @@ class AdminController extends Controller{
     }
 
     public function cupoms(){
+        ob_start();
+        $cupoms = new Cupom();
         if(isset($_GET['funcao'])){
-            if($_GET['funcao']=='novo'){
-                $this->ModalForm("Cupom/adicionar");
+            switch($_GET['funcao']){
+                case 'novo':
+                    $this->ModalForm("Cupom/adicionar");                    # code...
+                    break;
+                
+                case 'editar':
+                    $this->ModalForm("Cupom/adicionar", $cupoms->getCupomById($_GET["id"])[0]);
+                    break;
+                case 'excluir':
+                    $cupoms->id = intval($_GET["id"]);
+                    $cupoms->delete();
+                    $this->rendirecionar("../admin/cupoms");
+                
+            }
+            
+            if(isset($_POST["acao"])){
+                switch ($_POST["acao"]) {
+                    case 'novo':
+                        $cupom = new Cupom();
+                        $cupom->fill($_POST);
+                        $cupom->create();
+                        break;
+                    case 'editar':
+                        $cupom = new Cupom();
+                        $cupom->fill($_POST);
+                        $cupom->update();
+                        $this->rendirecionar("../admin/cupoms");
+                        break;
+                }    
             }
             
         }
-        if(isset($_POST["acao"])){
-            if ($_POST["acao"] == 'novo'){
-                $cupom = new Cupom();
-                $cupom->fill($_POST);
-                $cupom->create();
-            }
-        }
+        
 
-        $cupoms = new Cupom();
         $this->render("Admin/index", $data=[
             "pag" => "cupoms",
             "cupoms"=> $cupoms->read("")
         ]);
+        ob_end_flush();
     }
     public function combos(){
         $produtos = new Produto();

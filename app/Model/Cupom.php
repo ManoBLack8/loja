@@ -89,6 +89,66 @@ class Cupom {
         return $stmt->fetch(PDO::FETCH_ASSOC);
     }
 
+    public function update() {
+        $query = "UPDATE " . $this->nomeTabela . " 
+            SET 
+            codigo = :codigo, 
+            tipo_desconto = :tipo_desconto, 
+            valor_desconto = :valor_desconto, 
+            data_validade_inicio = :data_validade_inicio, 
+            data_validade_fim = :data_validade_fim, 
+            uso_maximo = :uso_maximo, 
+            uso_por_cliente = :uso_por_cliente, 
+            valor_minimo_pedido = :valor_minimo_pedido, 
+            status = :status
+            WHERE id = :id";
+    
+        $stmt = $this->conn->prepare($query);
+    
+        // Limpar dados
+        $this->codigo = htmlspecialchars(strip_tags($this->codigo));
+        $this->tipo_desconto = htmlspecialchars(strip_tags($this->tipo_desconto));
+        $this->valor_desconto = htmlspecialchars(strip_tags($this->valor_desconto));
+        $this->data_validade_inicio = htmlspecialchars(strip_tags($this->data_validade_inicio));
+        $this->data_validade_fim = htmlspecialchars(strip_tags($this->data_validade_fim));
+        $this->uso_maximo = htmlspecialchars(strip_tags($this->uso_maximo));
+        $this->uso_por_cliente = htmlspecialchars(strip_tags($this->uso_por_cliente));
+        $this->valor_minimo_pedido = htmlspecialchars(strip_tags($this->valor_minimo_pedido));
+        $this->status = htmlspecialchars(strip_tags($this->status));
+        $this->id = intval($this->id);
+    
+        // Bind parâmetros
+        $stmt->bindParam(':codigo', $this->codigo);
+        $stmt->bindParam(':tipo_desconto', $this->tipo_desconto);
+        $stmt->bindParam(':valor_desconto', $this->valor_desconto);
+        $stmt->bindParam(':data_validade_inicio', $this->data_validade_inicio);
+        $stmt->bindParam(':data_validade_fim', $this->data_validade_fim);
+        $stmt->bindParam(':uso_maximo', $this->uso_maximo);
+        $stmt->bindParam(':uso_por_cliente', $this->uso_por_cliente);
+        $stmt->bindParam(':valor_minimo_pedido', $this->valor_minimo_pedido);
+        $stmt->bindParam(':status', $this->status);
+        $stmt->bindParam(':id', $this->id);
+    
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
+    public function delete(){
+        $query = "UPDATE " . $this->nomeTabela . " 
+            SET 
+            status = 'inativo'
+                       WHERE id=:id ";
+    
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':id', $this->id, PDO::PARAM_INT);
+        if ($stmt->execute()) {
+            return true;
+        }
+        return false;
+    }
+
     // Método para validar o uso do cupom
     public function validarUsoCupom($idCupom, $idCliente) {
         // Verificar quantas vezes o cliente já usou o cupom
@@ -114,5 +174,10 @@ class Cupom {
             return max(0, $valorPedido - $valorDesconto); // Garante que o valor do pedido nunca seja negativo
         }
         return $valorPedido;
+    }
+
+    public function getCupomById($id){
+        $id = intval($id);
+        return $this->read("AND id = $id");
     }
 }

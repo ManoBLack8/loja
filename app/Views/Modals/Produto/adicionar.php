@@ -21,7 +21,7 @@
                             $tamanho2 = $produto["tamanho"];
                             $tamanhoveste2 = $produto["tamanhoVeste"];
                             $preco2 = $produto["valor"];
-                            $id_categoria2 = $produto["idcategoria"];
+                            $id_categoria2 = $produto["categoria_id"];
                             $situ2 = $produto["status"];
                             $descricao2 = $produto["descricao"];
                             $palavras2 = $produto["tags"];

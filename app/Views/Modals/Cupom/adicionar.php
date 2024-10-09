@@ -18,30 +18,35 @@ $titulo = isset($modal["id"]) ? "Editar Desconto" : "Cadastrar Desconto";
             </div>
             <form id="form" action="" method="POST">
                 <div class="modal-body">
-                    <div class="form-group">
-                        <label>Código</label>
-                        <input value="<?= @$modal["codigo"] ?>" type="text" class="form-control" id="codigo" name="codigo" placeholder="Código" required>
+                    <div class="row form-group m-2">
+                        <div class="form-group mr-2">
+                            <label>Código</label>
+                            <input value="<?= @$modal["codigo"] ?>" type="text" class="form-control" id="codigo" name="codigo" placeholder="Código" required>
+                        </div>
+                        <div class="form-group mr-2">
+                            <label>Tipo de Desconto</label>
+                            <input value="<?= @$modal["tipo_desconto"] ?>" type="text" class="form-control" id="tipo_desconto" name="tipo_desconto" placeholder="Tipo de Desconto" required>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label>Valor do Desconto</label>
+                            <input value="<?= @$modal["valor_desconto"] ?>" type="number" step="0.01" class="form-control" id="valor_desconto" name="valor_desconto" placeholder="Valor do Desconto" required>
+                        </div>
                     </div>
+                    
 
-                    <div class="form-group">
-                        <label>Tipo de Desconto</label>
-                        <input value="<?= @$modal["tipo_desconto"] ?>" type="text" class="form-control" id="tipo_desconto" name="tipo_desconto" placeholder="Tipo de Desconto" required>
-                    </div>
+                    <div class="row">
+                        <div class="form-group mr-2">
+                            <label>Data de Validade Início</label>
+                            <input value="<?= @$modal["data_validade_inicio"] ?>" type="date" class="form-control" id="data_validade_inicio" name="data_validade_inicio" required>
+                        </div>
 
-                    <div class="form-group">
-                        <label>Valor do Desconto</label>
-                        <input value="<?= @$modal["valor_desconto"] ?>" type="number" step="0.01" class="form-control" id="valor_desconto" name="valor_desconto" placeholder="Valor do Desconto" required>
+                        <div class="form-group">
+                            <label>Data de Validade Fim</label>
+                            <input value="<?= @$modal["data_validade_fim"] ?>" type="date" class="form-control" id="data_validade_fim" name="data_validade_fim" required>
+                        </div>
                     </div>
-
-                    <div class="form-group">
-                        <label>Data de Validade Início</label>
-                        <input value="<?= @$modal["data_validade_inicio"] ?>" type="date" class="form-control" id="data_validade_inicio" name="data_validade_inicio" required>
-                    </div>
-
-                    <div class="form-group">
-                        <label>Data de Validade Fim</label>
-                        <input value="<?= @$modal["data_validade_fim"] ?>" type="date" class="form-control" id="data_validade_fim" name="data_validade_fim" required>
-                    </div>
+                    
 
                     <div class="form-group">
                         <label>Uso Máximo</label>
