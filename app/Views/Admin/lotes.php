@@ -16,8 +16,16 @@
                     </tr>
                 </thead>
                 <tbody>
+                    <?php foreach($data["lotes"] as $lote){ ?>
                     <tr>
+                        <td><?= $lote["id"] ?></td>
+                        <td><?= $lote["apelido"] ?></td>
+                        <td>
+                            <a href="?funcao=editar&id=<?= $lote["id"] ?>" class='text-primary mr-1' title='Editar Dados'><i class='far fa-edit'></i></a>
+                            <a href="?funcao=excluir&id=<?= $lote["id"] ?>" class='text-danger mr-1' title='Excluir Registro'><i class='far fa-trash-alt'></i></a>
+                        </td>
                     </tr>
+                    <?php } ?>
                 </tbody>
             </table>
         </div>

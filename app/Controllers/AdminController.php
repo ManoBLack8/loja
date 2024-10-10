@@ -7,6 +7,7 @@ use App\Model\Imagen;
 use App\Model\Pedido;
 use App\Model\Produto;
 use App\Model\Usuario;
+use App\Model\Lote;
 
 
 class AdminController extends Controller{
@@ -22,9 +23,46 @@ class AdminController extends Controller{
     }
 
     public function lotes(){
+        ob_start();
+        $lotes = new Lote();
+        if(isset($_GET["funcao"])){
+            switch ($_GET["funcao"]) {
+                case 'novo':
+                    $this->ModalForm("Lote/adicionar");
+                    break;
+                case 'editar':
+                    $this->ModalForm("Lote/adicionar", $lotes->getLoteById($_GET["id"])[0]);
+                    break;
+                case 'excluir':
+                    $lotes->delete($_GET["id"]);
+
+                default:
+                    # code...
+                    break;
+            }
+        }
+        if(isset($_GET["acao"])){
+            switch ($_POST["acao"]) {
+                case 'novo':
+                    $lotes->fill($_POST);
+                    $lotes->create();
+                    break;
+                case 'editar':
+                    $lotes->fill($_POST);
+                    $lotes->update();
+                    $this->rendirecionar("lotes");
+                    break;
+                
+                default:
+                    # code...
+                    break;
+            }
+        }
         $this->render("Admin/index", $data=[
-            "pag" => "categorias",
+            "pag" => "lotes",
+            "lotes" => $lotes->read()
         ]);
+        ob_end_flush();
     }
     public function produtos(){
         $produtos = new Produto();
@@ -176,8 +214,7 @@ class AdminController extends Controller{
             switch($_GET['funcao']){
                 case 'novo':
                     $this->ModalForm("Cupom/adicionar");                    # code...
-                    break;
-                
+                    break;       
                 case 'editar':
                     $this->ModalForm("Cupom/adicionar", $cupoms->getCupomById($_GET["id"])[0]);
                     break;
@@ -205,8 +242,6 @@ class AdminController extends Controller{
             }
             
         }
-        
-
         $this->render("Admin/index", $data=[
             "pag" => "cupoms",
             "cupoms"=> $cupoms->read("")
