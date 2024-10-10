@@ -26,7 +26,7 @@
                         <p>
                         <?= $data['produtos']['descricao'] ?>
                         </p>
-                          <a class="site-btn" href="checkout.php?id=<?= $data['produtos']['id'] ?>">Comprar</a>
+                          <a class="site-btn" href="../checkout?id=<?= $data['produtos']['id'] ?>">Comprar</a>
                         <ul>
                             <li><b>Tamanho:</b> <span><?= $data['produtos']['tamanho'] ?></span></li>
                             <li><b>Tamanho veste:</b> <span><?= $data['produtos']['tamanhoVeste'] ?></span></li>

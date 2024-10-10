@@ -136,7 +136,7 @@
 
  <button type="button" id="btn-fechar-cadastrar" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
    
-  <button type="button" id="btn-cadastrar" class="btn btn-info">Cadastrar</button>
+  <button type="submit" id="btn-cadastrar" class="btn btn-info">Cadastrar</button>
 
   </form>
 
@@ -186,74 +186,6 @@
 </div>
 </div>
 
-
-<script type="text/javascript">
-    $('#btn-cadastrar').click(function(event){
-        event.preventDefault();
-        
-        $.ajax({
-            url:"cadastrar.php",
-            method:"post",
-            data: $('form').serialize(),
-            dataType: "text",
-            success: function(msg){
-                if(msg.trim() === 'Cadastrado com Sucesso!'){
-                    
-                    $('#div-mensagem').addClass('text-success')
-                    $('#div-mensagem').text(msg);
-                    $('#btn-fechar-cadastrar').click();
-                    $('#email_login').val(document.getElementById('email').value);
-                    $('#senha_login').val(document.getElementById('senha').value);
-                    }
-                 else{
-                    $('#div-mensagem').addClass('text-danger')
-                    $('#div-mensagem').text(msg);
-                   
-
-                 }
-            }
-        })
-    })
-</script>
-
-
-
-<script type="text/javascript">
-    $('#btn-recuperar').click(function(event){
-        event.preventDefault();
-        
-        $.ajax({
-            url:"recuperar.php",
-            method:"post",
-            data: $('form').serialize(),
-            dataType: "text",
-            success: function(msg){
-                if(msg.trim() === 'Senha Enviada para o Email!'){
-                    
-                    $('#div-mensagem-rec').addClass('text-success')
-                    $('#div-mensagem-rec').text(msg);
-                                        
-                    }else if(msg.trim() === 'Preencha o Campo Email!'){
-                      $('#div-mensagem-rec').addClass('text-success')
-                      $('#div-mensagem-rec').text(msg);
-
-                    }else if(msg.trim() === 'Este email não está cadastrado!'){
-                      $('#div-mensagem-rec').addClass('text-success')
-                      $('#div-mensagem-rec').text(msg);
-                    }
-
-
-
-                 else{
-                    $('#div-mensagem-rec').addClass('text-danger')
-                    $('#div-mensagem-rec').text('Deu erro ao Enviar o Formulário! Provavelmente seu servidor de hospedagem não está com permissão de envio habilitada ou você está em um servidor local');
-                   
-
-                 }
-            }
-        })
-    })
-</script>
 
 
 

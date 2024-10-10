@@ -25,9 +25,9 @@
         <nav class="humberger__menu__nav mobile-menu">
             <ul>
                 <li class="active"><a href="./home">Ínicio</a></li>
-                <li><a href="./shop">Shop</a></li>
-                <li><a href="./carrinho">Carrinho</a></li>
-                <li><a href="./contato">Contato</a></li>
+                <li><a href="../../shop">Shop</a></li>
+                <li><a href="../../carrinho">Carrinho</a></li>
+                <li><a href="../../contato">Contato</a></li>
                 <?php if (@$_SESSION["id_usuario"] != null) {?>
                     <li><a href="logout">Sair</a></li> <?php } ?>
             </ul>
@@ -95,10 +95,10 @@
                 <div class="col-lg-6">
                     <nav class="header__menu">
                         <ul>
-                            <li class="active"><a href="./home">Ínicio</a></li>
-                            <li><a href="./shop">Shop</a></li>
-                            <li><a href="./carrinho">Carrinho</a></li>
-                            <li><a href="./contato">Contato</a></li>
+                            <li class="active"><a href="../home">Ínicio</a></li>
+                            <li><a href="../shop">Shop</a></li>
+                            <li><a href="../carrinho">Carrinho</a></li>
+                            <li><a href="../contato">Contato</a></li>
                         </ul>
                     </nav>
                 </div>

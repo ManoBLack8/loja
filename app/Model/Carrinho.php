@@ -1,12 +1,12 @@
 <?php 
 namespace App\Model;
-
+use Config\BancoDeDados;
+use PDO;
 class Carrinho {
     private $conn;
     private $nomeTabela = 'carrinhos';
-
-    public function __construct($conn) {
-        $this->conn = $conn;
+    public function __construct() {
+        $this->conn = (new BancoDeDados())->Conexao();
     }
 
     public function read() {

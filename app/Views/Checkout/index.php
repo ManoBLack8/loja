@@ -1,4 +1,6 @@
-    <!-- Checkout Section Begin -->
+<?php require_once '../app/Views/layout/cabecalho.php';
+?>    
+  <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
             <div class="checkout__form">
@@ -53,33 +55,33 @@
                             <h4>Seu pedido</h4>
                             <div class="checkout__order__products">Produtos</div>
                             <?php
-                            $id2 = $_SESSION['id_usuario'];
-                            $query = $pdo->query("SELECT * FROM carrinho where situ = 'disponivel' and id_usuario =  $id2 order by id desc ");
-                            $res = $query->fetchAll(PDO::FETCH_ASSOC);
+                            // $id2 = $_SESSION['id_usuario'];
+                            // $query = $pdo->query("SELECT * FROM carrinho where situ = 'disponivel' and id_usuario =  $id2 order by id desc ");
+                            // $res = $query->fetchAll(PDO::FETCH_ASSOC);
                             
-                            for ($i=0; $i < count($res); $i++) { 
+                            // for ($i=0; $i < count($res); $i++) { 
                                 
-                            $idc = $res[$i]['id_produto'];
-                            $id = $res[$i]['id'];
-                            $query2 = $pdo->query("SELECT * FROM produtos where id = '" . $idc . "'");
-                            @$ress = $query2->fetchAll(PDO::FETCH_ASSOC);
-                            @$nomecar = $ress[0]['nome'];
-                            @$imagemc = $ress[0]['imagem'];
-                            @$valorcar = $ress[0]['valor'];
-                            @$idp = $ress[0]['id'];
-                            @$peso = $ress[0]['peso'];
-                            @$total_produtos = $valorcar + $total_produtos;
-                            $frete = 7.0;
-                            $total = $fretes_price + $total_produtos;
-                            // calculo porcentagem
-                            $pctm = $_POST["desconto"];
-                            $valor_descontado = $total - ($total / 100 * $pctm);
+                            // $idc = $res[$i]['id_produto'];
+                            // $id = $res[$i]['id'];
+                            // $query2 = $pdo->query("SELECT * FROM produtos where id = '" . $idc . "'");
+                            // @$ress = $query2->fetchAll(PDO::FETCH_ASSOC);
+                            // @$nomecar = $ress[0]['nome'];
+                            // @$imagemc = $ress[0]['imagem'];
+                            // @$valorcar = $ress[0]['valor'];
+                            // @$idp = $ress[0]['id'];
+                            // @$peso = $ress[0]['peso'];
+                            // @$total_produtos = $valorcar + $total_produtos;
+                            // $frete = 7.0;
+                            // $total = $fretes_price + $total_produtos;
+                            // // calculo porcentagem
+                            // $pctm = $_POST["desconto"];
+                            // $valor_descontado = $total - ($total / 100 * $pctm);
                             
-                            $a = $i + 1;
+                            // $a = $i + 1;
                             
-                            if ($idp == null) {
-                                Addsitu($idp,$id2);
-                            }?>
+                            // if ($idp == null) {
+                            //     Addsitu($idp,$id2);
+                            // }?>
 
                             <input name="itemId<?=$a?>" type="hidden" value="<?= $idp ?>">
                             <input name="itemDescription<?=$a?>" type="hidden" value="<?= $nomecar?>">  
@@ -89,9 +91,7 @@
 
                             <ul>
                                 <li><?= $nomecar ?><span>R$ <?= $valorcar?></span></li>
-                            </ul><?php } 
-                            
-                            $b = count($res) + 1;?>
+                            </ul>
 
                             <input name="itemId<?=$b?>" type="hidden" value="1">
                             <input name="itemDescription<?=$b?>" type="hidden" value="frete: <?= $fretes_name?> - <?= $fretes_name_company ?>">  
@@ -136,4 +136,7 @@
             </div>
         </div>
     </section>
-    <!-- Checkout Section End -->
+
+<?php
+require_once '../app/Views/layout/Roda_pe.php';
+?>  
