@@ -1,4 +1,5 @@
-<?php require_once '../app/Views/layout/header.php'; ?>
+<?php require_once '../app/Views/layout/header.php'; 
+var_dump($_SESSION)?>
 <body>
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
@@ -8,7 +9,7 @@
         </div>
         <div class="humberger__menu__cart">
             <ul>
-                <li><a href="./carrinho"><i class="fa fa-shopping-cart"></i><span><?= $carrinho->getQuantidadeItens()[0]["COUNT(*)"] ?></span></a></li>
+                <li><a href="./carrinho"><i class="fa fa-shopping-cart"></i><span><?= $carrinho->getQuantidadeItens() ?></span></a></li>
             </ul>
             <div class="header__cart__price">item: <span>R$00,00</span></div>
         </div>
@@ -105,7 +106,7 @@
                 <div class="col-lg-3">
                     <div class="header__cart">
                         <ul>
-                            <li><a href="./Carrinho"><i class="fa fa-shopping-cart"></i> <span><?= $carrinho->getQuantidadeItens()[0]["COUNT(*)"] ?></span></a></li>
+                            <li><a href="./Carrinho"><i class="fa fa-shopping-cart"></i> <span><?= $carrinho->getQuantidadeItens() ?></span></a></li>
                         </ul>
                     </div>
                 </div>

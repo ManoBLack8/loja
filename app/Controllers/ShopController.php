@@ -15,9 +15,6 @@ class ShopController extends Controller
 
     public function __construct() {
         @session_start();
-        if($_SESSION["usuario"][0]["nivelAcesso"] != "admin"){
-            $this->rendirecionar("../Login/index");
-        }
         $database = new BancoDeDados();
         $this->db = $database->Conexao();
         $this->usuario = new Usuario();

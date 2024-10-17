@@ -7,6 +7,9 @@ class Helpers {
     }
 
     public static function formatarMoeda($value) {
-        return number_format($value, 2, ',', '.');
+        if(isset($value)){
+           return number_format($value, 2, ',', '.'); 
+        }
+        return number_format(0, 2, ',', '.');
     }
 }

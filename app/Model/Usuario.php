@@ -170,6 +170,15 @@ class Usuario
         $_SESSION["usuario"] = (array) $user;
     }
 
+    public function verificarUsuarioOnline(){
+        if(isset($_SESSION["usuario"])){
+            if(isset($_SESSION["usuario"]["id"])){
+                return true;
+            }
+        }
+        return false;
+    }
+
     public function logout() {
         @$_SESSION["usuario"] = null;
         @session_start();

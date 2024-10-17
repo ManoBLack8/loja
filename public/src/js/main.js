@@ -292,7 +292,7 @@ $(document).ready(function() {
         event.preventDefault();
         sleep(10)
         $.ajax({
-            url: "entregas.php",
+            url: "api/entregas",
             method: "post",
             data: $('form').serialize(),
             dataType: "text",

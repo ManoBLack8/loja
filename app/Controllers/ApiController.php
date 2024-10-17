@@ -1,6 +1,7 @@
 <?php
 namespace App\Controllers;
 
+use App\Model\Carrinho;
 use App\Model\Imagen;
 use Config\BancoDeDados;
 class ApiController extends Controller{
@@ -16,5 +17,12 @@ class ApiController extends Controller{
     function listarImagens($id){
         $imagens = new Imagen();
         $imagens->listarImagensProduto($id);
+    }
+    function carrinhoAdicionar(){
+        $carrinho = new Carrinho();
+        $carrinho->adicionarProduto($_POST["id"]);
+    }
+    function entregas(){
+        $this->render("../../api/Ajax/entregas");
     }
 }

@@ -193,13 +193,13 @@ require_once '../app/Views/layout/Roda_pe.php';
         function adicionarCarrinho(produtoId) {
         // Previne o comportamento padrão do link
         event.preventDefault();
-    
         // Envia a requisição AJAX
         $.ajax({
-            url: '/carrinho/adicionar',
+            url: 'api/carrinhoAdicionar',
             type: 'POST',
             data: { id: produtoId },
             success: function(response) {
+                console.log(response);
                 // Atualiza a quantidade de itens no carrinho
                 $('#carrinhoQuantidade').text(response.quantidadeCarrinho);
             },

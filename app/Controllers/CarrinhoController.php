@@ -12,21 +12,21 @@ class CarrinhoController extends Controller {
     }
     public function index(){
         $carrinho = new Carrinho();
-        $carrinho = $carrinho->listaCarrinhoUsuario();
         $this->render('Carrinho/index', $data = [
-            "carrinho" => $carrinho
+            "carrinho" => $carrinho->listaCarrinhoUsuario(),
+            "totalCarrinho" => $carrinho->totalCarrinho()
         ]);
     }
     public function adicionar() {
         // Recebe o ID do produto da requisição POST
         $produtoId = $_POST['id'];
         // Adiciona o produto ao carrinho
-        $carrinho->adicionarProduto($produtoId);
+       // $carrinho->adicionarProduto($produtoId);
 
         // Obtém a quantidade atual de itens no carrinho
-        $quantidadeCarrinho = $carrinho->getQuantidadeItens();
+        //$quantidadeCarrinho = $carrinho->getQuantidadeItens();
 
         // Retorna a quantidade em formato JSON
-        echo json_encode(['quantidadeCarrinho' => $quantidadeCarrinho]);
+        //echo json_encode(['quantidadeCarrinho' => $quantidadeCarrinho]);
     }
 }

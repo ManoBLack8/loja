@@ -213,8 +213,7 @@ class Produto {
         return $stmt->fetch(\PDO::FETCH_ASSOC);
     }
 
-    public function getProdutoPorId(){
-        $id = @$_GET['id'];
+    public function getProdutoPorId($id){
         $query = "SELECT * FROM " . $this->nomeTabela . " WHERE id = :id LIMIT 1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);

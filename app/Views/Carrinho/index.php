@@ -1,7 +1,4 @@
 <?php
-
-use App\Model\Carrinho;
-
  require_once '../app/Views/layout/cabecalho.php'; ?>
 <section class="shoping-cart spad">
         <div class="container">
@@ -18,6 +15,7 @@ use App\Model\Carrinho;
                             </thead>
                             <?php 
                             foreach($data['carrinho'] as $carrinho) { 
+                                $soma = @$soma + $carrinho["valor_produto"];
                                 ?>
                             
                             <tbody>
@@ -65,8 +63,8 @@ use App\Model\Carrinho;
                     <div class="shoping__continue">
                         <div class="shoping__discount">
                             <h5>Calcular frete</h5>
-                            <form action="checkout.php" method="POST">
-                                <input type="postalcode" width="20" name="cep" placeholder="Adicione seu cupom" id="cep">
+                            <form action="../checkout" method="POST">
+                                <input type="postalcode" class="cep" width="20" name="cep" placeholder="Adicione seu cupom" id="cep">
                                 <input type="hidden" width="20" name="city" placeholder="Adicione seu cupom" id="cidade">
                                 <button type="submit" id="btn-calcular"
                                 class="site-btn">Calcular</button>
@@ -77,7 +75,7 @@ use App\Model\Carrinho;
                     <div class="shoping__checkout">
                         <h5>Total Carrinho</h5>
                         <ul>
-                            <li>Total de produtos <span>R$ <?= $data["totalCarrinho"]["SUM(p.valor)"] ?></span></li>
+                            <li>Total de produtos <span>R$ <?= $data["totalCarrinho"] ?></span></li>
                         </ul>
                         <button type="submit" class="site-btn">Tela de vendas</button>
                     </div></form>

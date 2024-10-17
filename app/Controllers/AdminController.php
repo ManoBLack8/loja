@@ -91,7 +91,7 @@ class AdminController extends Controller{
         if(isset($_GET["funcao"])){
             if($_GET["funcao"]=="novo"){
                 $this->ModalForm("Produto/adicionar",$modal=[
-                    "produtos" => $produtos->getProdutoPorId(),
+                    "produtos" => $produtos->getProdutoPorId($_GET["id"]),
                     "categorias" => $categorias->read()
                 ]);
             }elseif($_GET["funcao"] == "editar"){
