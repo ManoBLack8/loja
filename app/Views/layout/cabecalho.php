@@ -1,5 +1,4 @@
-<?php require_once '../app/Views/layout/header.php'; 
-var_dump($_SESSION)?>
+<?php require_once '../app/Views/layout/header.php'; ?>
 <body>
     <!-- Humberger Begin -->
     <div class="humberger__menu__overlay"></div>
@@ -16,7 +15,7 @@ var_dump($_SESSION)?>
         <div class="humberger__menu__widget">
             <div class="header__top__right__auth">
                 <a href="./Login"><i class="fa fa-user"><?php
-                if (@$_SESSION["id_usuario"] == null) {
+                if (empty($_SESSION["usuario"]["id"])) {
                  echo "Login";
                 }else {
                     echo $_SESSION["nome_usuario"];
@@ -67,7 +66,7 @@ var_dump($_SESSION)?>
                             <div class="header__top__right__auth">
                                 <nav class="header__menu2">
                                     <ul>
-                                        <li><a href="#"></a><a href="./Login"><i class="fa fa-user"></i><?php if (@$_SESSION["id_usuario"] == null) {
+                                        <li><a href="#"></a><a href="./Login"><i class="fa fa-user"></i><?php if (empty($_SESSION["usuario"]["id"])) {
                                         echo "Login";
                                         }else {
                                             echo $_SESSION["nome_usuario"]; ?></a>

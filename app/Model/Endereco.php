@@ -1,6 +1,8 @@
 <?php 
 namespace App\Model;
 
+use Config\BancoDeDados;
+
 class Endereco{
 
     private $conn;
@@ -18,9 +20,10 @@ class Endereco{
     private $created_at;
     private $updated_at;
 
-    public function __construct($db){
-        $this->conn = $db;
+    public function __construct() {
+        $this->conn = (new BancoDeDados())->Conexao();
     }
+
 
     // Função para criar um novo endereço
     public function create(){

@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Controllers;
+use App\Model\Usuario;
 use Config\BancoDeDados;
 use App\Model\Carrinho;
 class CarrinhoController extends Controller {
@@ -12,8 +13,15 @@ class CarrinhoController extends Controller {
     }
     public function index(){
         $carrinho = new Carrinho();
+        $usuario = new Usuario();
+        if(($usuario->verificarUsuarioOnline())){
+            $carrinhoLista = $carrinho->listaCarrinhoUsuario();
+        }else{
+            $carrinhoLista = isset($_SESSION["carrinho"]) ? $_SESSION["carrinho"] : null;
+        }
+        
         $this->render('Carrinho/index', $data = [
-            "carrinho" => $carrinho->listaCarrinhoUsuario(),
+            "carrinho" => $carrinhoLista,
             "totalCarrinho" => $carrinho->totalCarrinho()
         ]);
     }

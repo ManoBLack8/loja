@@ -155,7 +155,6 @@ class AdminController extends Controller{
             }elseif($_GET["funcao"] =='excluir'){
                 $c = new Categoria();
                 $c->fill($_POST);
-                var_dump($c);
                 $c->delete($_GET["id"]);
                 $this->rendirecionar("../admin/categorias");
                 exit(); // Certifique-se de sair após o redirecionament

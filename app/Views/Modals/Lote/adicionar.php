@@ -1,6 +1,5 @@
 <?php 
 $titulo = isset($modal["id"]) ? "Editar Desconto" : "Cadastrar Desconto";
-var_dump($modal);
 ?>
 <style>
     .show-modal {

@@ -1,5 +1,12 @@
 <?php
 require '../vendor/autoload.php';
+if(isset($_GET["debug"])){
+    session_start();
+    echo "Sessão<br>";
+    var_dump($_SESSION);
+    echo "<br>POST<br>";
+    var_dump($_POST);
+}
 $dotenv = Dotenv\Dotenv::createUnsafeImmutable(__DIR__);
 $dotenv->load();
 use App\Controllers\HomeController;
@@ -37,6 +44,9 @@ if (class_exists($controllerClass)) {
             $controllerInstance->$actionName();
         }
     } else {
+        if($actionName == ''){
+            $controllerInstance->index();
+        }
         // Método não encontrado
         http_response_code(404);
         echo "Erro 404: Ação '$actionName' não encontrada no controlador '$controllerName'.";

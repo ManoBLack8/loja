@@ -15,21 +15,21 @@
                             </thead>
                             <?php 
                             foreach($data['carrinho'] as $carrinho) { 
-                                $soma = @$soma + $carrinho["valor_produto"];
+                                $soma = @$soma + $carrinho["valor"];
                                 ?>
                             
                             <tbody>
                                 <tr>
                                     <td class="shoping__cart__item">
-                                        <img src="./src/img/produtos/<?= $carrinho['imagem_produto'] ?>"  alt="">
-                                        <h5><?= $carrinho['nome_produto'] ?></h5>
+                                        <img src="./src/img/produtos/<?= $carrinho['imagem'] ?>"  alt="">
+                                        <h5><?= $carrinho['nome'] ?></h5>
                                     </td>
                                     
                                     <td class="shoping__cart__total">
-                                        R$ <?= $carrinho['valor_produto'] ?>
+                                        R$ <?= number_format($carrinho['valor'], 2, ',', '.') ?>
                                     </td>
                                     <td>
-                                    <a width="120" href="Carrinho?funcao=delcarrinho&id=<?= $carrinho['id_carrinho'] ?>" class='text-danger mr-1' title="Excluir registro"><i class="fa fa-2x fa-times"></i></a>
+                                    <a width="120" href="Carrinho?funcao=delcarrinho&id=<?= $carrinho['id'] ?>" class='text-danger mr-1' title="Excluir registro"><i class="fa fa-2x fa-times"></i></a>
                                     </td>
                                 </tr>
                                 
@@ -75,7 +75,7 @@
                     <div class="shoping__checkout">
                         <h5>Total Carrinho</h5>
                         <ul>
-                            <li>Total de produtos <span>R$ <?= $data["totalCarrinho"] ?></span></li>
+                            <li>Total de produtos <span>R$ <?= number_format($data["totalCarrinho"] == '0,00' ? $soma : $data["totalCarrinho"], 2, ',', '.')  ?></span></li>
                         </ul>
                         <button type="submit" class="site-btn">Tela de vendas</button>
                     </div></form>

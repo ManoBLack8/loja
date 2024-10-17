@@ -1,4 +1,9 @@
-<?php require_once '../app/Views/layout/cabecalho.php';?>    
+<?php require_once '../app/Views/layout/cabecalho.php';
+    if(!isset($data["fretes"][0])){
+        $data["fretes"][0] = 0;        
+    }
+
+?>    
   <!-- Checkout Section Begin -->
     <section class="checkout spad">
         <div class="container">
@@ -9,37 +14,35 @@
                             <div class="col-lg-7 col-md-6">
                                 <div class="checkout__input">
                                     <p>CEP<span>*</span></p>
-                                    <input name="shippingAddressPostalCode" class="cep" type="postalcode" value="<?= @$cep ?>">
+                                    <input name="cep" class="cep" id="cep" type="postalcode" value="<?= @$cep ?>">
                                 </div>
                                 <div class="checkout__input">
                                     <p>UF<span>*</span></p>
-                                    <input name="shippingAddressState" id="uf" type="text" value="<?= @$estado ?>">
+                                    <input name="estado" id="uf" type="text" value="<?= @$estado ?>">
                                 </div>
                                 <div class="checkout__input">
                                     <p>Cidade<span>*</span></p>
-                                    <input name="shippingAddressCity" id="cidade" type="text" value="<?= @$cidade ?>">  
+                                    <input name="cidade" id="cidade" type="text" value="<?= @$cidade ?>">  
                                 </div>
                                 <div class="checkout__input">
                                     <p>Bairro<span>*</span></p>
-                                    <input name="shippingAddressDistrict" type="text" id="bairro" value="<?= @$bairro ?>"> 
+                                    <input name="bairro" type="text" id="bairro" value="<?= @$bairro ?>"> 
                                 </div>
                                 <div class="checkout__input">
                                     <p>Endereço<span>*</span></p>
-                                    <input name="shippingAddressStreet" placeholder="Nome da Rua" class="checkout__input__add" type="text" value="<?= @$rua ?>"> 
-                                    <input class="col-md-2" name="shippingAddressNumber" placeholder="numero" type="text" value="<?= @$lote ?>">
+                                    <input name="logradouro" placeholder="Nome da Rua" class="checkout__input__add" type="text" value="<?= @$rua ?>"> 
+                                    <input class="col-md-2" name="numero" placeholder="numero" type="text" value="<?= @$lote ?>">
                                 </div>
                                 <div class="checkout__input">
                                     <p>Complemento<span>*</span></p>
-                                    <input name="shippingAddressComplement" type="text" value="<?= @$complemento ?>">  
+                                    <input name="complemento" type="text" value="<?= @$complemento ?>">  
                                 </div>
-                                
-                                
                                 
                                 <div class="row">
                                     <div class="col-lg-6">
                                         <div class="checkout__input">
                                             <p>Telefone<span>*</span></p>
-                                            <input name="senderAreaCode" type="text" id="telefone" class="checkout__input__add phone_with_ddd" placeholder="Numero de telefone" value="<?= @$_SESSION["ddd_usuario"] ?>">
+                                            <input name="Telefone" type="text" id="telefone" class="checkout__input__add phone_with_ddd" placeholder="Numero de telefone" value="<?= @$_SESSION["ddd_usuario"] ?>">
                                         </div>
                                     </div>
                                 </div>                                
@@ -72,13 +75,15 @@
 
 
                             <div class="checkout__order__subtotal">Valor<span>R$ <?= number_format($soma, 2, ',', '.') ?></span></div>
-                            <div class="checkout__order__frete">frete: <?= @$fretes_name?> - <?= @$fretes_name_company ?> <span>R$<?= @$fretes_price ?></span></div>
+                            <?php if(isset($data["fretes"])){ ?>
+                                <div class="checkout__order__frete">frete: <?= @$data["fretes"][1]?> - <?= @$data["fretes"][2] ?> <span>R$ <?= number_format($data["fretes"][0], 2, ',', '.') ?></span></div>
+                            <?php } ?>
 
                             <?php if (isset($_POST["desconto"])) {
                                 $total = $valor_descontado; ?>
                                 <div class="checkout__order__frete">Desconto <span>-<?= $_POST["desconto"] ?>%</span></div>
                            <?php } ?>
-                            <div class="checkout__order__total">Total <span>R$ <?= number_format(@$total+@$soma+@$frete_price, 2, ',', '.') ?></span></div>
+                            <div class="checkout__order__total">Total <span>R$ <?= number_format(($soma+$data["fretes"][0]), 2, ',', '.') ?></span></div>
                             
                             
                             <!-- Campos obrigatórios -->  
@@ -109,4 +114,4 @@
 
 <?php
 require_once '../app/Views/layout/Roda_pe.php';
-?>  
+?> 

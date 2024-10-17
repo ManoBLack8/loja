@@ -79,7 +79,7 @@ require_once '../app/Views/layout/cabecalho.php';
                                 <span>Categorias</span>
                             </div>
                             <ul>
-                                <li><a href="">Todas</a></li>
+                                <li><a href="shop">Todas</a></li>
                             <?php
                             foreach ($data['categoria']->read() as $categoria) { ?>
                                 <li><a href="?cat=<?= $categoria['id'] ?>"><?= $categoria['nome'] ?></a></li>
