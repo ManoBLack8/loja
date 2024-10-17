@@ -29,7 +29,7 @@
                                         R$ <?= number_format($carrinho['valor'], 2, ',', '.') ?>
                                     </td>
                                     <td>
-                                    <a width="120" href="Carrinho?funcao=delcarrinho&id=<?= $carrinho['id'] ?>" class='text-danger mr-1' title="Excluir registro"><i class="fa fa-2x fa-times"></i></a>
+                                    <a width="120" href="" class='text-danger mr-1' onclick="deletarCarrinho(<?= $carrinho['id'] ?>)" title="Excluir registro"><i class="fa fa-2x fa-times"></i></a>
                                     </td>
                                 </tr>
                                 
@@ -84,3 +84,25 @@
         </div>
     </section>
 <?php require_once '../app/Views/layout/Roda_pe.php'?>
+
+<Script>
+        function deletarCarrinho(produtoId) {
+        // Previne o comportamento padrão do link
+        event.preventDefault();
+        // Envia a requisição AJAX
+        $.ajax({
+            url: 'api/carrinhoDeletar',
+            type: 'POST',
+            data: { id: produtoId },
+            success: function(response) {
+                console.log(response);
+                // Atualiza a quantidade de itens no carrinho
+                $('#carrinhoQuantidade').text(response.quantidadeCarrinho);
+                window.location = 'carrinho';
+            },
+            error: function() {
+                alert('Erro ao adicionar o produto ao carrinho.');
+            }
+        });
+    }
+</Script>

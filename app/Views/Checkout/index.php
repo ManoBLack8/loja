@@ -54,36 +54,24 @@
                             <h4>Seu pedido</h4>
                             <div class="checkout__order__products">Produtos</div>
                             <?php 
-                            foreach($data["produtos"] as $produto){ 
+                            foreach($data["produtos"] as $produto){
                                 $soma = @$soma + $produto["valor"]; ?>
-
-                            <input name="itemId<?=$a?>" type="hidden" value="<?= $produto["id"] ?>">
-                            <input name="itemDescription<?=$a?>" type="hidden" value="<?= $produto["nome"] ?>">  
-                            <input name="itemAmount<?=$a?>" type="hidden" value="<?= $produto["valor"] ?>">  
-                            <input name="itemQuantity<?=$a?>" type="hidden" value="1"> 
-                            <input name="itemWeight<?=$a?>" type="hidden" value="<?= $produto["peso"] ?>">
-
                             <ul>
                                 <li><?= $produto["nome"] ?><span>R$ <?= number_format($produto["valor"], 2, ',', '.') ?></span></li>
                             </ul>
-
-                            <!-- <input name="itemId" type="hidden" value="1">
-                            <input name="itemDescription" type="hidden" value="frete:">  
-                            <input name="itemAmount" type="hidden" value="">  
-                            <input name="itemQuantity" type="hidden" value="1"> -->
                             <?php } ?>
 
 
                             <div class="checkout__order__subtotal">Valor<span>R$ <?= number_format($soma, 2, ',', '.') ?></span></div>
                             <?php if(isset($data["fretes"])){ ?>
-                                <div class="checkout__order__frete">frete: <?= @$data["fretes"][1]?> - <?= @$data["fretes"][2] ?> <span>R$ <?= number_format($data["fretes"][0], 2, ',', '.') ?></span></div>
+                                <div class="checkout__order__frete">frete: <?= @$data["fretes"][1]?> - <?= @$data["fretes"][2] ?> <span>R$ <?= number_format(floatval($data["fretes"][0]), 2, ',', '.') ?></span></div>
                             <?php } ?>
 
                             <?php if (isset($_POST["desconto"])) {
                                 $total = $valor_descontado; ?>
                                 <div class="checkout__order__frete">Desconto <span>-<?= $_POST["desconto"] ?>%</span></div>
                            <?php } ?>
-                            <div class="checkout__order__total">Total <span>R$ <?= number_format(($soma+$data["fretes"][0]), 2, ',', '.') ?></span></div>
+                            <div class="checkout__order__total">Total <span>R$ <?= number_format($soma+floatval($data["fretes"][0]) ,2, ',', '.') ?></span></div>
                             
                             
                             <!-- Campos obrigatórios -->  

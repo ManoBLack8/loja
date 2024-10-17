@@ -172,9 +172,7 @@ class Usuario
 
     public function verificarUsuarioOnline(){
         if(isset($_SESSION["usuario"])){
-            if(isset($_SESSION["usuario"]["id"])){
-                return true;
-            }
+           return true;
         }
         return false;
     }

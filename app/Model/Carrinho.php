@@ -20,15 +20,15 @@ class Carrinho {
     }
 
     public function listaCarrinhoUsuario() {
-        $usuario_id = @$_SESSION['usuario']['id'];
+        $usuario_id = $_SESSION['usuario'][0]['id'];
         $query = 
         'SELECT
-            p.id as id_produto,
-            p.nome as nome_produto,
-            p.valor as valor_produto,
-            p.imagem as imagem_produto,
-            p.status as status_produto,
-            c.id as id_carrinho
+            p.id as produto_id,
+            p.nome as nome,
+            p.valor as valor,
+            p.imagem as imagem,
+            p.status as status,
+            c.id as id
         
         FROM ' . $this->nomeTabela . ' AS c
         INNER JOIN produtos AS p ON p.id = c.produto_id 
@@ -49,7 +49,7 @@ class Carrinho {
 
         if ($usuario->verificarUsuarioOnline()) {
             // O código para adicionar o produto ao carrinho no banco
-            $this->create($produtoId, $_SESSION['usuario']['id']);
+            $this->create($produtoId, $_SESSION['usuario'][0]['id']);
         } else {
             if (!isset($_SESSION["carrinho"])) {
                 $_SESSION["carrinho"] = [];

@@ -22,6 +22,11 @@ class ApiController extends Controller{
         $carrinho = new Carrinho();
         $carrinho->adicionarProduto($_POST["id"]);
     }
+    function carrinhoDeletar(){
+        $carrinho = new Carrinho();
+        $carrinho->delete($_POST["id"]);
+    }
+
     function entregas(){
         $this->render("../../api/Ajax/entregas");
     }

@@ -28,6 +28,7 @@
                 <li><a href="../../shop">Shop</a></li>
                 <li><a href="../../carrinho">Carrinho</a></li>
                 <li><a href="../../contato">Contato</a></li>
+                <li><a href="../../comunidade">comunidade</a></li>
                 <?php if (@$_SESSION["id_usuario"] != null) {?>
                     <li><a href="logout">Sair</a></li> <?php } ?>
             </ul>
@@ -99,6 +100,7 @@
                             <li><a href="../shop">Shop</a></li>
                             <li><a href="../carrinho">Carrinho</a></li>
                             <li><a href="../contato">Contato</a></li>
+                            <li><a href="../blog">Blog</a></li>
                         </ul>
                     </nav>
                 </div>
