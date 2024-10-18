@@ -12,7 +12,7 @@ class UsuarioController extends Controller
     }
 
     public function index() {
-        if ($this->usuario->findByid($_SESSION["usuario"]["id"])){
+        if ($this->usuario->findByid($_SESSION["usuario"][0]["id"])){
             $user = $this->usuario->findByid($_SESSION["usuario"]["id"]);
             $this->usuario->sessaoUsuarioInicio($user);
             $this->render("Usuario/index");

@@ -7,10 +7,10 @@ class LoginController extends Controller {
 
     public function index() {
         session_start();
-        if(@$_SESSION["usuario"]["nivelAcesso"] == 'usuario'){
+        if(@$_SESSION["usuario"][0]["nivelAcesso"] == 'usuario'){
             $this->rendirecionar("../Usuario");
         }
-        if(@$_SESSION["usuario"]["nivelAcesso"] == 'admin'){
+        if(@$_SESSION["usuario"][0]["nivelAcesso"] == 'admin'){
             $this->rendirecionar("../Admin");
         }
         $usuario = new Usuario();
